@@ -169,6 +169,29 @@ input[type=search]:focus,select:focus,textarea:focus{outline:none;border-color:v
 .groupcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
 .gc{background:var(--surface);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
 .gc h3{font-size:19px}
+.gc.complete{box-shadow:inset 0 0 0 2px var(--good),var(--shadow);background:linear-gradient(180deg,var(--good-soft),var(--surface) 70%)}
+.gc.complete .meter i{background:var(--good)}
+.pill svg{width:12px;height:12px}
+.trk{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.trk .p-bar{flex:none}
+.trk-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.trk-stats div{background:var(--sunk);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column}
+.trk-stats b{font-family:var(--f-head);font-size:26px;line-height:1.1}
+.trk-stats span{font-size:13px;color:var(--muted)}
+.trk-stats .bad b{color:var(--bad)}
+.trk-stats .good b{color:var(--good)}
+.mgrp{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.mgrp h3{font-size:18px;display:flex;align-items:center;gap:8px}
+.cw.st-done{box-shadow:inset 4px 0 0 var(--good),var(--shadow)}
+.cw.st-miss{box-shadow:inset 4px 0 0 var(--bad),var(--shadow)}
+.cw .stmark{display:inline-flex;width:20px;height:20px;border-radius:50%;align-items:center;justify-content:center;flex:none}
+.cw .stmark svg{width:12px;height:12px}
+.cw.st-done .stmark{background:var(--good);color:#fff}
+.cw.st-miss .stmark{background:var(--bad);color:#fff;font-weight:800;font-size:12px}
+.cw .wrote{width:100%;font-size:13px;color:var(--bad)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+@media (max-width:520px){.trk-stats b{font-size:21px}}
 .gc .meter{height:7px;background:var(--sunk);border-radius:4px;overflow:hidden}
 .gc .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
 .more{display:flex;justify-content:center;margin-top:18px}
@@ -306,6 +329,14 @@ const dayNum = (d = new Date()) => Math.floor((Date.UTC(d.getFullYear(), d.getMo
 const TODAY = () => dayNum();
 const dateStr = n => new Date(n * 864e5).toISOString().slice(0, 10);
 if (!S.startedAt) { S.startedAt = TODAY(); save(); }
+// completed words and mistakes, per word
+S.done = S.done || {}; S.miss = S.miss || {};
+if (!S.trackV){ Object.entries(S.st).forEach(([k, s]) => { if (s.x > 0 && s.b <= 1) S.miss[k] = { n:s.x, given:'', d:s.l }; else if (s.c > 0) S.done[k] = s.l; }); S.trackV = 1; save(); }
+function track(k, ok, given){
+  if (ok){ S.done[k] = TODAY(); delete S.miss[k]; }
+  else { const m = S.miss[k] || { n:0, given:'' }; S.miss[k] = { n:m.n + 1, given: given || m.given, d:TODAY() }; }
+}
+const wStatus = k => S.miss[k] ? 'miss' : S.done[k] ? 'done' : 'new';
 function logToday(){ const d = TODAY(); return S.log[d] || (S.log[d] = { xp:0, learned:0, reviewed:0, spelled:0, dict:0, typed:0, done:{} }); }
 function addXP(n, field){ const l = logToday(); l.xp += n; if (field) l[field] = (l[field] || 0) + 1; save(); }
 
@@ -441,10 +472,10 @@ function todayAction(a){
 }
 // prefer weak and unseen words, then the rest
 function pickForDrill(keys, n){
-  const weak = keys.filter(k => S.st[k] && S.st[k].x > S.st[k].c - 1 && S.st[k].b < 4);
-  const unseen = keys.filter(k => !S.st[k]);
-  const rest = keys.filter(k => S.st[k] && !weak.includes(k));
-  return [...shuffle(weak).slice(0, Math.ceil(n / 2)), ...shuffle(unseen), ...shuffle(rest)].filter((k, i, a) => a.indexOf(k) === i).slice(0, n);
+  const miss = keys.filter(k => S.miss[k]);
+  const weak = keys.filter(k => !S.miss[k] && S.st[k] && S.st[k].x > S.st[k].c - 1 && S.st[k].b < 4);
+  const todo = keys.filter(k => !S.done[k] && !S.miss[k]);
+  return [...shuffle(miss).slice(0, Math.ceil(n / 2)), ...shuffle(weak).slice(0, Math.ceil(n / 4)), ...shuffle(todo), ...shuffle(keys)].filter((k, i, a) => a.indexOf(k) === i).slice(0, n);
 }
 
 /* ---------- browse views ---------- */
@@ -488,24 +519,49 @@ function viewReading(){
 let CORE_ONLY = false;
 const gKeys = (src, gi) => groupKeys(src, gi).filter(k => !(src === 'h' && CORE_ONLY) || W[k].core);
 function groupView(src, title, intro, extraHead){
-  const gs = DATA[SRC[src]];
+  const gs = DATA[SRC[src]]; const back = location.hash || '#today';
+  const info = gs.map((g, i) => { const ks = gKeys(src, i); const d = ks.filter(k => wStatus(k) === 'done').length; const mk = ks.filter(k => S.miss[k]); return { g, i, ks, d, mk, full: ks.length > 0 && d === ks.length }; }).filter(t => t.ks.length);
+  const total = info.reduce((a, t) => a + t.ks.length, 0), done = info.reduce((a, t) => a + t.d, 0);
+  const missAll = info.flatMap(t => t.mk); const finished = info.filter(t => t.full).length;
   main().innerHTML = `<div class="page-head"><div><h1>${title}</h1><p>${intro}</p></div>${extraHead || ''}</div>
-  <div class="groupcards">${gs.map((g, i) => { const ks = gKeys(src, i); if (!ks.length) return ''; const m = ks.filter(k => S.st[k] && S.st[k].b >= 3).length;
-    return `<div class="gc"><div class="label">${ks.length} words</div><h3>${esc(g.name)}</h3><div class="meter"><i style="width:${m / ks.length * 100}%"></i></div><span class="muted" style="font-size:13px">${m} known well</span>
-    <div class="row"><button class="btn small" type="button" data-open="${i}">Words</button><button class="btn small" type="button" data-sp="${i}">Spell</button><button class="btn small primary" type="button" data-di="${i}">Dictation</button></div></div>`; }).join('')}</div>
+  <div class="panel trk">
+    <div class="trk-stats"><div class="good"><b>${done}</b><span>of ${total} words completed</span></div><div><b>${finished}</b><span>of ${info.length} topics finished</span></div><div class="${missAll.length ? 'bad' : ''}"><b>${missAll.length}</b><span>mistakes to fix</span></div></div>
+    <div class="p-bar"><i style="width:${total ? done / total * 100 : 0}%"></i></div>
+    <p class="muted" style="font-size:13.5px;margin:0">A word is completed when you spell it right on the first try, in spelling or dictation. A wrong answer puts it in your mistakes list, grouped by topic, until you get it right in a later practice.</p>
+    ${missAll.length ? `<div class="row"><button class="btn coral" type="button" id="mAll">Practise all mistakes (${missAll.length})</button><button class="btn" type="button" id="mJump">See mistakes by topic</button></div>` : ''}
+  </div>
+  <div class="groupcards">${info.map(({ g, i, ks, d, mk, full }) => `<div class="gc${full ? ' complete' : ''}">
+    <div class="row" style="justify-content:space-between;gap:6px"><div class="label">${ks.length} words</div>${full ? `<span class="pill good">${ICON.check} Completed</span>` : mk.length ? `<span class="pill bad">${mk.length} mistake${mk.length > 1 ? 's' : ''}</span>` : ''}</div>
+    <h3>${esc(g.name)}</h3><div class="meter"><i style="width:${d / ks.length * 100}%"></i></div><span class="muted" style="font-size:13px">${d} of ${ks.length} completed</span>
+    <div class="row"><button class="btn small" type="button" data-open="${i}">Words</button><button class="btn small" type="button" data-sp="${i}">Spell</button><button class="btn small primary" type="button" data-di="${i}">Dictation</button>${mk.length ? `<button class="btn small coral" type="button" data-fix="${i}">Fix ${mk.length}</button>` : ''}</div></div>`).join('')}</div>
+  ${missAll.length ? `<section class="panel" id="mistakes" style="margin-top:22px"><div class="row" style="justify-content:space-between"><h2 style="margin:0">My mistakes by topic</h2><span class="muted" style="font-size:14px">Get a word right in practice and it leaves this list.</span></div>
+    ${info.filter(t => t.mk.length).map(({ g, i, mk }) => `<div class="mgrp"><div class="row" style="justify-content:space-between"><h3>${esc(g.name)} <span class="pill bad">${mk.length}</span></h3><div class="row"><button class="btn small primary" type="button" data-fix="${i}">Spell these</button><button class="btn small" type="button" data-fixd="${i}">Dictation</button></div></div>
+      <div class="mistakes">${mk.map(k => { const m = S.miss[k]; return `<div class="mk"><span><b style="font-family:var(--f-word);font-size:18px">${esc(W[k].w)}</b> ${speakBtn(W[k].w)}<br><span class="bn muted">${esc(W[k].bn)}</span></span><span>${m.given ? `You wrote: <s>${esc(m.given)}</s><br>` : ''}<span class="muted" style="font-size:13px">Wrong ${m.n} time${m.n > 1 ? 's' : ''} · last on ${dateStr(m.d)}</span></span></div>`; }).join('')}</div></div>`).join('')}
+  </section>` : ''}
   <div id="glist" style="margin-top:22px"></div>`;
+  bindSpeak();
+  const fix = (gi, mode) => { const t = info.find(x => x.i === gi); startPractice({ mode, keys: shuffle(t.mk.slice()), title: 'Mistakes: ' + t.g.name, back }); };
   $$('[data-open]').forEach(b => b.onclick = () => openGroup(src, +b.dataset.open));
-  $$('[data-sp]').forEach(b => b.onclick = () => startPractice({ mode:'spell', keys: pickForDrill(gKeys(src, +b.dataset.sp), 15), title: 'Spelling: ' + gs[+b.dataset.sp].name }));
-  $$('[data-di]').forEach(b => b.onclick = () => startPractice({ mode:'dict', keys: pickForDrill(gKeys(src, +b.dataset.di), 12), title: 'Dictation: ' + gs[+b.dataset.di].name }));
+  $$('[data-sp]').forEach(b => b.onclick = () => startPractice({ mode:'spell', keys: pickForDrill(gKeys(src, +b.dataset.sp), 15), title: 'Spelling: ' + gs[+b.dataset.sp].name, back }));
+  $$('[data-di]').forEach(b => b.onclick = () => startPractice({ mode:'dict', keys: pickForDrill(gKeys(src, +b.dataset.di), 12), title: 'Dictation: ' + gs[+b.dataset.di].name, back }));
+  $$('[data-fix]').forEach(b => b.onclick = () => fix(+b.dataset.fix, 'spell'));
+  $$('[data-fixd]').forEach(b => b.onclick = () => fix(+b.dataset.fixd, 'dict'));
+  if ($('#mAll')) $('#mAll').onclick = () => startPractice({ mode:'spell', keys: missAll.slice(0, 40), title: 'All mistakes, topic by topic', back });
+  if ($('#mJump')) $('#mJump').onclick = () => $('#mistakes').scrollIntoView({ behavior:'smooth' });
 }
 function openGroup(src, gi){
   const g = DATA[SRC[src]][gi]; const ks = gKeys(src, gi);
-  $('#glist').innerHTML = `<div class="row" style="justify-content:space-between;margin-bottom:10px"><h2 style="font-size:24px">${esc(g.name)}</h2>
-    <div class="row"><button class="btn small" type="button" id="gFlash">Flashcards</button><button class="btn small" type="button" id="gSay">Hear all</button></div></div>
+  const todo = ks.filter(k => wStatus(k) !== 'done'); const nd = ks.length - todo.length;
+  const mark = k => { const t = wStatus(k); return t === 'done' ? `<span class="stmark" title="Completed">${ICON.check}</span>` : t === 'miss' ? '<span class="stmark" title="Mistake to fix">✕</span>' : ''; };
+  $('#glist').innerHTML = `<div class="row" style="justify-content:space-between;margin-bottom:10px"><h2 style="font-size:24px">${esc(g.name)} <span class="muted" style="font-size:16px;font-family:var(--f-body)">${nd}/${ks.length} completed</span></h2>
+    <div class="row">${todo.length ? `<button class="btn small primary" type="button" id="gTodo">Spell the ${todo.length} not done</button>` : '<span class="pill good">' + ICON.check + ' Topic completed</span>'}<button class="btn small" type="button" id="gFlash">Flashcards</button><button class="btn small" type="button" id="gSay">Hear all</button></div></div>
+    <div class="legend"><span><i style="background:var(--good)"></i>Completed</span><span><i style="background:var(--bad)"></i>Mistake to fix</span><span><i style="background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)"></i>Not practised yet</span></div>
     <div class="${src === 'p' ? 'words' : 'compact'}">${ks.map(k => { const x = W[k];
-      return src === 'p' ? `<article class="word"><div class="word-top"><h3 style="font-size:21px">${esc(x.w)}</h3>${speakBtn(x.w)}${starBtn(k)}${boxDots(k)}</div><div class="bnm">${esc(x.bn)}</div><p class="def">${esc(x.def)}</p></article>`
-        : `<div class="cw" style="flex-wrap:wrap"><b>${esc(x.w)}</b>${x.core ? '<span class="pill coral" title="Must-know">must</span>' : ''}${speakBtn(x.w)}<span class="bn">${esc(x.bn)}</span>${x.pr ? `<span class="muted mono" style="font-size:12.5px;width:100%">/${esc(x.pr)}/</span>` : ''}</div>`; }).join('')}</div>`;
-  $('#gFlash').onclick = () => startPractice({ mode:'flash', keys: ks, title: g.name, learn:true });
+      const t = wStatus(k); const wrote = t === 'miss' && S.miss[k].given ? `<span class="wrote">You wrote: <s>${esc(S.miss[k].given)}</s></span>` : '';
+      return src === 'p' ? `<article class="word" style="${t === 'done' ? 'box-shadow:inset 4px 0 0 var(--good),var(--shadow)' : t === 'miss' ? 'box-shadow:inset 4px 0 0 var(--bad),var(--shadow)' : ''}"><div class="word-top"><h3 style="font-size:21px">${esc(x.w)}</h3>${t === 'done' ? '<span class="pill good">' + ICON.check + ' done</span>' : t === 'miss' ? '<span class="pill bad">mistake</span>' : ''}${speakBtn(x.w)}${starBtn(k)}${boxDots(k)}</div><div class="bnm">${esc(x.bn)}</div><p class="def">${esc(x.def)}</p>${wrote}</article>`
+        : `<div class="cw st-${t}" style="flex-wrap:wrap">${mark(k)}<b>${esc(x.w)}</b>${x.core ? '<span class="pill coral" title="Must-know">must</span>' : ''}${speakBtn(x.w)}<span class="bn">${esc(x.bn)}</span>${x.pr ? `<span class="muted mono" style="font-size:12.5px;width:100%">/${esc(x.pr)}/</span>` : ''}${wrote}</div>`; }).join('')}</div>`;
+  $('#gFlash').onclick = () => startPractice({ mode:'flash', keys: ks, title: g.name, learn:true, back: location.hash });
+  if ($('#gTodo')) $('#gTodo').onclick = () => startPractice({ mode:'spell', keys: pickForDrill(todo, 20), title: 'Spelling: ' + g.name, back: location.hash });
   $('#gSay').onclick = () => { let i = 0; const next = () => { if (i >= ks.length || !document.body.contains($('#gSay'))) return; const u = new SpeechSynthesisUtterance(W[ks[i]].w); const v = pickVoice(); if (v) u.voice = v; u.rate = S.settings.rate; u.onend = () => setTimeout(next, 450); i++; speechSynthesis.speak(u); }; speechSynthesis.cancel(); next(); };
   $('#glist').scrollIntoView({ behavior:'smooth' });
 }
@@ -526,7 +582,7 @@ function viewSpell(){
   const opts = [['h', 'Listening 1200'], ['l', 'Listening words'], ['p', 'Part 4 topics'], ['r', 'Reading words']];
   main().innerHTML = `<div class="page-head"><div><h1>Spelling</h1><p>See the Bangla meaning and write the English word. Or switch to dictation: hear the word and type it, which is exactly what the Listening test asks you to do.</p></div></div>
   <div class="panel setup" style="max-width:640px">
-    <div class="field"><label for="spSrc">Word list</label><select id="spSrc">${opts.map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}<option value="core">Must-know listening words</option><option value="star">My saved words</option><option value="weak">My weak words</option></select></div>
+    <div class="field"><label for="spSrc">Word list</label><select id="spSrc">${opts.map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}<option value="core">Must-know listening words</option><option value="star">My saved words</option><option value="weak">My weak words</option><option value="miss">My mistakes (all lists)</option></select></div>
     <div class="field"><label for="spGrp">Topic</label><select id="spGrp"></select></div>
     <div class="field"><label>Mode</label><div class="chips" id="spMode"><button class="chip" type="button" data-m="spell" aria-pressed="true">Bangla → English</button><button class="chip" type="button" data-m="dict" aria-pressed="false">Dictation</button><button class="chip" type="button" data-m="mixed" aria-pressed="false">Mixed</button></div></div>
     <div class="field"><label for="spN">Number of words</label><select id="spN"><option>10</option><option selected>15</option><option>20</option><option>30</option></select></div>
@@ -541,6 +597,7 @@ function viewSpell(){
     if (s === 'core') return srcKeys('h').filter(k => W[k].core);
     if (s === 'star') return S.stars.filter(k => W[k]);
     if (s === 'weak') return weakKeys().map(x => x.k);
+    if (s === 'miss') return Object.keys(S.miss).filter(k => W[k]);
     return gi >= 0 ? groupKeys(s, gi) : srcKeys(s); };
   const info = () => { $('#spInfo').textContent = pool().length + ' words available'; };
   $('#spSrc').onchange = fill; $('#spGrp').onchange = info; fill();
@@ -651,7 +708,7 @@ function setButtons(state){
     $('#skp').onclick = next; }
 }
 function record(it, ok, given){
-  grade(it.k, ok);
+  track(it.k, ok, given); grade(it.k, ok);
   if (ok){ P.right++; addXP(1, it.m === 'dict' ? 'dict' : it.m === 'spell' ? 'spelled' : 'reviewed'); }
   else { P.wrong.push({ k:it.k, given }); logToday(); save(); }
 }
@@ -678,10 +735,10 @@ function renderResult(){
     <div class="result-hero"><div class="label">${esc(P.title)}</div><div class="score">${right}<span class="muted" style="font-size:28px">/${total}</span></div><span class="pill ${pct >= 80 ? 'good' : pct >= 50 ? 'gold' : 'bad'}">${pct}%</span>
       <p class="muted" style="margin:4px 0 0">${pct === 100 ? 'Perfect. These words move further out in your review schedule.' : 'Words you missed come back tomorrow in your reviews.'}</p></div>
     ${uniq.length ? `<div><h2 style="font-size:19px">To practise again</h2><div class="mistakes">${uniq.map(w => `<div class="mk"><span><b style="font-family:var(--f-head);font-size:18px">${esc(W[w.k].w)}</b> ${speakBtn(W[w.k].w)}<br><span class="bn muted">${esc(W[w.k].bn)}</span></span><span>${w.given ? `You wrote: <s>${esc(w.given)}</s>` : '<span class="muted">Marked as still learning</span>'}</span></div>`).join('')}</div></div>` : ''}
-    <div class="row" style="justify-content:center">${uniq.length ? `<button class="btn primary" type="button" id="again">Practise mistakes</button>` : ''}<button class="btn" type="button" id="back">Back to Today</button></div></div></div>`;
+    <div class="row" style="justify-content:center">${uniq.length ? `<button class="btn primary" type="button" id="again">Practise mistakes</button>` : ''}<button class="btn" type="button" id="back">${P.back && P.back !== '#today' ? 'Back to topics' : 'Back to Today'}</button></div></div></div>`;
   bindSpeak();
-  if ($('#again')) $('#again').onclick = () => startPractice({ mode: P.mode === 'mixed' ? 'spell' : P.mode, keys: uniq.map(w => w.k), title: P.title + ': mistakes' });
-  $('#back').onclick = () => { location.hash = '#today'; route(); };
+  if ($('#again')) $('#again').onclick = () => startPractice({ mode: P.mode === 'mixed' || P.mode === 'flash' ? 'spell' : P.mode, keys: uniq.map(w => w.k), title: P.title.replace(/: mistakes$/, '') + ': mistakes', back: P.back });
+  const bk = P.back || '#today'; $('#back').onclick = () => { if (location.hash === bk) route(); else location.hash = bk; };
 }
 
 /* ---------- typing ---------- */
