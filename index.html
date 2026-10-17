@@ -614,7 +614,7 @@ main{padding-top:26px}
 
 /* full tests: the Listening Lab runs inside the page */
 .labframe{width:100%;border:0;display:block;min-height:70vh;background:transparent;border-radius:20px;margin-top:6px}
-.labframe.full{position:fixed;inset:0;width:100vw;height:100vh;min-height:0;z-index:200;border-radius:0;background:#F3F6FB;margin:0}
+.labframe.full{position:fixed;inset:0;width:100vw;height:100vh !important;height:100dvh !important;min-height:0;z-index:200;border-radius:0;background:#F3F6FB;margin:0}
 body.labfull{overflow:hidden}
 .tfacts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 4px}
 .tfacts div{background:#fff;border:1px solid #E7EBF3;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column}
@@ -2483,7 +2483,7 @@ addEventListener('message', e => {
   const f = $('#labf'); if (!f) return;
   const full = e.data.view === 'exam' || e.data.view === 'review';
   f.classList.toggle('full', full); document.body.classList.toggle('labfull', full);
-  if (!full) f.style.height = Math.max(500, e.data.h) + 'px';
+  f.style.height = full ? '' : Math.max(500, e.data.h) + 'px';
   if (e.data.view !== LABVIEW) { LABVIEW = e.data.view; if (!full) f.scrollIntoView({ block:'start' }); }
 });
 addEventListener('hashchange', () => { document.body.classList.remove('labfull'); LABVIEW = 'home'; });
