@@ -640,6 +640,147 @@ body.labfull{overflow:hidden}
 .rail-card{overflow-y:auto;scrollbar-width:thin}
 @media (max-height:800px) and (min-width:881px){.nav a{padding:4px 8px}.nav a .ic{width:27px;height:27px}.nav .ng{padding-top:8px}}
 
+/* ---------- reading tests + writing book ---------- */
+body[data-sec="rtests"]{--sec:#0F766E;--sec2:#14A39A;--sec-soft:#E0F4F1}
+body[data-sec="wbook"]{--sec:#B45309;--sec2:#E58A2E;--sec-soft:#FDF0E1}
+.rph{font-size:22px;margin:24px 0 12px}
+.rptypes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.rptype,.wbch{display:flex;flex-direction:column;gap:5px;background:#fff;border:1px solid #E7EBF3;border-top:4px solid var(--pc);border-radius:18px;padding:15px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 2px rgb(19 32 58 / .04),0 10px 24px rgb(19 32 58 / .05);transition:transform .15s,box-shadow .15s}
+.rptype:hover,.wbch:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgb(19 32 58 / .09)}
+.rptype b,.wbch b{font-family:var(--f-head);font-size:18px;line-height:1.2;color:var(--ink)}
+.rptype small,.wbch small{color:var(--muted);font-size:13.5px}
+.rptype .meta,.wbch .meta{font-size:12.5px;color:var(--muted)}
+.rptype .bar,.wbch .bar{height:6px;border-radius:3px;background:var(--sunk);overflow:hidden;margin-top:auto}
+.rptype .bar i,.wbch .bar i{display:block;height:100%;background:var(--pc)}
+.rptopic h3{font-size:18px;margin:18px 0 10px;color:var(--sec)}
+.rplist{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.rpcard{background:#fff;border:1px solid #E7EBF3;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 10px 24px rgb(19 32 58 / .05)}
+.rpcard h3{font-size:19px}
+.rpcard p{margin:0;font-size:14px}
+.rpcard .chip{text-decoration:none;font-size:12.5px;padding:4px 10px;color:var(--ink)}
+.rptips{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.rpsplit{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
+.rppass{background:#fff;border:1px solid #E3E8F2;border-radius:16px;padding:22px 24px;font:17px/1.75 "Literata",Georgia,serif;position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto}
+.rppass h2{font-family:var(--f-head);font-size:26px;margin:4px 0 2px}
+.rppass .sub{font-style:italic;color:var(--muted);margin:0 0 14px}
+.rpp{margin:0 0 14px;position:relative}
+.rpp .pl{font:800 15px var(--f-ui);color:var(--sec);margin-right:10px}
+.rpp .phead{display:block;font:700 13px var(--f-ui);border-radius:8px;padding:4px 8px;margin-bottom:6px}
+.rpp .phead.ok{background:var(--good-soft);color:var(--good)}.rpp .phead.no{background:var(--bad-soft);color:var(--bad)}
+.rppass mark.hl{background:#FFE88A;border-radius:2px;cursor:pointer}
+.rppass mark.ev{background:#C9F0DD;border-radius:3px;padding:0 2px;color:inherit}
+.rppass mark.ev sup{font:800 11px var(--f-ui);color:#12855F;margin-left:2px}
+.rpq{gap:16px}
+.rqset{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.rqset:first-child{border-top:0;padding-top:0}
+.rqset .ins{margin:0;font-size:14.5px;color:var(--muted)}
+.hlist{border:1.5px solid #9AA6B8;border-radius:10px;padding:10px 14px;font-size:15px;display:flex;flex-direction:column;gap:3px}
+.hlist b{display:inline-block;min-width:34px;color:var(--sec)}
+.rq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 0;border-radius:10px}
+.rq.col{flex-direction:column;align-items:stretch}
+.rq .txt{flex:1;min-width:180px}
+.rq select,.gapw select{border:1.5px solid #9AA6B8;border-radius:8px;padding:5px 8px;background:#fff;font-weight:700}
+.rq .kres,.rqset > .kres{width:100%}
+.qn.sm{min-width:22px;height:22px;font-size:12px;margin-right:4px}
+.ropts{display:flex;flex-direction:column;gap:6px}
+.ropt{display:grid;grid-template-columns:20px 22px minmax(0,1fr);gap:6px;align-items:start;border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;cursor:pointer;background:#fff}
+.ropt input{margin-top:5px;accent-color:var(--sec)}
+.ropt.sel{border-color:var(--sec);background:var(--sec-soft)}
+.ropt.ok{border-color:var(--good);background:var(--good-soft)}.ropt.no{border-color:var(--bad);background:var(--bad-soft)}
+.sumbox{border:1.5px solid #9AA6B8;border-radius:10px;padding:12px 16px;line-height:2.1}
+.sumbox h4{margin:0 0 4px;font:700 16px var(--f-head);text-align:center}
+.sumbox p{margin:0}
+.gapw{display:inline-flex;align-items:center;gap:2px;white-space:nowrap;border-radius:8px;padding:0 3px}
+.gapw.ok{background:var(--good-soft)}.gapw.no{background:var(--bad-soft)}
+.wordbox{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 12px;border:1.5px solid #9AA6B8;border-radius:10px;padding:10px 14px;font-size:15px}
+.wordbox b{color:var(--sec);margin-right:4px}
+.rphint{display:inline-flex;flex-direction:column;gap:4px}
+.rphint .hx{font-size:14px;background:#FFF7DA;border:1px solid #F1D98A;border-radius:10px;padding:7px 10px}
+@media (max-width:900px){.rpsplit{grid-template-columns:1fr}.rppass{position:static;max-height:none}}
+
+/* writing book */
+.wbpart{font-size:24px;margin:26px 0 12px;color:var(--pc)}
+.wbpart span{font:600 15px var(--f-ui);color:var(--muted);margin-left:8px}
+.wbgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.wbch .no{font:800 13px var(--f-mono);color:var(--pc)}
+.wbread{display:grid;grid-template-columns:250px minmax(0,1fr);gap:22px;align-items:start}
+.wbtoc{position:sticky;top:14px;background:#fff;border:1px solid #E7EBF3;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px;max-height:calc(100vh - 28px);overflow:auto}
+.wbtoc b{font-family:var(--f-head);font-size:17px;color:var(--pc)}
+.wbtoc small{color:var(--muted);font-size:13px}
+.wbtoc ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:3px;font-size:14px}
+.wbtoc li a{color:var(--ink);text-decoration:none}
+.wbtoc li.rd a{color:var(--muted)}
+.wbtoc li.on a{color:var(--pc);font-weight:800}
+.wbpage{background:#fff;border:1px solid #E7EBF3;border-radius:22px;padding:26px 30px;box-shadow:0 10px 30px rgb(19 32 58 / .05);font-size:16.5px;line-height:1.75;min-width:0}
+.wbpage h1{font-size:clamp(26px,3.4vw,34px);margin:4px 0 14px;color:var(--ink)}
+.wbpage > p{margin:0 0 14px}
+.wbpage q{quotes:none;font-style:italic;color:#24406F;background:#EEF3FC;border-radius:4px;padding:0 3px}
+.wbl,.wbsteps{margin:0 0 16px;padding-left:22px;display:flex;flex-direction:column;gap:5px}
+.wbsteps li::marker{font-weight:800;color:var(--pc)}
+.wbtip,.wbtrap{border-radius:14px;padding:12px 16px;margin:0 0 16px;display:flex;flex-direction:column;gap:2px}
+.wbtip{background:#E8F5EE;border-left:4px solid #12855F}.wbtip b{color:#12855F}
+.wbtrap{background:#FDECEA;border-left:4px solid #D2422E}.wbtrap b{color:#D2422E}
+.wbtable{overflow-x:auto;margin:0 0 16px}
+.wbtable table,.chtable table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+.wbtable th,.wbtable td,.chtable th,.chtable td{border:1px solid #DCE2EC;padding:8px 10px;text-align:left;vertical-align:top}
+.wbtable thead th,.chtable thead th{background:color-mix(in srgb,var(--pc,#1D5FD1) 10%,#fff);font-weight:800}
+.wbpairs{border:1px solid #DCE2EC;border-radius:14px;overflow:hidden;margin:0 0 16px;font-size:15.5px}
+.wbpairs .ph,.wbpairs .pr{display:grid;grid-template-columns:1fr 1fr}
+.wbpairs .ph span{padding:8px 12px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.wbpairs .ph span:first-child{background:#FDECEA;color:#B4372A}.wbpairs .ph span:last-child{background:#E1F5EC;color:#12855F}
+.wbpairs .pr span{padding:9px 12px;border-top:1px solid #E7EBF3}
+.wbpairs .pr .a{color:#7A4A44;background:#FFF9F8}
+@media (max-width:640px){.wbpairs .ph,.wbpairs .pr{grid-template-columns:1fr}.wbpairs .ph span:last-child{display:none}}
+.wbtask{border:2px solid #9AA6B8;border-radius:14px;padding:14px 18px;margin:0 0 16px;background:#FAFBFD}
+.wbtask > p{font-weight:600;margin:4px 0 10px}
+.wbtry{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.wbtry .editor{min-height:220px}
+.wbmodel{border:1px solid #E3DCCD;border-radius:16px;background:#FFFDF8;margin:0 0 18px;overflow:hidden}
+.wbmodel .mh{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid #EFE7D6;background:#FFF6E6}
+.wbmodel .band{background:#12855F;color:#fff;font-weight:800;border-radius:999px;padding:2px 12px;font-size:13px}
+.wbmodel.low .band{background:#C27C0E}
+.wbmodel .mh .btn{margin-left:auto}
+.wbmodel .essay{padding:14px 20px;font:16.5px/1.85 "Literata",Georgia,serif}
+.wbmodel .essay p{margin:0 0 12px}
+.wbmodel .notes{padding:10px 16px;background:#F3F8F4;border-bottom:1px solid #E1EEE4;font-size:15px}
+.wbmodel .notes ul{margin:0;padding-left:20px}
+.wbcheck{border:1.5px dashed #B9C3D3;border-radius:14px;padding:12px 16px;margin:0 0 16px}
+.wbcheck b{color:var(--pc)}
+.wbcheck p{margin:4px 0 8px}
+.wbcheck .ans{background:#E8F5EE;border-radius:10px;padding:9px 12px}
+.wbnav{display:flex;justify-content:space-between;gap:10px;margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:960px){.wbread{grid-template-columns:1fr}.wbtoc{position:static;max-height:none}.wbpage{padding:18px}}
+
+/* charts */
+.chart-card{margin:0 0 16px;background:#fff;border:1px solid #DCE2EC;border-radius:14px;padding:12px 14px}
+.chart-card .cht{font:700 15px var(--f-ui);text-align:center;margin-bottom:6px;color:var(--ink)}
+.chsvg{width:100%;height:auto;display:block;font:12px var(--f-ui)}
+.chsvg text{fill:#475467}
+.chsvg .gl{stroke:#E6EAF1;stroke-width:1}
+.chsvg .ax{stroke:#667085;stroke-width:1.2}
+.chsvg .unit{font-style:italic}
+.chsvg.pie .pv{fill:#fff;font-weight:800;font-size:13px}
+.chsvg.proc .pt{fill:#1D2939;font-size:12.5px}
+.chsvg.proc .pn{fill:#fff;font-size:11px;font-weight:800}
+.chlegend{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;font-size:13.5px;margin-top:6px}
+.chlegend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.chpies{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.chpies figure{margin:0;width:min(260px,100%);text-align:center}
+.chpies figcaption{font-weight:700}
+.chmaps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.chmaps figure{margin:0}
+.chmaps figcaption{font-weight:800;text-align:center;margin-bottom:4px}
+.chmixed{display:flex;flex-direction:column;gap:0}
+.plansvg{width:100%;height:auto;display:block;border-radius:6px}
+.plansvg .ml{fill:#1D2939;font-family:var(--f-ui)}
+.plansvg .mr{fill:#5D5547;font-style:italic;font-family:var(--f-ui)}
+.plansvg .mx{fill:#3B4555;font-style:italic;font-family:var(--f-ui)}
+
+.rpjump{display:none}
+.wbtoc .tg{display:none;float:right;color:var(--muted)}
+@media (max-width:900px){.rpjump{display:block;position:fixed;right:14px;bottom:16px;z-index:30;border:0;border-radius:999px;padding:11px 18px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--sec),var(--sec2));box-shadow:0 10px 24px rgb(15 118 110 / .35)}}
+@media (max-width:960px){.wbtoc ol,.wbtoc small{display:none}.wbtoc.open ol{display:flex}.wbtoc.open small{display:block}.wbtoc .tg{display:inline}.wbtoc b{cursor:pointer}}
+
 </style>
 </head>
 <body>
@@ -763,7 +904,7 @@ function route(){
   if (typeof G !== 'undefined' && G) G.active = false;
   if (typeof stopK === 'function') { stopK(); K = null; }
   stopTyping();
-  ({ today:viewToday, reading:viewReading, listening:viewListening, l1200:viewL1200, part4:viewPart4, spell:viewSpell, typing:viewTyping, writing:viewWriting, progress:viewProgress, grammar:viewGrammar, skills:viewSkills, tests:viewTests })[sec]();
+  ({ today:viewToday, reading:viewReading, listening:viewListening, l1200:viewL1200, part4:viewPart4, spell:viewSpell, typing:viewTyping, writing:viewWriting, progress:viewProgress, grammar:viewGrammar, skills:viewSkills, tests:viewTests, rtests:viewRTests, wbook:viewWBook })[sec]();
   window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
@@ -2255,9 +2396,9 @@ function m1Hear(i){
 
 /* ---------- Theme v2: grouped colour nav, section icons, full tests ---------- */
 ICON.tests = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><circle cx="17.5" cy="17.5" r="3.5" fill="#fff"/><path d="m16 17.5 1 1 2-2"/></svg>';
-SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'progress'), 0, ['tests', 'Full tests']);
-const SECCOL = { today:'#0B8F74', reading:'#4F46E5', listening:'#0E7CC4', l1200:'#0F8BA0', part4:'#7C3AED', spell:'#D9502F', typing:'#B86E06', grammar:'#C9356F', skills:'#5B4FD6', tests:'#1D5FD1', writing:'#12855F', progress:'#3F5BA9' };
-const NAVGROUPS = [['Learn', ['today', 'reading', 'listening', 'l1200', 'part4']], ['Practice', ['spell', 'typing', 'grammar', 'skills', 'writing']], ['Exam', ['tests', 'progress']]];
+SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'progress'), 0, ['tests', 'Listening tests']);
+const SECCOL = { today:'#0B8F74', reading:'#4F46E5', listening:'#0E7CC4', l1200:'#0F8BA0', part4:'#7C3AED', spell:'#D9502F', typing:'#B86E06', grammar:'#C9356F', skills:'#5B4FD6', tests:'#1D5FD1', rtests:'#0F766E', wbook:'#B45309', writing:'#12855F', progress:'#3F5BA9' };
+const NAVGROUPS = [['Learn', ['today', 'reading', 'listening', 'l1200', 'part4', 'wbook']], ['Practice', ['spell', 'typing', 'grammar', 'skills', 'writing']], ['Exam', ['tests', 'rtests', 'progress']]];
 function renderNav(sec){
   const have = new Map(SECTIONS); const used = new Set();
   const link = id => { used.add(id); return `<a href="#${id}" style="--c:${SECCOL[id] || '#0B8F74'}" ${id === sec ? 'aria-current="page"' : ''}><span class="ic">${ICON[id] || ''}</span><span>${esc(have.get(id))}</span></a>`; };
@@ -2291,6 +2432,358 @@ addEventListener('message', e => {
   if (e.data.view !== LABVIEW) { LABVIEW = e.data.view; if (!full) f.scrollIntoView({ block:'start' }); }
 });
 addEventListener('hashchange', () => { document.body.classList.remove('labfull'); LABVIEW = 'home'; });
+
+/* ---------- Task 1 visuals and plan-style maps (flat, exam-paper look) ---------- */
+const CH_COL = ['#1D5FD1', '#E0573A', '#0E9F8A', '#C98407', '#7A4FE0', '#D23F7A'];
+const chEsc = s => esc(String(s));
+const chNum = v => Math.abs(v) >= 1000 ? v.toLocaleString('en-GB') : (Math.round(v * 100) / 100).toString();
+function chNice(max){ if (max <= 0) return 1; const p = Math.pow(10, Math.floor(Math.log10(max))); const n = max / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p; }
+function chLegend(series){ return `<div class="chlegend">${series.map((s, i) => `<span><i style="background:${CH_COL[i % CH_COL.length]}"></i>${chEsc(s.name)}</span>`).join('')}</div>`; }
+function chartHTML(c){
+  if (!c) return '';
+  let body = '';
+  try {
+    if (c.type === 'mixed') return `<div class="chmixed">${c.charts.map(chartHTML).join('')}</div>`;
+    if (c.type === 'line') body = chLine(c);
+    else if (c.type === 'bar') body = chBar(c);
+    else if (c.type === 'pie') body = chPie(c);
+    else if (c.type === 'table') body = chTable(c);
+    else if (c.type === 'process') body = chProcess(c);
+    else if (c.type === 'map') body = `<div class="chmaps">${c.maps.map(m => `<figure><figcaption>${chEsc(m.name)}</figcaption>${planSVG(m.items)}</figure>`).join('')}</div>`;
+  } catch (e) { body = '<p class="muted">Chart could not be drawn.</p>'; }
+  return `<figure class="chart-card"><figcaption class="cht">${chEsc(c.title || '')}</figcaption>${body}</figure>`;
+}
+function chAxes(W, H, L, B, T, max, unit){
+  let s = ''; const steps = 5;
+  for (let i = 0; i <= steps; i++){ const v = max / steps * i; const y = H - B - (H - B - T) * i / steps;
+    s += `<line x1="${L}" x2="${W - 12}" y1="${y}" y2="${y}" class="gl"/><text x="${L - 8}" y="${y + 4}" text-anchor="end">${chNum(v)}</text>`; }
+  s += `<text x="${L - 8}" y="${T - 10}" text-anchor="end" class="unit">${chEsc(unit || '')}</text>`;
+  return s;
+}
+function chLine(c){
+  const W = 640, H = 330, L = 58, B = 40, T = 26; const n = c.x.length;
+  const max = chNice(Math.max(...c.series.flatMap(s => s.v)) * 1.08);
+  const X = i => L + 14 + (W - 44 - L) * (n === 1 ? .5 : i / (n - 1)), Y = v => H - B - (H - B - T) * v / max;
+  let s = `<svg class="chsvg" viewBox="0 0 ${W} ${H}" role="img">` + chAxes(W, H, L, B, T, max, c.unit);
+  c.x.forEach((x, i) => { s += `<text x="${X(i)}" y="${H - B + 20}" text-anchor="middle">${chEsc(x)}</text>`; });
+  c.series.forEach((se, k) => { const col = CH_COL[k % CH_COL.length];
+    s += `<polyline fill="none" stroke="${col}" stroke-width="2.6" stroke-linejoin="round" points="${se.v.map((v, i) => X(i) + ',' + Y(v)).join(' ')}"/>`;
+    se.v.forEach((v, i) => { s += `<circle cx="${X(i)}" cy="${Y(v)}" r="3.6" fill="#fff" stroke="${col}" stroke-width="2"><title>${chEsc(se.name)} ${chEsc(c.x[i])}: ${chNum(v)}</title></circle>`; }); });
+  s += `<line x1="${L}" x2="${L}" y1="${T}" y2="${H - B}" class="ax"/><line x1="${L}" x2="${W - 12}" y1="${H - B}" y2="${H - B}" class="ax"/></svg>`;
+  return s + chLegend(c.series);
+}
+function chBar(c){
+  const max = chNice(Math.max(...c.series.flatMap(s => s.v)) * 1.08); const n = c.x.length, m = c.series.length;
+  if (c.horizontal){
+    const L = 150, W = 640, rowH = Math.max(26, 12 * m + 14), T = 26, H = T + n * rowH + 34;
+    const Xv = v => L + (W - 20 - L) * v / max;
+    let s = `<svg class="chsvg" viewBox="0 0 ${W} ${H}" role="img">`;
+    for (let i = 0; i <= 5; i++){ const v = max / 5 * i; s += `<line y1="${T}" y2="${H - 30}" x1="${Xv(v)}" x2="${Xv(v)}" class="gl"/><text x="${Xv(v)}" y="${H - 12}" text-anchor="middle">${chNum(v)}</text>`; }
+    c.x.forEach((x, i) => { const y0 = T + i * rowH + 6; const bh = (rowH - 12) / m;
+      s += `<text x="${L - 8}" y="${y0 + (rowH - 12) / 2 + 4}" text-anchor="end">${chEsc(x)}</text>`;
+      c.series.forEach((se, k) => { s += `<rect x="${L}" y="${y0 + k * bh}" width="${Math.max(0, Xv(se.v[i]) - L)}" height="${bh - 2}" fill="${CH_COL[k % CH_COL.length]}" rx="2"><title>${chEsc(se.name)} ${chEsc(x)}: ${chNum(se.v[i])}</title></rect>`; }); });
+    s += `<text x="${W - 20}" y="${T - 8}" text-anchor="end" class="unit">${chEsc(c.unit || '')}</text><line x1="${L}" x2="${L}" y1="${T}" y2="${H - 30}" class="ax"/></svg>`;
+    return s + (m > 1 ? chLegend(c.series) : '');
+  }
+  const W = 640, H = 340, L = 58, B = 52, T = 26; const gw = (W - 12 - L) / n; const bw = Math.min(34, (gw - 14) / m);
+  const Y = v => H - B - (H - B - T) * v / max;
+  let s = `<svg class="chsvg" viewBox="0 0 ${W} ${H}" role="img">` + chAxes(W, H, L, B, T, max, c.unit);
+  c.x.forEach((x, i) => { const cx = L + gw * i + gw / 2; const x0 = cx - bw * m / 2;
+    c.series.forEach((se, k) => { s += `<rect x="${x0 + k * bw}" y="${Y(se.v[i])}" width="${bw - 2}" height="${Math.max(0, H - B - Y(se.v[i]))}" fill="${CH_COL[k % CH_COL.length]}" rx="2"><title>${chEsc(se.name)} ${chEsc(x)}: ${chNum(se.v[i])}</title></rect>`; });
+    const lab = String(x); const words = lab.split(' ');
+    if (lab.length > 12 && words.length > 1){ const h = Math.ceil(words.length / 2); s += `<text x="${cx}" y="${H - B + 18}" text-anchor="middle">${chEsc(words.slice(0, h).join(' '))}</text><text x="${cx}" y="${H - B + 33}" text-anchor="middle">${chEsc(words.slice(h).join(' '))}</text>`; }
+    else s += `<text x="${cx}" y="${H - B + 20}" text-anchor="middle">${chEsc(lab)}</text>`; });
+  s += `<line x1="${L}" x2="${L}" y1="${T}" y2="${H - B}" class="ax"/><line x1="${L}" x2="${W - 12}" y1="${H - B}" y2="${H - B}" class="ax"/></svg>`;
+  return s + (m > 1 ? chLegend(c.series) : '');
+}
+function chPie(c){
+  const one = p => { const R = 92, cx = 110, cy = 108; let a = -Math.PI / 2; let s = `<svg class="chsvg pie" viewBox="0 0 220 216" role="img">`;
+    p.slices.forEach(([lab, v], i) => { const a2 = a + Math.PI * 2 * v / 100; const large = a2 - a > Math.PI ? 1 : 0;
+      const p1 = [cx + R * Math.cos(a), cy + R * Math.sin(a)], p2 = [cx + R * Math.cos(a2), cy + R * Math.sin(a2)];
+      s += v >= 99.9 ? `<circle cx="${cx}" cy="${cy}" r="${R}" fill="${CH_COL[i % CH_COL.length]}"/>` : `<path d="M${cx},${cy} L${p1[0]},${p1[1]} A${R},${R} 0 ${large} 1 ${p2[0]},${p2[1]} Z" fill="${CH_COL[i % CH_COL.length]}" stroke="#fff" stroke-width="1.5"><title>${chEsc(lab)}: ${v}%</title></path>`;
+      const mid = (a + a2) / 2; if (v >= 5) s += `<text x="${cx + R * .62 * Math.cos(mid)}" y="${cy + R * .62 * Math.sin(mid) + 4}" text-anchor="middle" class="pv">${v}%</text>`; a = a2; });
+    return s + `</svg>`; };
+  const labels = []; c.pies.forEach(p => p.slices.forEach(([l]) => { if (!labels.includes(l)) labels.push(l); }));
+  return `<div class="chpies">${c.pies.map(p => `<figure>${one({ slices: labels.map(l => [l, (p.slices.find(x => x[0] === l) || [l, 0])[1]]).filter(x => x[1] > 0).map(x => x), name: p.name })}<figcaption>${chEsc(p.name)}</figcaption></figure>`).join('')}</div>` +
+    `<div class="chlegend">${labels.map((l, i) => `<span><i style="background:${CH_COL[i % CH_COL.length]}"></i>${chEsc(l)}</span>`).join('')}</div>`;
+}
+function chTable(c){ return `<div class="chtable"><table><thead><tr>${c.head.map(h => `<th>${chEsc(h)}</th>`).join('')}</tr></thead><tbody>${c.rows.map(r => `<tr>${r.map((v, i) => i ? `<td>${chEsc(v)}</td>` : `<th>${chEsc(v)}</th>`).join('')}</tr>`).join('')}</tbody></table></div>`; }
+function chProcess(c){
+  const st = c.steps;
+  if (c.cycle){
+    const n = st.length, W = 640, H = 420, cx = W / 2, cy = H / 2, R = 150, bw = 150, bh = 52;
+    let s = `<svg class="chsvg proc" viewBox="0 0 ${W} ${H}" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5D6B82"/></marker></defs>`;
+    const P = i => { const a = -Math.PI / 2 + Math.PI * 2 * i / n; return [cx + R * 1.45 * Math.cos(a), cy + R * Math.sin(a)]; };
+    for (let i = 0; i < n; i++){ const a1 = -Math.PI / 2 + Math.PI * 2 * (i + .28) / n, a2 = -Math.PI / 2 + Math.PI * 2 * (i + .72) / n;
+      s += `<path d="M${cx + R * .78 * Math.cos(a1)},${cy + R * .78 * Math.sin(a1)} A${R * .78},${R * .78} 0 0 1 ${cx + R * .78 * Math.cos(a2)},${cy + R * .78 * Math.sin(a2)}" fill="none" stroke="#5D6B82" stroke-width="1.6" marker-end="url(#ar)"/>`; }
+    st.forEach((t, i) => { const [x, y] = P(i); s += procBox(x - bw / 2, y - bh / 2, bw, bh, i + 1, t); });
+    return s + `</svg>`;
+  }
+  const cols = Math.min(4, st.length), W = 660, bw = 140, bh = 66, gx = (W - cols * bw) / (cols + 1), rows = Math.ceil(st.length / cols), H = rows * (bh + 46) + 10;
+  let s = `<svg class="chsvg proc" viewBox="0 0 ${W} ${H}" role="img"><defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5D6B82"/></marker></defs>`;
+  const pos = i => { const r = Math.floor(i / cols); let c2 = i % cols; if (r % 2) c2 = cols - 1 - c2; return [gx + c2 * (bw + gx), 10 + r * (bh + 46)]; };
+  st.forEach((t, i) => { const [x, y] = pos(i);
+    if (i < st.length - 1){ const [x2, y2] = pos(i + 1);
+      s += y2 === y ? `<line x1="${x2 > x ? x + bw : x}" y1="${y + bh / 2}" x2="${x2 > x ? x2 - 2 : x2 + bw + 2}" y2="${y + bh / 2}" stroke="#5D6B82" stroke-width="1.6" marker-end="url(#ar2)"/>`
+        : `<line x1="${x + bw / 2}" y1="${y + bh}" x2="${x2 + bw / 2}" y2="${y2 - 2}" stroke="#5D6B82" stroke-width="1.6" marker-end="url(#ar2)"/>`; }
+    s += procBox(x, y, bw, bh, i + 1, t); });
+  return s + `</svg>`;
+}
+function procBox(x, y, w, h, n, t){
+  const words = String(t).split(' '); const lines = []; let cur = '';
+  words.forEach(wd => { if ((cur + ' ' + wd).trim().length > 17 && cur){ lines.push(cur); cur = wd; } else cur = (cur + ' ' + wd).trim(); }); if (cur) lines.push(cur);
+  const L = lines.slice(0, 3);
+  return `<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="9" fill="#fff" stroke="#9AA6B8" stroke-width="1.3"/><circle cx="${x + 12}" cy="${y + 12}" r="9" fill="#1D5FD1"/><text x="${x + 12}" y="${y + 16}" text-anchor="middle" class="pn">${n}</text>` +
+    L.map((l, i) => `<text x="${x + w / 2 + 9}" y="${y + h / 2 + 6 + (i - (L.length - 1) / 2) * 15}" text-anchor="middle" class="pt">${chEsc(l)}</text>`).join('') + `</g>`;
+}
+/* flat plan map like the exam paper: thin outlines, labels, trees, water, roads */
+function planSVG(items, opts){
+  opts = opts || {}; const sc = 6, W = 100 * sc, H = 70 * sc;
+  let s = `<svg class="plansvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Map"><defs>
+    <pattern id="pw" width="26" height="12" patternUnits="userSpaceOnUse"><path d="M0,7 q6.5,-5 13,0 t13,0" fill="none" stroke="#7FA9CF" stroke-width="1"/></pattern>
+    <pattern id="pg" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".9" fill="#8DB07A"/></pattern></defs>
+    <rect x="0" y="0" width="${W}" height="${H}" fill="#FCFBF7"/>`;
+  const tree = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#B9D4A3" stroke="#6E9257" stroke-width="1"/><circle cx="${x - r * .3}" cy="${y - r * .3}" r="${r * .35}" fill="#CFE2BE"/>`;
+  const label = (m, size) => { const vertical = m.h > m.w * 1.6 && m.w < 12; const room = (vertical ? m.h : m.w) * sc - 10; const fs = Math.max(10.5, Math.min(size || 15, room / (String(m.t).length * .56)));
+    const x = (m.x + m.w / 2) * sc, y = (m.y + m.h / 2) * sc;
+    return `<text x="${x}" y="${y}" font-size="${fs.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" class="ml" ${vertical ? `transform="rotate(-90 ${x} ${y})"` : ''}>${chEsc(m.t)}</text>`; };
+  const ord = { G:0, W:1, P:2, B:3, R:4 };
+  /* letters standing on open ground get a small unnamed plot, the way the exam maps mark a building or area */
+  const rects = items.filter(m => m.k in ord);
+  const inRect = (x, y, r, pad) => x >= r.x - (pad || 0) && x <= r.x + r.w + (pad || 0) && y >= r.y - (pad || 0) && y <= r.y + r.h + (pad || 0);
+  const hit = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+  const plots = [];
+  if (!opts.noPlots) items.filter(m => m.k === 'L').forEach(m => {
+    if (rects.some(r => inRect(m.x, m.y, r))) return;
+    for (const [w, h] of [[11, 7.5], [9, 6.5], [7.5, 5.5], [6, 5]]){
+      const pr = { x:m.x - w / 2, y:m.y - h / 2, w, h };
+      if (pr.x < 1 || pr.y < 1 || pr.x + w > 99 || pr.y + h > 69) continue;
+      if (rects.some(r => hit(pr, r)) || plots.some(q => hit(pr, { x:q.x - .8, y:q.y - .8, w:q.w + 1.6, h:q.h + 1.6 }))) continue;
+      plots.push(pr); break; } });
+  plots.forEach(q => { s += `<rect x="${q.x * sc}" y="${q.y * sc}" width="${q.w * sc}" height="${q.h * sc}" rx="4" fill="#F1EEE6" stroke="#8E95A3" stroke-width="1.2"/>`; });
+  /* a few trees on open ground so the plan does not look empty */
+  if (!opts.noTrees){ let seed = items.length * 7 + 3; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280; let n = 0;
+    for (let k = 0; k < 120 && n < 9; k++){ const x = 3 + rnd() * 94, y = 3 + rnd() * 64; const box = { x:x - 2.2, y:y - 2.2, w:4.4, h:4.4 };
+      if (rects.some(r => hit(box, { x:r.x - 1.5, y:r.y - 1.5, w:r.w + 3, h:r.h + 3 })) || plots.some(q => hit(box, q))) continue;
+      if (items.some(m => (m.k === 'L' || m.k === 'X' || m.k === 'N') && Math.abs(m.x - x) < (m.k === 'X' ? 12 : 6) && Math.abs(m.y - y) < 5)) continue;
+      s += tree(x * sc, y * sc, 7); n++; } }
+  items.filter(m => m.k in ord).sort((a, b) => ord[a.k] - ord[b.k]).forEach(m => {
+    const x = m.x * sc, y = m.y * sc, w = m.w * sc, h = m.h * sc;
+    if (m.k === 'G'){ s += `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="#E6F0DC" stroke="#9DBB86" stroke-width="1.2"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="url(#pg)"/>`;
+      const r = Math.min(9, Math.min(w, h) / 6); [[.14, .2], [.86, .22], [.12, .8], [.88, .8]].forEach(([fx, fy]) => { if (w > 50 && h > 40) s += tree(x + w * fx, y + h * fy, r); }); }
+    if (m.k === 'W') s += `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${Math.min(w, h) * .4}" fill="#DCEBF7" stroke="#86AFD3" stroke-width="1.2"/><rect x="${x + 4}" y="${y + 4}" width="${Math.max(0, w - 8)}" height="${Math.max(0, h - 8)}" rx="${Math.min(w, h) * .35}" fill="url(#pw)" opacity=".7"/>`;
+    if (m.k === 'P'){ s += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#ECE8DF" stroke="#A39B8A" stroke-width="1"/>`;
+      if (w > h * 3) s += `<line x1="${x + 6}" x2="${x + w - 6}" y1="${y + h / 2}" y2="${y + h / 2}" stroke="#fff" stroke-width="2" stroke-dasharray="12 9"/>`;
+      else if (h > w * 3) s += `<line y1="${y + 6}" y2="${y + h - 6}" x1="${x + w / 2}" x2="${x + w / 2}" stroke="#fff" stroke-width="2" stroke-dasharray="12 9"/>`; }
+    if (m.k === 'B') s += `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="none" stroke="#5D6B82" stroke-width="1.4" stroke-dasharray="7 5"/>`;
+    if (m.k === 'R') s += `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="#FFFFFF" stroke="#3B4555" stroke-width="1.5"/><rect x="${x + 3}" y="${y + 3}" width="${Math.max(0, w - 6)}" height="${Math.max(0, h - 6)}" rx="2" fill="none" stroke="#D5D9E0" stroke-width="1"/>`;
+  });
+  items.filter(m => m.k in ord && m.t).forEach(m => { if (m.k === 'P'){ const vertical = m.h > m.w; const x = (m.x + m.w / 2) * sc, y = (m.y + m.h / 2) * sc;
+      s += `<text x="${x}" y="${y}" font-size="13" text-anchor="middle" dominant-baseline="middle" class="mr" ${vertical ? `transform="rotate(-90 ${x} ${y})"` : ''}><tspan>${chEsc(m.t)}</tspan></text>`; }
+    else s += label(m, m.k === 'R' ? 14 : 15); });
+  items.forEach(m => {
+    if (m.k === 'X') s += `<text x="${m.x * sc}" y="${m.y * sc}" font-size="14" text-anchor="middle" dominant-baseline="middle" class="mx">${chEsc(m.t)}</text>`;
+    if (m.k === 'N') s += `<g transform="translate(${m.x * sc},${m.y * sc})"><circle r="17" fill="#fff" stroke="#3B4555" stroke-width="1.2"/><path d="M0,-14 L5,3 L0,-1 L-5,3 Z" fill="#3B4555"/><text y="12" font-size="10" font-weight="700" text-anchor="middle" fill="#3B4555">N</text></g>`;
+    if (m.k === 'L') s += `<g><circle cx="${m.x * sc}" cy="${m.y * sc}" r="14" fill="#fff" stroke="#1D2939" stroke-width="1.8"/><text x="${m.x * sc}" y="${m.y * sc + 1}" font-size="16" font-weight="700" text-anchor="middle" dominant-baseline="middle" fill="#1D2939">${chEsc(m.t)}</text></g>`;
+  });
+  return s + `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" fill="none" stroke="#3B4555" stroke-width="1"/></svg>`;
+}
+
+/* ---------- Reading practice: hard Cambridge-style passages by question type ---------- */
+ICON.rtests = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6"/><path d="M8 13h8M8 17h5"/></svg>';
+SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'tests') + 1, 0, ['rtests', 'Reading tests']);
+S.rp = Object.assign({ res:{} }, S.rp || {});
+let RP = null, RPP = null, RT = null;
+async function rpLoad(){ if (RP) return RP; if (!RPP) RPP = fetch('reading.json', { cache:'no-cache' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(j => (RP = j)); return RPP; }
+const RPTYPES = [
+  ['heading', 'Matching headings', 'Paragraph er main idea dhoro', 7, '#4F46E5'],
+  ['info', 'Matching information', 'Kon paragraph e detail ta lukano', 6, '#0E7CC4'],
+  ['mcq', 'Multiple choice', '4 option, 3 ta trap', 4, '#B45309'],
+  ['summary', 'Summary with word box', 'Box theke thik word', 6, '#0F766E'],
+  ['full', 'Full passage', 'Shob question eksathe, 30 min', 23, '#C9356F']];
+const RPTIME = { heading:9, info:9, mcq:7, summary:8, full:30 };
+const RPTIPS = {
+  heading:['Heading list age porbe na. Age paragraph er prothom 2 line ar sesh line poro, nijer mone 4-5 word e main idea bolo, tarpor list dekho.', 'Je heading er word paragraph e hubohu ache, oita prai trap. Thik heading synonym diye lekha thake.', 'Ekta heading jodi shudhu ekta example ba number er kotha bole, oita detail, main idea na.', 'Sure na hole pencil e 2 ta option rakho, baki paragraph sesh kore elimination koro.'],
+  info:['Statement er type dekho: "an example of", "a reference to", "a comparison". Eta bole dey ki dhoroner sentence khujbe.', 'Order maintain kore na. Tai age shob statement er key idea mark koro, tarpor passage ekbar porte porte miliyo.', 'Answer prai paragraph er majhkhane lukano thake, prothom line e na.', 'Ekta paragraph duibar answer hote pare. Ekta letter use hoye geche bole bad dio na.'],
+  mcq:['Question gula passage er order e ashe. Stem er unique word (nam, saal, number) diye jayga ta khujo.', 'Shob option passage e kono na kono vabe ache. Je option ta stem er proshner uttor dey, shudhu sheta thik.', 'Extreme word (always, only, entirely, never) thakle sabdhan.', 'Kar mot, kokhon er kotha, sheta milao: researcher A er mot B er nam e dile bhul.'],
+  summary:['Age summary ta puro poro, gap er age-pore ki grammar lagbe (noun, adjective, verb) likhe rakho.', 'Box er word passage er hubohu word hoy na prai. Synonym khujo.', 'Grammar fit kore emon 2-3 option thakbe. Meaning diye final koro.', 'Summary ta passage er kon paragraph cover kore, sheta age dhoro: first gap er answer theke shuru koro.'],
+  full:['Prothome questions dekho, tarpor passage. Headings shob sesh e korle shohoj hoy, karon tokhon passage ta chena.', 'Ek question e 90 second er beshi atke thakle guess kore samne jao.', 'Matching information er key word age underline koro, passage porar somoy dhore felo.', 'Sesh 3 minute rakho blank answer fill korar jonno. Blank mane shunno number.']};
+const rpKey = (id, t) => id + ':' + t;
+async function viewRTests(){
+  main().innerHTML = '<div class="page-head"><div><h1>Reading tests</h1><p>Loading…</p></div></div>';
+  let d; try { d = await rpLoad(); } catch (e) { main().innerHTML = `<div class="page-head"><div><h1>Reading tests</h1><p>Passage load hoyni (${esc(e.message)}). Internet check kore abar try koro.</p></div></div>`; return; }
+  if (location.hash.split('-')[0] !== '#rtests' && location.hash !== '#rtests') return;
+  const parts = location.hash.split('-').slice(1);
+  if (parts.length === 2 && d.find(p => p.id === parts[0])) return rpTest(d.find(p => p.id === parts[0]), parts[1]);
+  if (parts.length === 1 && RPTYPES.find(t => t[0] === parts[0])) return rpTypeList(d, parts[0]);
+  const done = Object.keys(S.rp.res).length;
+  const topics = [...new Set(d.map(p => p.topic))];
+  main().innerHTML = `<div class="page-head"><div><h1>Reading tests</h1><p>${d.length} ta kothin Cambridge-style passage (${d.reduce((a, p) => a + p.paras.reduce((b, x) => b + x.x.split(/\s+/).length, 0), 0).toLocaleString()} words). Question type dhore practice koro, ba puro passage er full test dao. Protita answer er sathe Banglish e keno thik, ar passage e kothay lekha.</p></div></div>
+    <h2 class="rph">Question type dhore practice</h2>
+    <div class="rptypes">${RPTYPES.map(([k, name, bn, n, col]) => { const best = d.filter(p => S.rp.res[rpKey(p.id, k)]).length;
+      return `<a class="rptype" href="#rtests-${k}" style="--pc:${col}"><b>${name}</b><small>${bn}</small><span class="meta">${d.length} passages · ${n} question protita</span><span class="bar"><i style="width:${Math.round(best / d.length * 100)}%"></i></span><span class="meta">${best} of ${d.length} done</span></a>`; }).join('')}</div>
+    <h2 class="rph">Topic dhore passage</h2>
+    ${topics.map(t => `<div class="rptopic"><h3>${esc(t)}</h3><div class="rplist">${d.filter(p => p.topic === t).map(p => rpCard(p, 'full')).join('')}</div></div>`).join('')}
+    ${done ? '' : '<p class="muted" style="font-size:14px">Tip: prothome ekta question type er 2-3 ta passage koro, tarpor full passage dao.</p>'}`;
+}
+function rpCard(p, t){
+  const r = S.rp.res[rpKey(p.id, t)];
+  const SH = { heading:'Headings', info:'Info', mcq:'MCQ', summary:'Summary' };
+  const sets = Object.keys(SH).map(k => { const rr = S.rp.res[rpKey(p.id, k)]; return `<a class="chip" href="#rtests-${p.id}-${k}">${SH[k]}${rr ? ` ${rr.best}/${rr.total}` : ''}</a>`; }).join('');
+  return `<div class="rpcard"><div class="row" style="justify-content:space-between"><span class="label">${esc(p.topic)}</span>${r ? `<span class="pill ${r.best / r.total >= .7 ? 'good' : 'bad'}">best ${r.best}/${r.total}</span>` : ''}</div>
+    <h3>${esc(p.title)}</h3><p class="muted">${esc(p.sub)}</p><div class="row"><a class="btn small primary" href="#rtests-${p.id}-${t}">${t === 'full' ? 'Full test' : 'Start'}</a>${t === 'full' ? sets : ''}</div></div>`;
+}
+function rpTypeList(d, t){
+  const [, name, bn, n, col] = RPTYPES.find(x => x[0] === t);
+  main().innerHTML = `<div class="row" style="margin-bottom:12px"><a class="btn small ghost" href="#rtests">← Reading tests</a></div>
+    <div class="page-head"><div><h1>${name}</h1><p>${bn}. ${d.length} ta passage, protitay ${n} ta question. Shuru korar age niche er tricks ekbar dekho.</p></div></div>
+    <div class="panel"><h2>Ei type e jitar tricks</h2><ol class="rptips">${RPTIPS[t].map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>
+    <div class="rplist" style="margin-top:18px">${d.map(p => rpCard(p, t)).join('')}</div>`;
+}
+function rpSets(p, t){ return t === 'full' ? ['heading', 'info', 'mcq', 'summary'] : [t]; }
+function rpQCount(p, t){ return rpSets(p, t).reduce((a, k) => a + p[k].qs.length, 0); }
+function rpTest(p, t){
+  stopK(); const sets = rpSets(p, t); RT = { p, t, sets, ans:{}, hints:new Set(), done:false, t0:Date.now() };
+  let qn = 0; const blocks = [];
+  sets.forEach(k => {
+    const s = p[k]; const start = qn + 1; qn += s.qs.length; const rng = `Questions ${start}${s.qs.length > 1 ? '–' + qn : ''}`;
+    if (k === 'heading') blocks.push(`<div class="rqset"><b>${rng}</b><p class="ins">The reading passage has ${p.paras.length} paragraphs, A–${p.paras[p.paras.length - 1].l}. Choose the correct heading for each paragraph from the list of headings below.</p>
+      <div class="hlist"><div class="label">List of Headings</div>${s.list.map((h, i) => `<div><b>${ROMAN[i]}</b> ${esc(h)}</div>`).join('')}</div>
+      ${s.qs.map((q, i) => { const n = start + i; return `<div class="rq" data-n="${n}"><span class="qn">${n}</span><span class="txt">Paragraph ${q.p}</span><select data-k="heading:${i}"><option value="">Choose</option>${s.list.map((h, j) => `<option value="${j}">${ROMAN[j]}</option>`).join('')}</select>${rpHint(q, 'heading:' + i)}</div>`; }).join('')}</div>`);
+    if (k === 'info') blocks.push(`<div class="rqset"><b>${rng}</b><p class="ins">The reading passage has ${p.paras.length} paragraphs, A–${p.paras[p.paras.length - 1].l}. Which paragraph contains the following information? <i>NB You may use any letter more than once.</i></p>
+      ${s.qs.map((q, i) => { const n = start + i; return `<div class="rq" data-n="${n}"><span class="qn">${n}</span><span class="txt">${esc(q.s)}</span><select data-k="info:${i}"><option value="">Choose</option>${p.paras.map(x => `<option value="${x.l}">${x.l}</option>`).join('')}</select>${rpHint(q, 'info:' + i)}</div>`; }).join('')}</div>`);
+    if (k === 'mcq') blocks.push(`<div class="rqset"><b>${rng}</b><p class="ins">Choose the correct letter, A, B, C or D.</p>
+      ${s.qs.map((q, i) => { const n = start + i; return `<div class="rq col" data-n="${n}"><div><span class="qn">${n}</span><b>${esc(q.q)}</b></div><div class="ropts">${q.o.map((o, j) => `<label class="ropt"><input type="radio" name="rpm${i}" value="${j}" data-k="mcq:${i}"><b>${LET[j]}</b><span>${esc(o)}</span></label>`).join('')}</div>${rpHint(q, 'mcq:' + i)}</div>`; }).join('')}</div>`);
+    if (k === 'summary'){ let txt = esc(s.text); s.qs.forEach((q, i) => { const n = start + i; txt = txt.replace(`{${q.n}}`, `<span class="gapw" data-n="${n}"><span class="qn sm">${n}</span><select data-k="summary:${i}"><option value="">…</option>${s.box.map((w, j) => `<option value="${j}">${LET[j]}</option>`).join('')}</select></span>`); });
+      blocks.push(`<div class="rqset"><b>${rng}</b><p class="ins">Complete the summary using the list of phrases, A–${LET[s.box.length - 1]}, below. Choose the correct letter for each gap.</p>
+        <div class="sumbox"><h4>${esc(s.title)}</h4><p>${txt}</p></div><div class="wordbox">${s.box.map((w, j) => `<span><b>${LET[j]}</b> ${esc(w)}</span>`).join('')}</div>
+        <div class="row">${s.qs.map((q, i) => rpHint(q, 'summary:' + i, start + i)).join('')}</div></div>`); }
+  });
+  RT.total = qn;
+  main().innerHTML = `<div class="ktop"><div class="row"><a class="btn small ghost" href="#rtests${t === 'full' ? '' : '-' + t}">← Back</a><span class="pill">${esc((RPTYPES.find(x => x[0] === t) || [])[1] || '')} · ${qn} questions</span></div><span class="ktimer" id="rpclock">${RPTIME[t]}:00</span></div>
+    <div class="rpsplit"><article class="rppass" id="rppass"><div class="label">${esc(p.topic)}</div><h2>${esc(p.title)}</h2><p class="sub">${esc(p.sub)}</p>
+      ${p.paras.map(x => `<p class="rpp" data-l="${x.l}"><b class="pl">${x.l}</b>${esc(x.x)}</p>`).join('')}<p class="muted" style="font-size:13px">Passage er text select korle highlight hoy. Highlight e click korle muche jay.</p></article>
+    <div class="rpq kq" id="rpq">${blocks.join('')}<button class="btn primary" type="button" id="rpCheck">Check answers</button></div></div>
+    <button class="rpjump" type="button" id="rpJump">Questions ↓</button>`;
+  $('#rpJump').onclick = () => { const q = $('#rpq'), toQ = q.getBoundingClientRect().top > 80; (toQ ? q : $('#rppass')).scrollIntoView({ behavior:'smooth' }); };
+  addEventListener('scroll', function rj(){ const b = $('#rpJump'), q = $('#rpq'); if (!b || !q){ removeEventListener('scroll', rj); return; } b.textContent = q.getBoundingClientRect().top > 200 ? 'Questions ↓' : 'Passage ↑'; }, { passive:true });
+  $$('#rpq [data-k]').forEach(el => el.onchange = () => { RT.ans[el.dataset.k] = el.value; if (el.type === 'radio') $$(`#rpq input[name="${el.name}"]`).forEach(r => r.closest('.ropt').classList.toggle('sel', r.checked)); });
+  $$('#rpq [data-hint]').forEach(b => b.onclick = () => { b.nextElementSibling.hidden = false; b.remove(); RT.hints.add(b.dataset.hint); });
+  $('#rpCheck').onclick = () => rpCheck();
+  const pass = $('#rppass');
+  pass.onmouseup = () => { const sel = getSelection(); if (!sel.rangeCount || sel.isCollapsed) return; const r = sel.getRangeAt(0); if (!pass.contains(r.commonAncestorContainer) || r.startContainer !== r.endContainer) return;
+    const m = document.createElement('mark'); m.className = 'hl'; try { r.surroundContents(m); } catch (e) {} sel.removeAllRanges(); };
+  pass.onclick = e => { const m = e.target.closest('mark.hl'); if (m){ m.replaceWith(...m.childNodes); } };
+  let left = RPTIME[t] * 60; RT.timer = setInterval(() => { const el = $('#rpclock'); if (!el || !RT) return clearInterval(RT && RT.timer); left--; el.textContent = (left < 0 ? '-' : '') + Math.floor(Math.abs(left) / 60) + ':' + String(Math.abs(left) % 60).padStart(2, '0'); el.classList.toggle('over', left < 0); }, 1000);
+  window.scrollTo(0, 0);
+}
+function rpHint(q, k, n){ return q.hint ? `<span class="rphint"><button class="btn small ghost" type="button" data-hint="${k}">Hint${n ? ' ' + n : ''}</button><span class="hx" hidden>${kmd(q.hint)}</span></span>` : ''; }
+function rpCheck(){
+  if (!RT || RT.done) return; const { p, t, sets } = RT;
+  const blank = $$('#rpq [data-k]').filter(el => el.type !== 'radio').filter(el => !el.value).length + sets.filter(k => k === 'mcq').reduce((a) => a + p.mcq.qs.filter((q, i) => RT.ans['mcq:' + i] == null).length, 0);
+  if (blank && !RT.warned){ RT.warned = true; toast(`${blank} ta blank. Asol exam e guess koro. Check korte abar chap dao.`); return; }
+  RT.done = true; clearInterval(RT.timer); let score = 0; const evs = [];
+  sets.forEach(k => p[k].qs.forEach((q, i) => {
+    const key = k + ':' + i, g = RT.ans[key]; let ok = false, right = '';
+    if (k === 'heading'){ ok = g !== undefined && g !== '' && +g === q.a; right = ROMAN[q.a] + ' ' + p.heading.list[q.a]; }
+    if (k === 'info'){ ok = g === q.a; right = 'Paragraph ' + q.a; }
+    if (k === 'mcq'){ ok = g !== undefined && +g === q.a; right = LET[q.a] + ' ' + q.o[q.a]; }
+    if (k === 'summary'){ ok = g !== undefined && g !== '' && +g === q.a; right = LET[q.a] + ' ' + p.summary.box[q.a]; }
+    if (ok) score++;
+    const host = k === 'mcq' ? $(`#rpq input[data-k="${key}"]`).closest('.rq') : k === 'summary' ? $(`#rpq select[data-k="${key}"]`).closest('.gapw') : $(`#rpq [data-k="${key}"]`).closest('.rq');
+    const n = +host.dataset.n; host.classList.add(ok ? 'ok' : 'no');
+    if (k === 'mcq') $$(`#rpq input[data-k="${key}"]`).forEach(r => { const o = r.closest('.ropt'); if (+r.value === q.a) o.classList.add('ok'); else if (r.checked) o.classList.add('no'); });
+    const fb = `<div class="kres ${ok ? 'ok' : 'no'}"><b>${n}. ${ok ? 'Thik' : 'Bhul'}</b><span>Answer: <b>${esc(right)}</b></span>${q.ev ? `<span class="ev">"${esc(q.ev)}"</span>` : ''}<span>${kmd(q.why || '')}</span></div>`;
+    if (k === 'summary') host.closest('.rqset').insertAdjacentHTML('beforeend', fb); else host.insertAdjacentHTML('beforeend', fb);
+    if (q.ev) evs.push([q.ev, n]); if (k === 'heading') { const para = $(`#rppass .rpp[data-l="${q.p}"]`); para && para.insertAdjacentHTML('afterbegin', `<span class="phead ${ok ? 'ok' : 'no'}">${n}. ${esc(ROMAN[q.a])} ${esc(p.heading.list[q.a])}</span>`); }
+  }));
+  evs.forEach(([e, n]) => { const para = $$('#rppass .rpp').find(x => x.textContent.includes(e)); if (!para) return; const h = para.innerHTML; const ee = esc(e); if (h.includes(ee)) para.innerHTML = h.replace(ee, `<mark class="ev">${ee}<sup>${n}</sup></mark>`); });
+  const key = rpKey(p.id, t); const r = S.rp.res[key] || { best:0, tries:0 }; r.best = Math.max(r.best, score); r.total = RT.total; r.tries++; r.last = score; r.date = TODAY(); S.rp.res[key] = r; save();
+  const band = rpBand(score, RT.total);
+  $('#rpCheck').outerHTML = `<div class="kres ${score / RT.total >= .7 ? 'ok' : 'no'}" style="font-size:16px"><b style="font-size:22px">${score} / ${RT.total}${band ? ` · band ${band} level` : ''}</b>
+    <span>${score / RT.total >= .8 ? 'Darun! Ei level er passage e eta band 7.5+ er performance.' : score / RT.total >= .6 ? 'Bhalo. Bhul gulor "why" pore dekho kon trap e porecho.' : 'Kothin passage, tai chinta koro na. Sobuj highlight kora line gula pore abar dao.'}</span>${RT.hints.size ? `<span class="muted">${RT.hints.size} ta hint use korecho.</span>` : ''}
+    <div class="row"><button class="btn small primary" type="button" id="rpAgain">Abar dao</button><a class="btn small" href="#rtests">Shob passage</a></div></div>
+    <div class="panel"><h2>Power words</h2><div class="m1words">${p.words.map(w => `<div><b>${esc(w.w)}</b> ${speakBtn(w.w)}<span class="bn">${esc(w.bn)}</span><small>${esc(w.m)}</small></div>`).join('')}</div></div>`;
+  $('#rpAgain').onclick = () => rpTest(p, t);
+  $$('#rpq select, #rpq input').forEach(x => x.disabled = true);
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+function rpBand(s, n){ if (n < 13) return ''; const r = s / n * 40; return r >= 39 ? '9' : r >= 37 ? '8.5' : r >= 35 ? '8' : r >= 33 ? '7.5' : r >= 30 ? '7' : r >= 27 ? '6.5' : r >= 23 ? '6' : r >= 19 ? '5.5' : r >= 15 ? '5' : '4.5'; }
+
+/* ---------- Writing book: Task 1 and Task 2 ---------- */
+ICON.wbook = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-1.5-5-2-8-1.5V19c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V4.5C17 4 14 4.5 12 6z"/><path d="M12 6v14.5"/><path d="M15 9.5h2.5M15 12.5h2.5"/></svg>';
+SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'spell'), 0, ['wbook', 'Writing book']);
+S.wb = Object.assign({ read:{}, drafts:{}, last:null }, S.wb || {});
+let WB = null, WBP = null;
+async function wbLoad(){ if (WB) return WB; if (!WBP) WBP = fetch('writing.json', { cache:'no-cache' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(j => (WB = j)); return WBP; }
+const wbParts = [['Basics', 'Shuru korar age', '#B45309'], ['Task 1', 'Graph, chart, process, map', '#1D5FD1'], ['Task 2', 'Essay: shob type', '#C9356F']];
+const wbMd = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/(^|[\s(\[])'([^'\n]{1,160}?)'(?=[\s.,;:!?)\]]|$)/g, '$1<q>$2</q>');
+function wbWords(t){ return (String(t).match(/[A-Za-z0-9'%£$.-]+/g) || []).filter(w => /[A-Za-z0-9]/.test(w)).length; }
+async function viewWBook(){
+  main().innerHTML = '<div class="page-head"><div><h1>Writing book</h1><p>Loading…</p></div></div>';
+  let d; try { d = await wbLoad(); } catch (e) { main().innerHTML = `<div class="page-head"><div><h1>Writing book</h1><p>Book load hoyni (${esc(e.message)}). Internet check kore abar try koro.</p></div></div>`; return; }
+  if (location.hash.split('-')[0] !== '#wbook' && location.hash !== '#wbook') return;
+  const sub = location.hash.split('-').slice(1).join('-'); const ch = d.find(c => c.id === sub.split('.')[0]);
+  if (ch) return wbChapter(ch, +(sub.split('.')[1] || 0));
+  const total = d.reduce((a, c) => a + c.pages.length, 0), read = d.reduce((a, c) => a + c.pages.filter((p, i) => S.wb.read[c.id + '.' + i]).length, 0);
+  const models = d.reduce((a, c) => a + c.pages.reduce((b, p) => b + p.blocks.filter(x => x.t === 'model').length, 0), 0);
+  const cont = S.wb.last && d.find(c => c.id === S.wb.last.split('.')[0]);
+  main().innerHTML = `<div class="page-head"><div><h1>Writing book</h1><p>IELTS Academic Writing er puro boi: marking kivabe hoy, Task 1 er protita chart type, Task 2 er protita essay type, grammar, vocabulary, ar ${models} ta model answer. Banglish e bujhano, English e example.</p></div>
+    ${cont ? `<a class="btn primary" href="#wbook-${S.wb.last}">Continue: ${esc(cont.title)}</a>` : `<a class="btn primary" href="#wbook-${d[0].id}">Start reading</a>`}</div>
+    <div class="tfacts"><div><b>${d.length}</b><span>chapters</span></div><div><b>${total}</b><span>pages</span></div><div><b>${models}</b><span>model answers</span></div><div><b>${Math.round(read / total * 100)}%</b><span>read</span></div></div>
+    ${wbParts.map(([p, bn, col]) => { const cs = d.filter(c => c.part === p); if (!cs.length) return '';
+      return `<h2 class="wbpart" style="--pc:${col}">${p === 'Basics' ? 'Basics' : p} <span>${bn}</span></h2><div class="wbgrid">${cs.map((c, ci) => { const n = c.pages.length, r = c.pages.filter((x, i) => S.wb.read[c.id + '.' + i]).length;
+        const ms = c.pages.reduce((b, pg) => b + pg.blocks.filter(x => x.t === 'model').length, 0);
+        return `<a class="wbch" href="#wbook-${c.id}" style="--pc:${col}"><span class="no">${p === 'Task 1' ? '1.' : p === 'Task 2' ? '2.' : ''}${ci + 1}</span><b>${esc(c.title)}</b><small>${esc(c.bn || '')}</small>
+          <span class="meta">${n} pages${ms ? ` · ${ms} models` : ''}</span><span class="bar"><i style="width:${Math.round(r / n * 100)}%"></i></span></a>`; }).join('')}</div>`; }).join('')}`;
+}
+function wbChapter(c, pi){
+  const d = WB; const idx = d.indexOf(c); pi = Math.max(0, Math.min(c.pages.length - 1, pi || 0)); const pg = c.pages[pi];
+  S.wb.read[c.id + '.' + pi] = 1; S.wb.last = c.id + '.' + pi; save();
+  const prev = pi > 0 ? `#wbook-${c.id}.${pi - 1}` : idx > 0 ? `#wbook-${d[idx - 1].id}.${d[idx - 1].pages.length - 1}` : null;
+  const next = pi < c.pages.length - 1 ? `#wbook-${c.id}.${pi + 1}` : idx < d.length - 1 ? `#wbook-${d[idx + 1].id}` : null;
+  const col = (wbParts.find(p => p[0] === c.part) || [, , '#B45309'])[2];
+  main().innerHTML = `<div class="row" style="margin-bottom:12px"><a class="btn small ghost" href="#wbook">← Writing book</a><span class="pill" style="background:color-mix(in srgb,${col} 14%,#fff);color:${col}">${esc(c.part)}</span></div>
+  <div class="wbread" style="--pc:${col}">
+    <aside class="wbtoc" id="wbtoc"><b onclick="this.parentElement.classList.toggle('open')">${esc(c.title)} <span class="tg">☰</span></b><small>${esc(c.goal || '')}</small><ol>${c.pages.map((p, i) => `<li class="${i === pi ? 'on' : ''} ${S.wb.read[c.id + '.' + i] ? 'rd' : ''}"><a href="#wbook-${c.id}.${i}">${esc(p.h)}</a></li>`).join('')}</ol></aside>
+    <article class="wbpage"><div class="label">${esc(c.part)} · ${esc(c.title)} · page ${pi + 1} of ${c.pages.length}</div><h1>${esc(pg.h)}</h1>
+      ${pg.blocks.map((b, bi) => wbBlock(b, c.id + '.' + pi + '.' + bi)).join('')}
+      <div class="wbnav">${prev ? `<a class="btn" href="${prev}">← Previous</a>` : '<span></span>'}${next ? `<a class="btn primary" href="${next}">Next page →</a>` : '<a class="btn primary" href="#wbook">Finish book</a>'}</div></article></div>`;
+  $$('[data-reveal]').forEach(b => b.onclick = () => { b.nextElementSibling.hidden = false; b.remove(); });
+  $$('[data-notes]').forEach(b => b.onclick = () => { const n = b.parentElement.nextElementSibling; n.hidden = !n.hidden; b.textContent = n.hidden ? 'Keno band 8? (notes)' : 'Notes lukao'; });
+  $$('[data-try]').forEach(b => b.onclick = () => wbTry(b.dataset.try, b));
+  window.scrollTo(0, 0);
+}
+function wbBlock(b, key){
+  switch (b.t){
+    case 'p': return `<p>${wbMd(b.x)}</p>`;
+    case 'list': return `<ul class="wbl">${b.x.map(x => `<li>${wbMd(x)}</li>`).join('')}</ul>`;
+    case 'steps': return `<ol class="wbsteps">${b.x.map(x => `<li>${wbMd(x)}</li>`).join('')}</ol>`;
+    case 'tip': return `<div class="wbtip"><b>Tip</b><span>${wbMd(b.x)}</span></div>`;
+    case 'trap': return `<div class="wbtrap"><b>Bhul ta koro na</b><span>${wbMd(b.x)}</span></div>`;
+    case 'table': return `<div class="wbtable"><table><thead><tr>${(b.head || []).map(h => `<th>${wbMd(h)}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r => `<tr>${r.map(v => `<td>${wbMd(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    case 'pairs': { const h = b.h || ['Weak', 'Better']; return `<div class="wbpairs"><div class="ph"><span>${esc(h[0])}</span><span>${esc(h[1])}</span></div>${b.x.map(([a, c]) => `<div class="pr"><span class="a">${wbMd(a)}</span><span class="c">${wbMd(c)}</span></div>`).join('')}</div>`; }
+    case 'chart': return chartHTML(b.c);
+    case 'task': return `<div class="wbtask"><div class="label">Writing task</div><p>${esc(b.x)}</p>${b.c ? chartHTML(b.c) : ''}<button class="btn small" type="button" data-try="${key}">Nije likhe practice koro</button><div class="wbtry" hidden></div></div>`;
+    case 'model': { const wc = b.x.reduce((a, p) => a + wbWords(p), 0); return `<div class="wbmodel ${+b.band < 7 ? 'low' : ''}"><div class="mh"><span class="band">Band ${esc(b.band)}</span><span class="muted">${wc} words</span>${b.notes && b.notes.length ? '<button class="btn small ghost" type="button" data-notes>Keno band ' + esc(b.band) + '? (notes)</button>' : ''}</div>
+      <div class="notes" hidden><ul>${(b.notes || []).map(n => `<li>${wbMd(n)}</li>`).join('')}</ul></div><div class="essay">${b.x.map(p => `<p>${esc(p)}</p>`).join('')}</div></div>`; }
+    case 'check': return `<div class="wbcheck"><b>Nije try koro</b><p>${wbMd(b.q)}</p><button class="btn small" type="button" data-reveal>Answer dekho</button><div class="ans" hidden>${wbMd(b.a)}</div></div>`;
+    default: return '';
+  }
+}
+function wbTry(key, btn){
+  const box = btn.nextElementSibling; if (!box.hidden){ box.hidden = true; return; } box.hidden = false;
+  const isT2 = /^t2/.test(key); const min = isT2 ? 250 : 150, mins = isT2 ? 40 : 20;
+  box.innerHTML = `<div class="row" style="justify-content:space-between"><span class="pill" id="wbt-${key.replace(/\./g, '_')}">${mins}:00</span><span class="pill" data-wc>0 words</span></div>
+    <textarea class="editor" placeholder="Ekhane likho. Minimum ${min} words." data-k="${key}">${esc(S.wb.drafts[key] || '')}</textarea>
+    <div class="row"><button class="btn small primary" type="button" data-go>Timer shuru</button><a class="btn small" href="#writing" data-chk>Writing check e grammar dekho</a><span class="muted" style="font-size:13px">Draft auto-save hoy.</span></div>`;
+  const ta = box.querySelector('textarea'), wc = box.querySelector('[data-wc]');
+  const upd = () => { const n = wbWords(ta.value); wc.textContent = n + ' words'; wc.className = 'pill ' + (n >= min ? 'good' : ''); S.wb.drafts[key] = ta.value; save(); };
+  ta.oninput = upd; upd();
+  box.querySelector('[data-chk]').onclick = () => { if (typeof WR !== 'undefined') { WR.text = ta.value; WR.issues = null; } try { localStorage.setItem('iwl-draft', ta.value); } catch (e) {} };
+  box.querySelector('[data-go]').onclick = e => { const el = box.querySelector('.pill'); let left = mins * 60; e.target.disabled = true;
+    const t = setInterval(() => { if (!document.body.contains(el)) return clearInterval(t); left--; el.textContent = Math.floor(left / 60) + ':' + String(Math.abs(left % 60)).padStart(2, '0'); if (left <= 0){ el.className = 'pill bad'; el.textContent = 'Time up'; clearInterval(t); } }, 1000); };
+}
 
 
 /* ---------- global events ---------- */
