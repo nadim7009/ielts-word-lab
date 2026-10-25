@@ -643,6 +643,7 @@ body.labfull{overflow:hidden}
 /* ---------- reading tests + writing book ---------- */
 body[data-sec="rtests"]{--sec:#0F766E;--sec2:#14A39A;--sec-soft:#E0F4F1}
 body[data-sec="wbook"]{--sec:#B45309;--sec2:#E58A2E;--sec-soft:#FDF0E1}
+body[data-sec="sbook"]{--sec:#7C3AED;--sec2:#A06BF5;--sec-soft:#F1EAFE}
 .rph{font-size:22px;margin:24px 0 12px}
 .rptypes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
 .rptype,.wbch{display:flex;flex-direction:column;gap:5px;background:#fff;border:1px solid #E7EBF3;border-top:4px solid var(--pc);border-radius:18px;padding:15px 16px;text-decoration:none;color:inherit;box-shadow:0 1px 2px rgb(19 32 58 / .04),0 10px 24px rgb(19 32 58 / .05);transition:transform .15s,box-shadow .15s}
@@ -835,6 +836,13 @@ body[data-sec="wbook"]{--sec:#B45309;--sec2:#E58A2E;--sec-soft:#FDF0E1}
 .wbnav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:26px;border-top:1px solid #ECE6DA;padding-top:16px}
 .wbnav .folio{font:600 15px "Literata",Georgia,serif;color:#9A8F7E}
 @media (max-width:960px){.wbread{grid-template-columns:1fr}.wbtoc{position:static;max-height:none}.wbpage{padding:18px 18px 22px;border-radius:18px}.wbtoc ol{display:none}.wbtoc.open ol{display:flex}.wbtoc .tg{display:inline}.wbtoc > b{cursor:pointer}.wbpage .chno{font-size:52px}.wbbody{font-size:16.5px}}
+.wbcover.sbook{background:linear-gradient(135deg,#F7F2FF 0%,#EFE6FF 60%,#E4D6FD 100%);border-color:#E0D2FA}
+.wbcover.sbook .kicker{color:#6D28D9}.wbcover.sbook h1{color:#24124A}.wbcover.sbook .sub{color:#4A3A6B}.wbcover.sbook .lede{color:#3D3355}
+.wbcover.sbook::after{background:radial-gradient(circle,rgb(124 58 237 / .16),transparent 70%)}
+.wbspine{background:linear-gradient(90deg,color-mix(in srgb,var(--pc,#B45309) 70%,#000) 0 10px,var(--pc,#B45309) 10px 100%)}
+.wbmodel .mq{padding:12px 24px 0;font:700 15.5px/1.5 var(--f-ui);color:var(--ink)}
+.wbmodel .mq::before{content:"Q  ";color:var(--pc);font-weight:800}
+.wbmodel .essay b{font-weight:600;color:#3B1C86;background:#F1EAFE;border-radius:4px;padding:0 3px}
 
 </style>
 </head>
@@ -959,7 +967,7 @@ function route(){
   if (typeof G !== 'undefined' && G) G.active = false;
   if (typeof stopK === 'function') { stopK(); K = null; }
   stopTyping();
-  ({ today:viewToday, reading:viewReading, listening:viewListening, l1200:viewL1200, part4:viewPart4, spell:viewSpell, typing:viewTyping, writing:viewWriting, progress:viewProgress, grammar:viewGrammar, skills:viewSkills, tests:viewTests, rtests:viewRTests, wbook:viewWBook })[sec]();
+  ({ today:viewToday, reading:viewReading, listening:viewListening, l1200:viewL1200, part4:viewPart4, spell:viewSpell, typing:viewTyping, writing:viewWriting, progress:viewProgress, grammar:viewGrammar, skills:viewSkills, tests:viewTests, rtests:viewRTests, wbook:viewWBook, sbook:viewSBook })[sec]();
   window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
@@ -2452,8 +2460,8 @@ function m1Hear(i){
 /* ---------- Theme v2: grouped colour nav, section icons, full tests ---------- */
 ICON.tests = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><circle cx="17.5" cy="17.5" r="3.5" fill="#fff"/><path d="m16 17.5 1 1 2-2"/></svg>';
 SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'progress'), 0, ['tests', 'Listening tests']);
-const SECCOL = { today:'#0B8F74', reading:'#4F46E5', listening:'#0E7CC4', l1200:'#0F8BA0', part4:'#7C3AED', spell:'#D9502F', typing:'#B86E06', grammar:'#C9356F', skills:'#5B4FD6', tests:'#1D5FD1', rtests:'#0F766E', wbook:'#B45309', writing:'#12855F', progress:'#3F5BA9' };
-const NAVGROUPS = [['Learn', ['today', 'reading', 'listening', 'l1200', 'part4', 'wbook']], ['Practice', ['spell', 'typing', 'grammar', 'skills', 'writing']], ['Exam', ['tests', 'rtests', 'progress']]];
+const SECCOL = { today:'#0B8F74', reading:'#4F46E5', listening:'#0E7CC4', l1200:'#0F8BA0', part4:'#7C3AED', spell:'#D9502F', typing:'#B86E06', grammar:'#C9356F', skills:'#5B4FD6', tests:'#1D5FD1', rtests:'#0F766E', wbook:'#B45309', sbook:'#7C3AED', writing:'#12855F', progress:'#3F5BA9' };
+const NAVGROUPS = [['Learn', ['today', 'reading', 'listening', 'l1200', 'part4', 'wbook', 'sbook']], ['Practice', ['spell', 'typing', 'grammar', 'skills', 'writing']], ['Exam', ['tests', 'rtests', 'progress']]];
 function renderNav(sec){
   const have = new Map(SECTIONS); const used = new Set();
   const link = id => { used.add(id); return `<a href="#${id}" style="--c:${SECCOL[id] || '#0B8F74'}" ${id === sec ? 'aria-current="page"' : ''}><span class="ic">${ICON[id] || ''}</span><span>${esc(have.get(id))}</span></a>`; };
@@ -2767,59 +2775,74 @@ function rpBand(s, n){ if (n < 13) return ''; const r = s / n * 40; return r >= 
 
 /* ---------- Writing book: Task 1 and Task 2 ---------- */
 ICON.wbook = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-1.5-5-2-8-1.5V19c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V4.5C17 4 14 4.5 12 6z"/><path d="M12 6v14.5"/><path d="M15 9.5h2.5M15 12.5h2.5"/></svg>';
-SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'spell'), 0, ['wbook', 'Writing book']);
+ICON.sbook = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg>';
+SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'spell'), 0, ['wbook', 'Writing book'], ['sbook', 'Speaking book']);
 S.wb = Object.assign({ read:{}, drafts:{}, last:null }, S.wb || {});
-let WB = null, WBP = null;
-async function wbLoad(){ if (WB) return WB; if (!WBP) WBP = fetch('writing.json', { cache:'no-cache' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(j => (WB = j)); return WBP; }
-const wbParts = [['Basics', 'Getting started', '#B45309', 'One'], ['Task 1', 'Reports on charts, processes and maps', '#1D5FD1', 'Two'], ['Task 2', 'Essays of every type', '#C9356F', 'Three']];
+// one engine, two books; ids never clash (writing: b1/t1x/t2x, speaking: sNN), so read/drafts are shared
+const BOOKS = {
+  wbook:{ file:'writing.json', name:'Writing book', title:'The Writing Book', sub:'Task 1 and Task 2, from the marking criteria to band 8 model answers.',
+    lede:n => `Every chart type, every essay type, the grammar and vocabulary examiners reward, and ${n} annotated model answers. Read it in order, or open any chapter you need.`,
+    spine:['IELTS', 'Writing', 'Task 1 · Task 2'], col:'#B45309', units:'model answers',
+    parts:[['Basics', 'Basics', 'Getting started', '#B45309', 'One'], ['Task 1', 'Writing Task 1', 'Reports on charts, processes and maps', '#1D5FD1', 'Two'], ['Task 2', 'Writing Task 2', 'Essays of every type', '#C9356F', 'Three']] },
+  sbook:{ file:'speaking.json', name:'Speaking book', title:'The Speaking Book', sub:'A band 7 plan built on vocabulary and grammar, with sample answers for Parts 1, 2 and 3.',
+    lede:n => `How the examiner scores you, the words and structures that lift you to band 7, and ${n} sample answers you can read and listen to. The useful language in every answer is in bold.`,
+    spine:['IELTS', 'Speaking', 'Part 1 · 2 · 3'], col:'#7C3AED', units:'sample answers',
+    parts:[['Basics', 'Basics', 'How the test works', '#7C3AED', 'One'], ['Vocabulary', 'Lexical resource', 'Words, collocations and idioms for band 7', '#0F766E', 'Two'], ['Grammar', 'Grammatical range', 'Structures and accuracy for band 7', '#C9356F', 'Three'], ['Part 1', 'Speaking Part 1', 'Short answers about you', '#1D5FD1', 'Four'], ['Part 2', 'Speaking Part 2', 'The two-minute talk', '#B45309', 'Five'], ['Part 3', 'Speaking Part 3', 'Discussion and opinions', '#5B4FD6', 'Six'], ['Fluency', 'Fluency and pronunciation', 'Sounding natural on the day', '#0E7CC4', 'Seven']] }
+};
+const BK = {}, BKP = {};
+async function bookLoad(k){ if (BK[k]) return BK[k]; if (!BKP[k]) BKP[k] = fetch(BOOKS[k].file, { cache:'no-cache' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(j => (BK[k] = j)); return BKP[k]; }
+const viewWBook = () => viewBook('wbook'), viewSBook = () => viewBook('sbook');
 const wbMd = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/(^|[\s(\[])'([^'\n]{1,160}?)'(?=[\s.,;:!?)\]]|$)/g, '$1<q>$2</q>');
 function wbWords(t){ return (String(t).match(/[A-Za-z0-9'%£$.-]+/g) || []).filter(w => /[A-Za-z0-9]/.test(w)).length; }
-async function viewWBook(){
-  main().innerHTML = '<div class="page-head"><div><h1>Writing book</h1><p>Loading…</p></div></div>';
-  let d; try { d = await wbLoad(); } catch (e) { main().innerHTML = `<div class="page-head"><div><h1>Writing book</h1><p>The book could not load (${esc(e.message)}). Check your connection and try again.</p></div></div>`; return; }
-  if (location.hash.split('-')[0] !== '#wbook' && location.hash !== '#wbook') return;
+async function viewBook(k){
+  const B = BOOKS[k];
+  main().innerHTML = `<div class="page-head"><div><h1>${B.name}</h1><p>Loading…</p></div></div>`;
+  let d; try { d = await bookLoad(k); } catch (e) { main().innerHTML = `<div class="page-head"><div><h1>${B.name}</h1><p>The book could not load (${esc(e.message)}). Check your connection and try again.</p></div></div>`; return; }
+  if (location.hash.split('-')[0] !== '#' + k) return;
   const sub = location.hash.split('-').slice(1).join('-'); const ch = d.find(c => c.id === sub.split('.')[0]);
-  if (ch) return wbChapter(ch, +(sub.split('.')[1] || 0));
+  if (ch) return wbChapter(k, ch, +(sub.split('.')[1] || 0));
   const total = d.reduce((a, c) => a + c.pages.length, 0), read = d.reduce((a, c) => a + c.pages.filter((p, i) => S.wb.read[c.id + '.' + i]).length, 0);
   const models = d.reduce((a, c) => a + c.pages.reduce((b, p) => b + p.blocks.filter(x => x.t === 'model').length, 0), 0);
-  const cont = S.wb.last && d.find(c => c.id === S.wb.last.split('.')[0]);
+  const last = S.wb['last_' + k] || (k === 'wbook' && S.wb.last), cont = last && d.find(c => c.id === last.split('.')[0]);
   const pct = Math.round(read / total * 100);
-  main().innerHTML = `<section class="wbcover">
-      <div class="wbcover-text"><div class="kicker">IELTS Academic</div><h1>The Writing Book</h1>
-        <p class="sub">Task 1 and Task 2, from the marking criteria to band 8 model answers.</p>
-        <p class="lede">Every chart type, every essay type, the grammar and vocabulary examiners reward, and ${models} annotated model answers. Read it in order, or open any chapter you need.</p>
-        <div class="row">${cont ? `<a class="btn primary" href="#wbook-${S.wb.last}">Continue: ${esc(cont.title)}</a><a class="btn" href="#wbook-${d[0].id}">Start from the beginning</a>` : `<a class="btn primary" href="#wbook-${d[0].id}">Start reading</a>`}</div></div>
-      <div class="wbspine" aria-hidden="true"><span>IELTS</span><b>Writing</b><i></i><small>Task 1 · Task 2</small></div>
+  main().innerHTML = `<section class="wbcover ${k}">
+      <div class="wbcover-text"><div class="kicker">IELTS Academic</div><h1>${B.title}</h1>
+        <p class="sub">${B.sub}</p>
+        <p class="lede">${B.lede(models)}</p>
+        <div class="row">${cont ? `<a class="btn primary" href="#${k}-${last}">Continue: ${esc(cont.title)}</a><a class="btn" href="#${k}-${d[0].id}">Start from the beginning</a>` : `<a class="btn primary" href="#${k}-${d[0].id}">Start reading</a>`}</div></div>
+      <div class="wbspine" aria-hidden="true" style="--pc:${B.col}"><span>${B.spine[0]}</span><b>${B.spine[1]}</b><i></i><small>${B.spine[2]}</small></div>
     </section>
-    <div class="tfacts"><div><b>${d.length}</b><span>chapters</span></div><div><b>${total}</b><span>pages</span></div><div><b>${models}</b><span>model answers</span></div><div><b>${pct}%</b><span>read</span></div></div>
+    <div class="tfacts"><div><b>${d.length}</b><span>chapters</span></div><div><b>${total}</b><span>pages</span></div><div><b>${models}</b><span>${B.units}</span></div><div><b>${pct}%</b><span>read</span></div></div>
     <h2 class="wbcontents">Contents</h2>
-    ${wbParts.map(([p, sub, col, no]) => { const cs = d.filter(c => c.part === p); if (!cs.length) return '';
-      return `<div class="wbpart" style="--pc:${col}"><span class="pno">Part ${no}</span><h2>${p === 'Basics' ? 'Basics' : 'Writing ' + p}</h2><span class="psub">${sub}</span></div><ol class="wbtocl">${cs.map((c, ci) => { const n = c.pages.length, r = c.pages.filter((x, i) => S.wb.read[c.id + '.' + i]).length;
+    ${B.parts.map(([p, pname, sub, col, no]) => { const cs = d.filter(c => c.part === p); if (!cs.length) return '';
+      return `<div class="wbpart" style="--pc:${col}"><span class="pno">Part ${no}</span><h2>${pname}</h2><span class="psub">${sub}</span></div><ol class="wbtocl">${cs.map((c, ci) => { const n = c.pages.length, r = c.pages.filter((x, i) => S.wb.read[c.id + '.' + i]).length;
         const ms = c.pages.reduce((b, pg) => b + pg.blocks.filter(x => x.t === 'model').length, 0);
-        return `<li><a class="wbch" href="#wbook-${c.id}" style="--pc:${col}"><span class="no">${String(d.indexOf(c) + 1).padStart(2, '0')}</span><span class="tt"><b>${esc(c.title)}</b><small>${esc(c.bn || '')}</small></span>
-          <span class="meta">${n} pages${ms ? ` · ${ms} model${ms > 1 ? 's' : ''}` : ''}</span><span class="ring" style="--v:${Math.round(r / n * 100)}" title="${r} of ${n} pages read"></span></a></li>`; }).join('')}</ol>`; }).join('')}`;
+        return `<li><a class="wbch" href="#${k}-${c.id}" style="--pc:${col}"><span class="no">${String(d.indexOf(c) + 1).padStart(2, '0')}</span><span class="tt"><b>${esc(c.title)}</b><small>${esc(c.bn || '')}</small></span>
+          <span class="meta">${n} pages${ms ? ` · ${ms} ${k === 'sbook' ? 'answer' : 'model'}${ms > 1 ? 's' : ''}` : ''}</span><span class="ring" style="--v:${Math.round(r / n * 100)}" title="${r} of ${n} pages read"></span></a></li>`; }).join('')}</ol>`; }).join('')}`;
 }
-function wbChapter(c, pi){
-  const d = WB; const idx = d.indexOf(c); pi = Math.max(0, Math.min(c.pages.length - 1, pi || 0)); const pg = c.pages[pi];
-  S.wb.read[c.id + '.' + pi] = 1; S.wb.last = c.id + '.' + pi; save();
-  const prev = pi > 0 ? `#wbook-${c.id}.${pi - 1}` : idx > 0 ? `#wbook-${d[idx - 1].id}.${d[idx - 1].pages.length - 1}` : null;
-  const next = pi < c.pages.length - 1 ? `#wbook-${c.id}.${pi + 1}` : idx < d.length - 1 ? `#wbook-${d[idx + 1].id}` : null;
-  const col = (wbParts.find(p => p[0] === c.part) || [, , '#B45309'])[2];
+function wbChapter(k, c, pi){
+  const B = BOOKS[k], d = BK[k]; const idx = d.indexOf(c); pi = Math.max(0, Math.min(c.pages.length - 1, pi || 0)); const pg = c.pages[pi];
+  S.wb.read[c.id + '.' + pi] = 1; S.wb['last_' + k] = c.id + '.' + pi; save();
+  const prev = pi > 0 ? `#${k}-${c.id}.${pi - 1}` : idx > 0 ? `#${k}-${d[idx - 1].id}.${d[idx - 1].pages.length - 1}` : null;
+  const next = pi < c.pages.length - 1 ? `#${k}-${c.id}.${pi + 1}` : idx < d.length - 1 ? `#${k}-${d[idx + 1].id}` : null;
+  const P = B.parts.find(p => p[0] === c.part) || B.parts[0], col = P[3];
   const chno = String(idx + 1).padStart(2, '0'), pct = Math.round((pi + 1) / c.pages.length * 100);
-  main().innerHTML = `<div class="wbtop"><a class="btn small ghost" href="#wbook">← Contents</a><span class="crumb">${esc(c.part === 'Basics' ? 'Basics' : 'Writing ' + c.part)} · Chapter ${chno}</span></div>
+  main().innerHTML = `<div class="wbtop"><a class="btn small ghost" href="#${k}">← Contents</a><span class="crumb">${esc(P[1])} · Chapter ${chno}</span></div>
   <div class="wbread" style="--pc:${col}">
-    <aside class="wbtoc" id="wbtoc"><b onclick="this.parentElement.classList.toggle('open')"><span class="cn">Chapter ${chno}</span>${esc(c.title)} <span class="tg">☰</span></b><ol>${c.pages.map((p, i) => `<li class="${i === pi ? 'on' : ''} ${S.wb.read[c.id + '.' + i] ? 'rd' : ''}"><a href="#wbook-${c.id}.${i}"><span>${i + 1}</span>${esc(p.h)}</a></li>`).join('')}</ol></aside>
+    <aside class="wbtoc" id="wbtoc"><b onclick="this.parentElement.classList.toggle('open')"><span class="cn">Chapter ${chno}</span>${esc(c.title)} <span class="tg">☰</span></b><ol>${c.pages.map((p, i) => `<li class="${i === pi ? 'on' : ''} ${S.wb.read[c.id + '.' + i] ? 'rd' : ''}"><a href="#${k}-${c.id}.${i}"><span>${i + 1}</span>${esc(p.h)}</a></li>`).join('')}</ol></aside>
     <article class="wbpage">
       <div class="runhead"><span>${esc(c.title)}</span><span>${pi + 1} / ${c.pages.length}</span></div><div class="prog"><i style="width:${pct}%"></i></div>
       ${pi === 0 ? `<header class="opener"><span class="chno">${chno}</span><div><div class="kicker">Chapter ${chno} · ${esc(c.part)}</div><h1 class="chtitle">${esc(c.title)}</h1>${c.bn ? `<p class="chsub">${esc(c.bn)}</p>` : ''}</div></header>${c.goal ? `<div class="goal"><b>In this chapter</b><p>${wbMd(c.goal)}</p></div>` : ''}<h2 class="pgh">${esc(pg.h)}</h2>` : `<h1 class="pgh">${esc(pg.h)}</h1>`}
-      <div class="wbbody">${pg.blocks.map((b, bi) => wbBlock(b, c.id + '.' + pi + '.' + bi)).join('')}</div>
-      <div class="wbnav">${prev ? `<a class="btn" href="${prev}">← Previous</a>` : '<span></span>'}<span class="folio">${pi + 1}</span>${next ? `<a class="btn primary" href="${next}">${pi < c.pages.length - 1 ? 'Next page' : 'Next chapter'} →</a>` : '<a class="btn primary" href="#wbook">Back to contents</a>'}</div></article></div>`;
+      <div class="wbbody">${pg.blocks.map((b, bi) => wbBlock(b, c.id + '.' + pi + '.' + bi, k)).join('')}</div>
+      <div class="wbnav">${prev ? `<a class="btn" href="${prev}">← Previous</a>` : '<span></span>'}<span class="folio">${pi + 1}</span>${next ? `<a class="btn primary" href="${next}">${pi < c.pages.length - 1 ? 'Next page' : 'Next chapter'} →</a>` : '<a class="btn primary" href="#${k}">Back to contents</a>'}</div></article></div>`;
   $$('[data-reveal]').forEach(b => b.onclick = () => { b.nextElementSibling.hidden = false; b.remove(); });
   $$('[data-notes]').forEach(b => b.onclick = () => { const n = b.parentElement.nextElementSibling; n.hidden = !n.hidden; b.textContent = n.hidden ? 'Why it scores band ' + b.dataset.notes : 'Hide notes'; });
-  $$('[data-try]').forEach(b => b.onclick = () => wbTry(b.dataset.try, b));
+  $$('[data-try]').forEach(b => b.onclick = () => (k === 'sbook' ? sbTry : wbTry)(b.dataset.try, b));
+  $$('[data-say]').forEach(b => b.onclick = () => sbSay(b));
   window.scrollTo(0, 0);
 }
-function wbBlock(b, key){
+function wbBlock(b, key, k){
+  const sp = k === 'sbook';
   switch (b.t){
     case 'p': return `<p>${wbMd(b.x)}</p>`;
     case 'list': return `<ul class="wbl">${b.x.map(x => `<li>${wbMd(x)}</li>`).join('')}</ul>`;
@@ -2829,9 +2852,9 @@ function wbBlock(b, key){
     case 'table': return `<div class="wbtable"><table><thead><tr>${(b.head || []).map(h => `<th>${wbMd(h)}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r => `<tr>${r.map(v => `<td>${wbMd(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
     case 'pairs': { const h = b.h || ['Weak', 'Better']; return `<div class="wbpairs"><div class="ph"><span>${esc(h[0])}</span><span>${esc(h[1])}</span></div>${b.x.map(([a, c]) => `<div class="pr"><span class="a">${wbMd(a)}</span><span class="c">${wbMd(c)}</span></div>`).join('')}</div>`; }
     case 'chart': return chartHTML(b.c);
-    case 'task': return `<div class="wbtask"><div class="label">Practice task</div><p>${esc(b.x)}</p>${b.c ? chartHTML(b.c) : ''}<button class="btn small" type="button" data-try="${key}">Write your own answer</button><div class="wbtry" hidden></div></div>`;
-    case 'model': { const wc = b.x.reduce((a, p) => a + wbWords(p), 0); return `<div class="wbmodel ${+b.band < 7 ? 'low' : ''}"><div class="mh"><span class="band">Band ${esc(b.band)}</span><span class="mt">Model answer</span><span class="muted">${wc} words</span>${b.notes && b.notes.length ? '<button class="btn small ghost" type="button" data-notes="' + esc(b.band) + '">Why it scores band ' + esc(b.band) + '</button>' : ''}</div>
-      <div class="notes" hidden><ul>${(b.notes || []).map(n => `<li>${wbMd(n)}</li>`).join('')}</ul></div><div class="essay">${b.x.map(p => `<p>${esc(p)}</p>`).join('')}</div></div>`; }
+    case 'task': return `<div class="wbtask"><div class="label">${sp ? 'Cue card' : 'Practice task'}</div><p>${wbMd(b.x).replace(/\n/g, '<br>')}</p>${b.c ? chartHTML(b.c) : ''}<button class="btn small" type="button" data-try="${key}">${sp ? 'Practise this talk' : 'Write your own answer'}</button><div class="wbtry" hidden></div></div>`;
+    case 'model': { const wc = b.x.reduce((a, p) => a + wbWords(p), 0); return `<div class="wbmodel ${+b.band < 7 ? 'low' : ''}"><div class="mh"><span class="band">Band ${esc(b.band)}</span><span class="mt">${sp ? 'Sample answer' : 'Model answer'}</span><span class="muted">${wc} words</span>${sp ? '<button class="btn small ghost" type="button" data-say>▶ Listen</button>' : ''}${b.notes && b.notes.length ? '<button class="btn small ghost" type="button" data-notes="' + esc(b.band) + '">Why it scores band ' + esc(b.band) + '</button>' : ''}</div>
+      <div class="notes" hidden><ul>${(b.notes || []).map(n => `<li>${wbMd(n)}</li>`).join('')}</ul></div>${b.q ? `<div class="mq">${esc(b.q)}</div>` : ''}<div class="essay">${b.x.map(p => `<p>${sp ? wbMd(p) : esc(p)}</p>`).join('')}</div></div>`; }
     case 'check': return `<div class="wbcheck"><b>Try it yourself</b><p>${wbMd(b.q)}</p><button class="btn small" type="button" data-reveal>Show answer</button><div class="ans" hidden>${wbMd(b.a)}</div></div>`;
     default: return '';
   }
@@ -2848,6 +2871,28 @@ function wbTry(key, btn){
   box.querySelector('[data-chk]').onclick = () => { if (typeof WR !== 'undefined') { WR.text = ta.value; WR.issues = null; } try { localStorage.setItem('iwl-draft', ta.value); } catch (e) {} };
   box.querySelector('[data-go]').onclick = e => { const el = box.querySelector('.pill'); let left = mins * 60; e.target.disabled = true;
     const t = setInterval(() => { if (!document.body.contains(el)) return clearInterval(t); left--; el.textContent = Math.floor(left / 60) + ':' + String(Math.abs(left % 60)).padStart(2, '0'); if (left <= 0){ el.className = 'pill bad'; el.textContent = 'Time up'; clearInterval(t); } }, 1000); };
+}
+function sbSay(btn){
+  const ss = window.speechSynthesis; if (!ss) return;
+  if (btn.dataset.on){ ss.cancel(); return; }
+  $$('[data-say]').forEach(x => { delete x.dataset.on; x.textContent = '▶ Listen'; }); ss.cancel();
+  const u = new SpeechSynthesisUtterance(btn.closest('.wbmodel').querySelector('.essay').innerText.replace(/ \/+ /g, ', '));
+  const v = ss.getVoices().filter(v => /^en-GB/i.test(v.lang)); u.voice = v.find(v => !v.localService) || v[0] || null; u.lang = 'en-GB'; u.rate = .95;
+  u.onend = u.onerror = () => { delete btn.dataset.on; btn.textContent = '▶ Listen'; };
+  btn.dataset.on = 1; btn.textContent = '■ Stop'; ss.speak(u);
+}
+function sbTry(key, btn){
+  const box = btn.nextElementSibling; if (!box.hidden){ box.hidden = true; return; } box.hidden = false;
+  box.innerHTML = `<div class="row" style="justify-content:space-between"><span class="pill" data-tm>1:00 to prepare</span></div>
+    <textarea class="editor" style="min-height:120px" placeholder="Your notes: 5 to 8 key words, not full sentences." data-k="${key}">${esc(S.wb.drafts[key] || '')}</textarea>
+    <div class="row"><button class="btn small primary" type="button" data-go>Start: 1 minute to prepare, then 2 minutes to speak</button><span class="muted" style="font-size:13px">Record yourself on your phone while you speak, then compare with the sample answer.</span></div>`;
+  const ta = box.querySelector('textarea'), el = box.querySelector('[data-tm]');
+  ta.oninput = () => { S.wb.drafts[key] = ta.value; save(); };
+  box.querySelector('[data-go]').onclick = e => { e.target.disabled = true; let left = 180;
+    const t = setInterval(() => { if (!document.body.contains(el)) return clearInterval(t); left--;
+      const prep = left > 120, n = prep ? left - 120 : left;
+      el.className = 'pill ' + (prep ? '' : 'good'); el.textContent = Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0') + (prep ? ' to prepare' : ' speak now');
+      if (left <= 0){ el.className = 'pill bad'; el.textContent = 'Stop. Time is up.'; clearInterval(t); } }, 1000); };
 }
 
 
