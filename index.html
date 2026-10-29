@@ -883,6 +883,25 @@ body[data-sec="sbook"]{--sec:#7C3AED;--sec2:#A06BF5;--sec-soft:#F1EAFE}
 .upmodel .why{font-size:14.5px;color:var(--muted)}
 .btn.good{background:var(--good);border-color:var(--good);color:#fff}
 @media (max-width:720px){.uplab{padding:18px 14px}.uptop{grid-template-columns:1fr}.upscore{flex-direction:row;justify-content:space-between}}
+/* ---------- 28-day plan ---------- */
+body[data-sec="plan"]{--sec:#D9502F;--sec2:#F07A4F;--sec-soft:#FDEBE4}
+.p6 summary{cursor:pointer;font-weight:700;margin-top:4px}.p6 ul{margin:8px 0 0;padding-left:20px;font-size:14.5px}.p6 li{margin:4px 0}
+.pweek{margin:18px 0 0}.pwk{display:flex;gap:10px;align-items:baseline;margin-bottom:8px}.pwk b{font:800 17px var(--f-head)}.pwk span{color:var(--muted);font-size:14px}
+.pdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.pday{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:10px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;min-height:72px}
+.pday b{font:800 18px var(--f-head)}.pday small{font-size:12px;color:var(--muted);line-height:1.3}
+.pday.part{border-color:#E9A23B}.pday.full{border-color:var(--good);background:var(--good-soft)}
+.pday.today b::after{content:" · today";font:600 11px var(--f-ui);color:var(--accent)}
+.pday.on{outline:2.5px solid var(--accent);outline-offset:2px}
+.pdetail{margin-top:20px}
+.ptasks{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.ptasks li{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px}
+.ptasks li.done{background:var(--good-soft);border-color:var(--good)}.ptasks li.done .pt{text-decoration:line-through;color:var(--muted)}
+.ptasks label{display:flex;align-items:center;gap:10px;flex:1;cursor:pointer;min-width:0}
+.ptasks input{width:20px;height:20px;flex:none;accent-color:var(--good)}
+.pk{flex:none;font:800 11px var(--f-ui);letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--kc);padding:3px 7px;border-radius:6px;min-width:78px;text-align:center}
+.pt{font-size:15px}.pm{font-size:13px;white-space:nowrap}
+@media (max-width:720px){.pdays{grid-template-columns:repeat(4,minmax(0,1fr))}.ptasks li{flex-wrap:wrap;justify-content:flex-end}.ptasks label{flex-basis:100%;align-items:flex-start}.pk{min-width:0}}
 
 </style>
 </head>
@@ -1007,7 +1026,7 @@ function route(){
   if (typeof G !== 'undefined' && G) G.active = false;
   if (typeof stopK === 'function') { stopK(); K = null; }
   stopTyping();
-  ({ today:viewToday, reading:viewReading, listening:viewListening, l1200:viewL1200, part4:viewPart4, spell:viewSpell, typing:viewTyping, writing:viewWriting, progress:viewProgress, grammar:viewGrammar, skills:viewSkills, tests:viewTests, rtests:viewRTests, wbook:viewWBook, sbook:viewSBook })[sec]();
+  ({ today:viewToday, reading:viewReading, listening:viewListening, l1200:viewL1200, part4:viewPart4, spell:viewSpell, typing:viewTyping, writing:viewWriting, progress:viewProgress, grammar:viewGrammar, skills:viewSkills, tests:viewTests, rtests:viewRTests, wbook:viewWBook, sbook:viewSBook, plan:viewPlan })[sec]();
   window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
@@ -2487,8 +2506,8 @@ function m1Hear(i){
 /* ---------- Theme v2: grouped colour nav, section icons, full tests ---------- */
 ICON.tests = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><circle cx="17.5" cy="17.5" r="3.5" fill="#fff"/><path d="m16 17.5 1 1 2-2"/></svg>';
 SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'progress'), 0, ['tests', 'Listening tests']);
-const SECCOL = { today:'#0B8F74', reading:'#4F46E5', listening:'#0E7CC4', l1200:'#0F8BA0', part4:'#7C3AED', spell:'#D9502F', typing:'#B86E06', grammar:'#C9356F', skills:'#5B4FD6', tests:'#1D5FD1', rtests:'#0F766E', wbook:'#B45309', sbook:'#7C3AED', writing:'#12855F', progress:'#3F5BA9' };
-const NAVGROUPS = [['Learn', ['today', 'reading', 'l1200', 'part4', 'wbook', 'sbook']], ['Practice', ['spell', 'typing', 'grammar', 'skills', 'writing']], ['Exam', ['tests', 'rtests', 'progress']]];
+const SECCOL = { today:'#0B8F74', plan:'#D9502F', reading:'#4F46E5', listening:'#0E7CC4', l1200:'#0F8BA0', part4:'#7C3AED', spell:'#D9502F', typing:'#B86E06', grammar:'#C9356F', skills:'#5B4FD6', tests:'#1D5FD1', rtests:'#0F766E', wbook:'#B45309', sbook:'#7C3AED', writing:'#12855F', progress:'#3F5BA9' };
+const NAVGROUPS = [['Learn', ['today', 'plan', 'reading', 'l1200', 'part4', 'wbook', 'sbook']], ['Practice', ['spell', 'typing', 'grammar', 'skills', 'writing']], ['Exam', ['tests', 'rtests', 'progress']]];
 function renderNav(sec){
   const have = new Map(SECTIONS); const used = new Set();
   const link = id => { used.add(id); return `<a href="#${id}" style="--c:${SECCOL[id] || '#0B8F74'}" ${id === sec ? 'aria-current="page"' : ''}><span class="ic">${ICON[id] || ''}</span><span>${esc(have.get(id))}</span></a>`; };
@@ -3008,6 +3027,86 @@ function upSet(k, sid){
       b.textContent = 'Listening…'; b.disabled = true; r.start(); };
   };
   draw();
+}
+
+/* ---------- 28-day plan: Writing and Speaking, grammar and vocabulary from 5 to 6.5+ ---------- */
+ICON.plan = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg>';
+SECTIONS.splice(1, 0, ['plan', '28-day plan']);
+S.plan = Object.assign({ start:null, done:{}, log:{} }, S.plan || {});
+const pG = (id, t) => ['Grammar', 'Grammar unit: ' + t, '#grammar-' + id, 20];
+const pL = (k, id, t) => [id[1] === 'g' ? 'Grammar' : 'Vocabulary', 'Upgrade lab: ' + t + (k === 'sbook' ? ' (speaking)' : ' (writing)'), '#' + k + '-up-' + id, 20];
+const pR = (h, t) => ['Read', t, '#' + h, 20];
+const pW = (h, t, m) => ['Write', t + '. Time yourself, then compare with the model and paste it into Writing check.', '#' + h, m];
+const pS = (h, t) => ['Speak', t + '. Record yourself on your phone and listen back for errors.', '#' + h, 20];
+const MIX = [['Grammar', 'Quick 10: writing drills you have not mastered', '#wbook-up-mix', 15], ['Vocabulary', 'Quick 10: speaking drills you have not mastered', '#sbook-up-mix', 15]];
+const PLAN28 = [
+ ['Week 1', 'Accuracy first', 'At band 5 the problem is errors, not a lack of fancy words. This week you remove the mistakes that examiners see in almost every Bangladeshi script.', [
+  ['How you are marked', [pG('plural', 'Singular and plural'), pL('wbook', 'wv2', 'Precise words'), pR('wbook-b1', 'Writing book: how IELTS Writing is marked'), pW('wbook-t2k.1', 'Task 2, opinion prompt 1', 40), pS('sbook-s10', 'Part 1: answer the work, study and hometown questions')]],
+  ['Articles', [pG('articles', 'Articles: a, an, the'), pL('wbook', 'wv1', 'Strong collocations'), pR('wbook-t2b', 'Writing book: planning and structure'), pW('wbook-t1k.1', 'Task 1, line graph', 20), pS('sbook-s08', 'Read the speaking errors chapter, then answer 5 Part 1 questions')]],
+  ['Subject-verb agreement', [pG('agreement', 'Subject-verb agreement'), pL('wbook', 'wg4', 'Accuracy repair'), pR('wbook-t2f', 'Writing book: opinion essays'), pW('wbook-t2k.1', 'Task 2, opinion prompt 2', 40), pL('sbook', 'sg1', 'Talking about the past')]],
+  ['Sentence boundaries', [pG('sentence', 'Sentence boundaries'), pL('wbook', 'wv4', 'Paraphrasing the question'), pR('wbook-t1a', 'Writing book: the Task 1 framework'), pW('wbook-t1k.3', 'Task 1, bar chart', 20), pS('sbook-s13', 'Part 2: learn the planning method, then do one cue card')]],
+  ['Complex sentences', [pL('wbook', 'wg1', 'Complex sentences'), pG('complex', 'Complex sentences for band 7'), pR('wbook-t2d', 'Writing book: grammar for band 7'), pW('wbook-t2k.2', 'Task 2, discuss both views prompt 5', 40), pS('sbook-s14', 'Part 2: a person who inspired you')]],
+  ['Tenses for data', [pG('tenses', 'Tenses for data and change'), pL('wbook', 'wv3', 'Task 1 data language'), pR('wbook-t1b', 'Writing book: the language of Task 1'), pW('wbook-t1k.4', 'Task 1, two pie charts', 20), pS('sbook-s14.1', 'Part 2: a friend you enjoy spending time with')]],
+  ['Review and mock', [...MIX, pR('plan', 'Read your error log from days 1 to 6 and write the 5 errors you make most'), pW('wbook-t1k.2', 'Full Writing test: this Task 1, then Task 2 opinion prompt 3, 60 minutes in total', 60), pS('sbook-s15', 'Full Speaking test: 5 Part 1 questions, this cue card, then 4 Part 3 questions')]] ]],
+ ['Week 2', 'Lexical resource', 'Band 6 vocabulary means the right word in the right combination. Collocations and paraphrasing move your score more than rare words do.', [
+  ['Collocations', [pG('prep', 'Dependent prepositions'), pL('sbook', 'sv4', 'Describing words'), pR('wbook-t2e', 'Writing book: vocabulary for band 7'), pW('wbook-t2k.3', 'Task 2, advantages and disadvantages prompt 9', 40), pS('sbook-s15.1', 'Part 2: a city you have visited')]],
+  ['Word forms', [pG('wordform', 'Word forms'), pL('wbook', 'wv2', 'Precise words'), pR('sbook-s03', 'Speaking book: topic vocabulary bank'), pW('wbook-t1k.5', 'Task 1, table', 20), pS('sbook-s18', 'Part 3: education and learning')]],
+  ['Paraphrasing', [pG('quant', 'Quantifiers'), pL('wbook', 'wv4', 'Paraphrasing the question'), pR('sbook-s05', 'Speaking book: paraphrasing and avoiding repetition'), pW('wbook-t2k.4', 'Task 2, problem and solution prompt 13', 40), pS('sbook-s15.3', 'Part 2: a useful object or gadget')]],
+  ['Comparing', [pG('compare', 'Comparing numbers'), pL('sbook', 'sg3', 'Comparing things'), pR('wbook-t1d', 'Writing book: bar charts'), pW('wbook-t1k.6', 'Task 1, mixed chart', 20), pS('sbook-s18.4', 'Part 3: technology in daily life')]],
+  ['Passive voice', [pG('passive', 'Passive voice'), pL('wbook', 'wg2', 'Passive and academic tone'), pR('wbook-t1h', 'Writing book: process diagrams'), pW('wbook-t1k.7', 'Task 1, process', 20), pS('sbook-s16', 'Part 2: a time you helped someone')]],
+  ['Natural spoken English', [pG('gerund', 'Gerund or infinitive'), pL('sbook', 'sv1', 'Natural phrases and idioms'), pR('sbook-s04', 'Speaking book: natural spoken language'), pW('wbook-t2k.5', 'Task 2, two-part question prompt 17', 40), pS('sbook-s19.1', 'Part 3: environment and climate')]],
+  ['Review and mock', [...MIX, pR('plan', 'Read your error log from week 2 and update your top 5 errors'), pW('wbook-t1k.8', 'Full Writing test: this map, then Task 2 discuss both views prompt 6, 60 minutes', 60), pS('sbook-s16.3', 'Full Speaking test: Part 1, this cue card, then Part 3 health and lifestyle')]] ]],
+ ['Week 3', 'Range for 6.5 to 7', 'Now that most sentences are correct, add variety: relative clauses, conditionals, hedging and linking. Use each one where it fits, not everywhere.', [
+  ['Relative clauses', [pG('relative', 'Relative clauses'), pL('wbook', 'wv1', 'Strong collocations'), pR('wbook-t2c', 'Writing book: coherence and cohesion'), pW('wbook-t2k.1', 'Task 2, opinion prompt 4', 40), pL('sbook', 'sg4', 'Extending your answers')]],
+  ['Conditionals', [pG('cond', 'Conditionals'), pL('wbook', 'wg3', 'Conditionals and hedging'), pR('sbook-s06', 'Speaking book: grammatical range for band 7'), pW('wbook-t1c', 'Task 1, the practice task in the line graphs chapter', 20), pL('sbook', 'sg2', 'Hypotheticals and the future')]],
+  ['Hedging', [pG('modals', 'Modals and hedging'), pL('sbook', 'sv2', 'Opinions and feelings'), pR('wbook-t2g', 'Writing book: discuss both views'), pW('wbook-t2k.2', 'Task 2, discuss both views prompt 7', 40), pS('sbook-s17.6', 'Part 3: advantages, disadvantages and hedging')]],
+  ['Linking ideas', [pG('contrast', 'Contrast and cause linkers'), pL('wbook', 'wv4', 'Paraphrasing the question'), pR('wbook-t2i', 'Writing book: problem and solution'), pW('wbook-t1e', 'Task 1, the practice task in the pie charts chapter', 20), pS('sbook-s16.2', 'Part 2: a time you were late')]],
+  ['Noun clauses', [pG('nounclause', 'Noun clauses and cleft sentences'), pL('wbook', 'wv2', 'Precise words'), pR('wbook-t2h', 'Writing book: advantages and disadvantages'), pW('wbook-t2k.3', 'Task 2, advantages and disadvantages prompt 10', 40), pS('sbook-s18.6', 'Part 3: artificial intelligence and automation')]],
+  ['Parallel structure', [pG('parallel', 'Parallel structure and lists'), pL('sbook', 'sv1', 'Natural phrases and idioms'), pR('sbook-s20', 'Speaking book: fluency, coherence and pronunciation'), pW('wbook-t1i', 'Task 1, the practice task in the maps chapter', 20), pS('sbook-s16.5', 'Part 2: a decision that changed your life')]],
+  ['Review and mock', [...MIX, pR('plan', 'Read your error log from week 3 and update your top 5 errors'), pW('wbook-t1g', 'Full Writing test: the mixed chart task here, then Task 2 problem prompt 14, 60 minutes', 60), pS('sbook-s15.4', 'Full Speaking test: Part 1, this cue card, then Part 3 traditions and festivals')]] ]],
+ ['Week 4', 'Exam mode', 'One full test a day under real timing. Spend as long checking your errors as you spent writing. Do not start new topics.', [
+  ['Mock 1', [...MIX, pR('wbook-t1j', 'Writing book: mistakes checklist and band 7 strategy'), pW('wbook-t2k.6', 'Full Writing test: Task 1 from the tables chapter, then this Task 2, 60 minutes', 60), pS('sbook-s14.3', 'Full Speaking test: Part 1, this cue card, Part 3 cities and the countryside')]],
+  ['Mock 2', [pL('wbook', 'wg4', 'Accuracy repair, again'), pL('sbook', 'sv3', 'Topic words'), pR('plan', 'Read your top 5 errors before you start'), pW('wbook-t2k.7', 'Full Writing test: Task 1 from the line graphs chapter, then this Task 2, 60 minutes', 60), pS('sbook-s15.5', 'Full Speaking test: Part 1, this cue card, Part 3 work and careers')]],
+  ['Mock 3', [...MIX, pR('plan', 'Read your top 5 errors before you start'), pW('wbook-t2k.8', 'Full Writing test: Task 1 from the bar charts chapter, then this Task 2, 60 minutes', 60), pS('sbook-s16.6', 'Full Speaking test: Part 1, this cue card, Part 3 money and shopping')]],
+  ['Mock 4', [pL('wbook', 'wg1', 'Complex sentences, again'), pL('wbook', 'wv1', 'Strong collocations, again'), pR('plan', 'Read your top 5 errors before you start'), pW('wbook-t2k.5', 'Full Writing test: Task 1 from the process chapter, then Task 2 prompt 18, 60 minutes', 60), pS('sbook-s14.4', 'Full Speaking test: Part 1, this cue card, Part 3 the internet and young people')]],
+  ['Mock 5', [...MIX, pR('plan', 'Read your top 5 errors before you start'), pW('wbook-t2k.3', 'Full Writing test: Task 1 from the maps chapter, then Task 2 prompt 11, 60 minutes', 60), pS('sbook-s14.5', 'Full Speaking test: Part 1, this cue card, Part 3 family and generations')]],
+  ['Light day', [...MIX, pR('wbook-t2b', 'Plan 5 Task 2 essays in 25 minutes: position, two main ideas, examples. No full writing.'), pS('sbook-s11', 'Part 1: answer 10 questions from set B out loud')]],
+  ['Exam eve', [pR('plan', 'Read your top 5 errors one last time'), pR('wbook-t1j', 'Writing book: the final checklist'), pR('sbook-s20', 'Speaking book: what to do on the day'), ['Rest', 'Sleep early. No new material today.', '', 0]]] ]],
+];
+const PDAYS = PLAN28.flatMap(([wk, theme, why, days], w) => days.map(([focus, tasks], j) => ({ n:w * 7 + j + 1, wk, theme, why, focus, tasks })));
+console.assert(PDAYS.length === 28, 'plan must have 28 days');
+const pToday = () => S.plan.start == null ? 1 : Math.min(28, Math.max(1, TODAY() - S.plan.start + 1));
+const pDone = d => d.tasks.filter((t, i) => S.plan.done[d.n + '.' + i]).length;
+let PSEL = null;
+function viewPlan(){
+  const today = pToday(), sel = PDAYS[(PSEL || today) - 1];
+  const all = PDAYS.reduce((a, d) => a + d.tasks.length, 0), done = PDAYS.reduce((a, d) => a + pDone(d), 0);
+  const days = PDAYS.filter(d => pDone(d) === d.tasks.length).length;
+  const KC = { Grammar:'#C9356F', Vocabulary:'#0F766E', Read:'#4F46E5', Write:'#B45309', Speak:'#7C3AED', Rest:'#64748B' };
+  main().innerHTML = `<div class="page-head"><div><h1>28-day plan</h1><p>Writing and Speaking, from band 5 to 6.5 in grammar and vocabulary. About 2 to 2.5 hours a day. Follow the order: accuracy first, then vocabulary, then range, then mock tests.</p></div>
+    <div class="row">${S.plan.start == null ? '<button class="btn primary" type="button" id="pStart">Start the plan today</button>' : `<span class="pill good">Day ${today} of 28</span><button class="btn small ghost" type="button" id="pReset">Restart</button>`}</div></div>
+  <div class="panel trk"><div class="trk-stats"><div class="good"><b>${days}</b><span>of 28 days complete</span></div><div><b>${done}</b><span>of ${all} tasks done</span></div><div><b>${Object.values(S.plan.log).filter(x => x && x.trim()).length}</b><span>days with an error log</span></div></div>
+    <div class="p-bar"><i style="width:${done / all * 100}%"></i></div>
+    <details class="p6"><summary>What band 6.5 needs in grammar and vocabulary</summary><ul>
+      <li><b>Grammar 6:</b> a mix of simple and complex sentences. Errors are allowed if they rarely make the meaning unclear.</li>
+      <li><b>Grammar 7:</b> a range of complex structures, and most sentences are error-free. So for 6.5, cut errors first and add complex sentences second.</li>
+      <li><b>Vocabulary 6:</b> enough range for the topic, some less common words, a few errors with word choice or spelling.</li>
+      <li><b>Vocabulary 7:</b> less common words used naturally, with awareness of collocation and style. Correct collocations beat rare words.</li>
+      <li>Your error log is the fastest route: most candidates stuck at 5 repeat the same 5 to 10 mistakes.</li></ul></details></div>
+  ${PLAN28.map(([wk, theme], w) => `<div class="pweek"><div class="pwk"><b>${wk}</b><span>${theme}</span></div><div class="pdays">${PDAYS.slice(w * 7, w * 7 + 7).map(d => { const n = pDone(d), full = n === d.tasks.length;
+    return `<button type="button" class="pday${full ? ' full' : n ? ' part' : ''}${d === sel ? ' on' : ''}${d.n === today && S.plan.start != null ? ' today' : ''}" data-d="${d.n}"><b>${d.n}</b><small>${esc(d.focus)}</small></button>`; }).join('')}</div></div>`).join('')}
+  <section class="panel pdetail"><div class="row" style="justify-content:space-between"><div><div class="label">${sel.wk} · ${esc(sel.theme)} · Day ${sel.n}</div><h2 style="margin:4px 0">${esc(sel.focus)}</h2></div><span class="pill ${pDone(sel) === sel.tasks.length ? 'good' : ''}">${pDone(sel)} / ${sel.tasks.length} done</span></div>
+    <p class="muted" style="margin:4px 0 12px">${esc(sel.why)}</p>
+    <ol class="ptasks">${sel.tasks.map(([k, t, h, m], i) => { const id = sel.n + '.' + i;
+      return `<li class="${S.plan.done[id] ? 'done' : ''}"><label><input type="checkbox" data-t="${id}" ${S.plan.done[id] ? 'checked' : ''}><span class="pk" style="--kc:${KC[k]}">${k}</span><span class="pt">${esc(t)}</span></label>${m ? `<span class="muted pm">${m} min</span>` : ''}${h && h !== '#plan' ? `<a class="btn small" href="${h}">Open</a>` : ''}</li>`; }).join('')}</ol>
+    <div class="label" style="margin-top:14px">My error log for day ${sel.n}</div>
+    <textarea class="editor" id="pLog" rows="4" placeholder="Write every mistake you found today, with the correct version. For example: the technology have → technology has">${esc(S.plan.log[sel.n] || '')}</textarea>
+  </section>`;
+  $$('[data-d]').forEach(b => b.onclick = () => { PSEL = +b.dataset.d; viewPlan(); });
+  $$('[data-t]').forEach(c => c.onchange = () => { if (c.checked) S.plan.done[c.dataset.t] = 1; else delete S.plan.done[c.dataset.t]; save(); viewPlan(); });
+  $('#pLog').oninput = e => { S.plan.log[sel.n] = e.target.value; save(); };
+  if ($('#pStart')) $('#pStart').onclick = () => { S.plan.start = TODAY(); PSEL = null; save(); viewPlan(); };
+  if ($('#pReset')) $('#pReset').onclick = () => { if (confirm('Restart from day 1 today? Your ticks and error logs stay.')) { S.plan.start = TODAY(); PSEL = null; save(); viewPlan(); } };
 }
 
 
