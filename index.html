@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B3245A'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' fill='white' text-anchor='middle'%3EAa%3C/text%3E%3C/svg%3E">
 <title>IELTS Word Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Hind+Siliguri:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
 <style>
 /* Layout: bright study app. Floating left rail on desktop, scrolling tab strip on phones.
    Light theme only, by design: white cards on a cool, airy background, jade as the action colour, coral for streaks. */
@@ -18,8 +18,8 @@
   --good:#12855F; --good-soft:#E1F5EC; --bad:#D2422E; --bad-soft:#FDE8E4;
   --heat0:#E8ECF3; --heat1:#B8E6D8; --heat2:#4CC2A3; --heat3:#0B8F74;
   --shadow:0 1px 2px rgb(19 32 58 / .05), 0 8px 24px rgb(19 32 58 / .06);
-  --f-head:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-ui:"Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --f-head:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --f-ui:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --f-word:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-bn:"Hind Siliguri", "Nirmala UI", "Vrinda", sans-serif;
   --f-mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
@@ -185,8 +185,8 @@ input[type=search]:focus,select:focus,textarea:focus{outline:none;border-color:v
 .trk-stats .good b{color:var(--good)}
 .mgrp{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
 .mgrp h3{font-size:18px;display:flex;align-items:center;gap:8px}
-.cw.st-done{box-shadow:inset 4px 0 0 var(--good),var(--shadow)}
-.cw.st-miss{box-shadow:inset 4px 0 0 var(--bad),var(--shadow)}
+.cw.st-done{box-shadow:inset 0 0 0 1.5px var(--good),var(--shadow)}
+.cw.st-miss{box-shadow:inset 0 0 0 1.5px var(--bad),var(--shadow)}
 .cw .stmark{display:inline-flex;width:20px;height:20px;border-radius:50%;align-items:center;justify-content:center;flex:none}
 .cw .stmark svg{width:12px;height:12px}
 .cw.st-done .stmark{background:var(--good);color:#fff}
@@ -903,16 +903,50 @@ body[data-sec="plan"]{--sec:#D9502F;--sec2:#F07A4F;--sec-soft:#FDEBE4}
 .pt{font-size:15px}.pm{font-size:13px;white-space:nowrap}
 @media (max-width:720px){.pdays{grid-template-columns:repeat(4,minmax(0,1fr))}.ptasks li{flex-wrap:wrap;justify-content:flex-end}.ptasks label{flex-basis:100%;align-items:flex-start}.pk{min-width:0}}
 
+/* ---------- plain finish: solid colours, no glass, no glow, no hover lift, no icon boxes ---------- */
+body{background:#F5F6F8;background-image:none}
+.rail-card{background:#fff;backdrop-filter:none;box-shadow:none;border-color:#E4E7EC}
+.brand .logo{background:#1F2937;box-shadow:none}
+.nav a .ic{display:none}
+.nav a{padding:8px 12px}
+.nav a[aria-current="page"]{background:var(--c);box-shadow:none}
+.nav a:hover .ic{transform:none}
+.page-head{background:#fff;box-shadow:none;border-color:#E4E7EC}
+.page-head::after,.wbcover::after,.wbcover.sbook::after,.hero::after,.khero::after,.m1hero::after{display:none}
+.page-head h1{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--ink)}
+.page-head .sec-ic,.panel h2::before{display:none}
+.btn.primary,.chip[aria-pressed="true"],.toast,.kq .qn,.lphase span.on,.rpjump{background:var(--accent);box-shadow:none}
+.btn.primary:hover{box-shadow:none;transform:none;filter:brightness(.94)}
+.hero{background:#0B6E5A;box-shadow:none}
+.ghero{background:#4343B5;box-shadow:none}
+.khero{background:#8A4A16;box-shadow:none}
+.m1hero{background:#2B3770;box-shadow:none}
+.flame{backdrop-filter:none;background:rgb(255 255 255 / .16)}
+.gc .meter i,.p-bar i,.bars .bar i,.lplayer .bar i,.gbar i{background:var(--accent)}
+.gc.complete,.unit.complete{background:var(--good-soft)}
+.wbcover,.wbcover.sbook{background:#fff;border-color:#E4E7EC}
+.wbspine{display:none}.wbcover{grid-template-columns:1fr}
+.mic{background:var(--coral);box-shadow:none}
+.lplayer{background:#1B2740}
+.m1link{background:#fff}
+.paper mark{background:#FFE9A8}
+.gc:hover,.kcard:hover,.word:hover,.rptype:hover,.wbch:hover,.upc:hover,.drill:hover{transform:none;box-shadow:none}
+.panel,.stat,.word,.cw,.gc,.kcard,.card,.type-stage,.kq,.trans,.issue{box-shadow:none}
+.wbtip,.wbtrap,.note.tip,.note.trap,.note.bnn,.khint .hx{border-left:0;border-radius:10px}
+.issue{border-left:0;box-shadow:inset 0 0 0 1.5px var(--bad)}.issue.style{box-shadow:inset 0 0 0 1.5px var(--gold)}.issue.spell{box-shadow:inset 0 0 0 1.5px var(--violet)}
+.jd.today .dot,.mic.on,.lplayer.on .wave i{animation:none}
+.hero::before,.khero::before,.m1hero::before,.ghero::before,.ghero::after{display:none}
+
 </style>
 </head>
 <body>
 
 <div class="shell">
   <aside class="rail" aria-label="Sections"><div class="rail-card">
-    <div class="brand"><span class="logo">Aa</span><span>IELTS Word Lab<small>Band 7 plan</small></span></div>
+    <div class="brand"><span class="logo">Aa</span><span>IELTS Word Lab</span></div>
     <nav class="nav" id="nav"></nav>
     <div class="spacer"></div>
-    <div class="mini"><a href="#tests">20 full listening tests</a><br><button class="btn small ghost" id="openSettings" type="button" style="padding-left:0">Settings</button></div>
+    <div class="mini"><button class="btn small ghost" id="openSettings" type="button" style="padding-left:0">Settings</button></div>
   </div></aside>
   <main id="main"></main>
 </div>
@@ -1171,8 +1205,8 @@ function openGroup(src, gi){
     <div class="legend"><span><i style="background:var(--good)"></i>Completed</span><span><i style="background:var(--bad)"></i>Mistake to fix</span><span><i style="background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)"></i>Not practised yet</span></div>
     <div class="${src === 'p' || src === 'r' ? 'words' : 'compact'}">${ks.map(k => { const x = W[k];
       const t = wStatus(k); const wrote = t === 'miss' && S.miss[k].given ? `<span class="wrote">You wrote: <s>${esc(S.miss[k].given)}</s></span>` : '';
-      if (src === 'r') return `<article class="word" style="${t === 'done' ? 'box-shadow:inset 4px 0 0 var(--good),var(--shadow)' : t === 'miss' ? 'box-shadow:inset 4px 0 0 var(--bad),var(--shadow)' : ''}"><div class="word-top"><h3 style="font-size:21px">${esc(x.w)}</h3><span class="pos">${esc(x.pos)}</span>${t === 'done' ? '<span class="pill good">' + ICON.check + ' done</span>' : t === 'miss' ? '<span class="pill bad">mistake</span>' : ''}${speakBtn(x.w)}${starBtn(k)}${boxDots(k)}</div><div class="bnm">${esc(x.bn)}</div>${x.def ? `<p class="def">${esc(x.def)}</p>` : ''}${x.ex ? `<p class="ex">“${esc(x.ex)}”</p>` : ''}${x.syn ? `<div class="syn"><b>Paraphrase:</b> ${esc(x.syn)}</div>` : ''}${wrote}</article>`;
-      return src === 'p' ? `<article class="word" style="${t === 'done' ? 'box-shadow:inset 4px 0 0 var(--good),var(--shadow)' : t === 'miss' ? 'box-shadow:inset 4px 0 0 var(--bad),var(--shadow)' : ''}"><div class="word-top"><h3 style="font-size:21px">${esc(x.w)}</h3>${t === 'done' ? '<span class="pill good">' + ICON.check + ' done</span>' : t === 'miss' ? '<span class="pill bad">mistake</span>' : ''}${speakBtn(x.w)}${starBtn(k)}${boxDots(k)}</div><div class="bnm">${esc(x.bn)}</div><p class="def">${esc(x.def)}</p>${wrote}</article>`
+      if (src === 'r') return `<article class="word" style="${t === 'done' ? 'box-shadow:inset 0 0 0 1.5px var(--good),var(--shadow)' : t === 'miss' ? 'box-shadow:inset 0 0 0 1.5px var(--bad),var(--shadow)' : ''}"><div class="word-top"><h3 style="font-size:21px">${esc(x.w)}</h3><span class="pos">${esc(x.pos)}</span>${t === 'done' ? '<span class="pill good">' + ICON.check + ' done</span>' : t === 'miss' ? '<span class="pill bad">mistake</span>' : ''}${speakBtn(x.w)}${starBtn(k)}${boxDots(k)}</div><div class="bnm">${esc(x.bn)}</div>${x.def ? `<p class="def">${esc(x.def)}</p>` : ''}${x.ex ? `<p class="ex">“${esc(x.ex)}”</p>` : ''}${x.syn ? `<div class="syn"><b>Paraphrase:</b> ${esc(x.syn)}</div>` : ''}${wrote}</article>`;
+      return src === 'p' ? `<article class="word" style="${t === 'done' ? 'box-shadow:inset 0 0 0 1.5px var(--good),var(--shadow)' : t === 'miss' ? 'box-shadow:inset 0 0 0 1.5px var(--bad),var(--shadow)' : ''}"><div class="word-top"><h3 style="font-size:21px">${esc(x.w)}</h3>${t === 'done' ? '<span class="pill good">' + ICON.check + ' done</span>' : t === 'miss' ? '<span class="pill bad">mistake</span>' : ''}${speakBtn(x.w)}${starBtn(k)}${boxDots(k)}</div><div class="bnm">${esc(x.bn)}</div><p class="def">${esc(x.def)}</p>${wrote}</article>`
         : `<div class="cw st-${t}" style="flex-wrap:wrap">${mark(k)}<b>${esc(x.w)}</b>${x.core ? '<span class="pill coral" title="Must-know">must</span>' : ''}${speakBtn(x.w)}<span class="bn">${esc(x.bn)}</span>${x.pr ? `<span class="muted mono" style="font-size:12.5px;width:100%">/${esc(x.pr)}/</span>` : ''}${wrote}</div>`; }).join('')}</div>${g.passage ? rvPassage(g, ks) : ''}`;
   $('#gFlash').onclick = () => startPractice({ mode:'flash', keys: ks, title: g.name, learn:true, back: location.hash });
   $$('[data-tf]').forEach(b => b.onclick = () => { const q = b.closest('.tfq'); if (q.dataset.done) return; q.dataset.done = 1;
@@ -1215,7 +1249,7 @@ function viewSpell(){
   let mode = 'spell';
   const fill = () => { const s = $('#spSrc').value; const g = $('#spGrp');
     if (SRC[s]){ g.disabled = false; g.innerHTML = '<option value="-1">All topics</option>' + DATA[SRC[s]].map((x, i) => `<option value="${i}">${esc(x.name)}</option>`).join(''); }
-    else { g.disabled = true; g.innerHTML = '<option>—</option>'; }
+    else { g.disabled = true; g.innerHTML = '<option>None</option>'; }
     info(); };
   const pool = () => { const s = $('#spSrc').value; const gi = +$('#spGrp').value;
     if (s === 'core') return srcKeys('h').filter(k => W[k].core);
@@ -2516,13 +2550,6 @@ function renderNav(sec){
   $('#nav').innerHTML = h;
   document.body.dataset.sec = sec;
 }
-/* put the section icon into every page header */
-new MutationObserver(() => {
-  const ph = $('#main .page-head'); if (!ph || ph.querySelector('.sec-ic')) return;
-  const first = ph.firstElementChild; if (!first || first.tagName !== 'DIV') return;
-  const sec = document.body.dataset.sec || 'today';
-  first.insertAdjacentHTML('afterbegin', `<span class="sec-ic" aria-hidden="true">${ICON[sec] || ''}</span>`);
-}).observe(document.getElementById('main'), { childList:true });
 
 /* ---------- full listening tests (Listening Lab, same site) ---------- */
 const LAB_URL = '../ielts-listening-lab/?embed=1';
@@ -2854,7 +2881,7 @@ async function viewBook(k){
   const last = S.wb['last_' + k] || (k === 'wbook' && S.wb.last), cont = last && d.find(c => c.id === last.split('.')[0]);
   const pct = Math.round(read / total * 100);
   main().innerHTML = `<section class="wbcover ${k}">
-      <div class="wbcover-text"><div class="kicker">IELTS Academic</div><h1>${B.title}</h1>
+      <div class="wbcover-text"><h1>${B.title}</h1>
         <p class="sub">${B.sub}</p>
         <p class="lede">${B.lede(models)}</p>
         <div class="row">${cont ? `<a class="btn primary" href="#${k}-${last}">Continue: ${esc(cont.title)}</a><a class="btn" href="#${k}-${d[0].id}">Start from the beginning</a>` : `<a class="btn primary" href="#${k}-${d[0].id}">Start reading</a>`}</div></div>
@@ -2968,7 +2995,7 @@ function upLab(k){
   const sp = k === 'sbook';
   const grp = (sk, name, desc) => `<div class="uphd"><h3>${name}</h3><span>${desc}</span></div><div class="upgrid">${sets.filter(st => st.sk === sk).map(st => { const m = mast(st);
     return `<a class="upc${m === st.items.length ? ' done' : ''}" href="#${k}-up-${st.id}"><span class="ring" style="--v:${Math.round(m / st.items.length * 100)}"></span><span class="tt"><b>${esc(st.title)}</b><small>${esc(st.sub)}</small></span><span class="upn">${m}/${st.items.length}</span></a>`; }).join('')}</div>`;
-  return `<section class="uplab"><div class="uptop"><div><div class="kicker">Band 7 upgrade lab</div><h2>Turn band 5 ${sp ? 'answers' : 'sentences'} into band 7</h2>
+  return `<section class="uplab"><div class="uptop"><div><h2>Band 7 upgrade lab: turn band 5 ${sp ? 'answers' : 'sentences'} into band 7</h2>
       <p>You see a weak ${sp ? 'answer to a real examiner question' : 'sentence'}. Rewrite it, check which band 7 features you used, then compare with the model. The words that changed are highlighted.</p></div>
       <div class="upscore"><b>${done}<small>/${tot}</small></b><span>mastered</span><a class="btn primary" href="#${k}-up-mix">Quick 10</a></div></div>
     ${grp('g', 'Grammatical range and accuracy', sp ? 'Tenses, conditionals, comparisons and longer answers' : 'Complex sentences, passive, conditionals and error repair')}
@@ -2994,7 +3021,7 @@ function upSet(k, sid){
         <p class="uptask">${esc(x.t || 'Give a band 7 answer. Extend it and hit the targets below.')}</p>
         <div class="uptargets">${x.k.map(([l]) => `<span class="upt">${esc(l)}</span>`).join('')}</div>
         <textarea class="editor" id="upIn" rows="3" placeholder="${sp ? 'Say or type your band 7 answer' : 'Write your band 7 version'}">${esc(S.wb.drafts[dk] || '')}</textarea>
-        <div class="row"><button class="btn primary" type="button" id="upGo">Check my upgrade</button>${SR ? '<button class="btn" type="button" id="upMic">🎤 Speak</button>' : ''}<button class="btn ghost" type="button" id="upPeek">Show the model</button></div>
+        <div class="row"><button class="btn primary" type="button" id="upGo">Check my upgrade</button>${SR ? '<button class="btn" type="button" id="upMic">Speak</button>' : ''}<button class="btn ghost" type="button" id="upPeek">Show the model</button></div>
         <div id="upRes"></div>
       </div>
       <div class="wbnav">${i > 0 ? '<button class="btn" type="button" id="upPrev">← Previous</button>' : '<span></span>'}<span class="folio">${i + 1}</span>${i < items.length - 1 ? '<button class="btn" type="button" id="upNext">Skip →</button>' : `<a class="btn" href="#${k}">Finish</a>`}</div>
@@ -3023,7 +3050,7 @@ function upSet(k, sid){
     ta.onkeydown = e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) show(true); };
     if (SR) $('#upMic').onclick = e => { const r = new SR(), b = e.target; r.lang = 'en-GB'; r.interimResults = false;
       r.onresult = ev => { ta.value = (ta.value + ' ' + ev.results[0][0].transcript).trim(); ta.oninput(); };
-      r.onerror = ev => toast('Mic error: ' + ev.error); r.onend = () => { b.textContent = '🎤 Speak'; b.disabled = false; };
+      r.onerror = ev => toast('Mic error: ' + ev.error); r.onend = () => { b.textContent = 'Speak'; b.disabled = false; };
       b.textContent = 'Listening…'; b.disabled = true; r.start(); };
   };
   draw();
@@ -3042,7 +3069,7 @@ const MIX = [['Grammar', 'Quick 10: writing drills you have not mastered', '#wbo
 const PLAN28 = [
  ['Week 1', 'Accuracy first', 'At band 5 the problem is errors, not a lack of fancy words. This week you remove the mistakes that examiners see in almost every Bangladeshi script.', [
   ['How you are marked', [pG('plural', 'Singular and plural'), pL('wbook', 'wv2', 'Precise words'), pR('wbook-b1', 'Writing book: how IELTS Writing is marked'), pW('wbook-t2k.1', 'Task 2, opinion prompt 1', 40), pS('sbook-s10', 'Part 1: answer the work, study and hometown questions')]],
-  ['Articles', [pG('articles', 'Articles: a, an, the'), pL('wbook', 'wv1', 'Strong collocations'), pR('wbook-t2b', 'Writing book: planning and structure'), pW('wbook-t1k.1', 'Task 1, line graph', 20), pS('sbook-s08', 'Read the speaking errors chapter, then answer 5 Part 1 questions')]],
+  ['Articles', [pG('articles', 'Articles: a, an, the'), pL('wbook', 'wv1', 'Strong collocations'), pR('wbook-t2s', 'Writing book: essay structures for every question type'), pW('wbook-t1k.1', 'Task 1, line graph', 20), pS('sbook-s08', 'Read the speaking errors chapter, then answer 5 Part 1 questions')]],
   ['Subject-verb agreement', [pG('agreement', 'Subject-verb agreement'), pL('wbook', 'wg4', 'Accuracy repair'), pR('wbook-t2f', 'Writing book: opinion essays'), pW('wbook-t2k.1', 'Task 2, opinion prompt 2', 40), pL('sbook', 'sg1', 'Talking about the past')]],
   ['Sentence boundaries', [pG('sentence', 'Sentence boundaries'), pL('wbook', 'wv4', 'Paraphrasing the question'), pR('wbook-t1a', 'Writing book: the Task 1 framework'), pW('wbook-t1k.3', 'Task 1, bar chart', 20), pS('sbook-s13', 'Part 2: learn the planning method, then do one cue card')]],
   ['Complex sentences', [pL('wbook', 'wg1', 'Complex sentences'), pG('complex', 'Complex sentences for band 7'), pR('wbook-t2d', 'Writing book: grammar for band 7'), pW('wbook-t2k.2', 'Task 2, discuss both views prompt 5', 40), pS('sbook-s14', 'Part 2: a person who inspired you')]],
