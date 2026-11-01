@@ -1179,7 +1179,7 @@ function groupView(src, title, intro, extraHead){
     <div class="row" style="justify-content:space-between;gap:6px"><div class="label">${ks.length} words</div>${full ? `<span class="pill good">${ICON.check} Completed</span>` : mk.length ? `<span class="pill bad">${mk.length} mistake${mk.length > 1 ? 's' : ''}</span>` : ''}</div>
     <h3>${esc(g.name)}</h3><div class="meter"><i style="width:${d / ks.length * 100}%"></i></div><span class="muted" style="font-size:13px">${d} of ${ks.length} completed</span>
     ${g.passage ? '<span class="muted" style="font-size:13px">+ mini passage · 3 T/F/NG</span>' : ''}
-    <div class="row"><button class="btn small" type="button" data-open="${i}">${g.passage ? 'Words + passage' : 'Words'}</button>${src === 'r' ? `<button class="btn small primary" type="button" data-pq="${i}">Paraphrase</button><button class="btn small" type="button" data-sp="${i}">Spell</button>` : `<button class="btn small" type="button" data-sp="${i}">Spell</button><button class="btn small primary" type="button" data-di="${i}">Dictation</button>`}${mk.length ? `<button class="btn small coral" type="button" data-fix="${i}">Fix ${mk.length}</button>` : ''}</div></div>`).join('')}</div>
+    <div class="row"><button class="btn small" type="button" data-open="${i}">${g.passage ? 'Words + passage' : 'Words'}</button>${src === 'r' ? `<button class="btn small primary" type="button" data-lq="${i}">Learn + quiz</button><button class="btn small" type="button" data-pq="${i}">Paraphrase</button><button class="btn small" type="button" data-sp="${i}">Spell</button>` : `<button class="btn small" type="button" data-sp="${i}">Spell</button><button class="btn small primary" type="button" data-di="${i}">Dictation</button>`}${mk.length ? `<button class="btn small coral" type="button" data-fix="${i}">Fix ${mk.length}</button>` : ''}</div></div>`).join('')}</div>
   ${missAll.length ? `<section class="panel" id="mistakes" style="margin-top:22px"><div class="row" style="justify-content:space-between"><h2 style="margin:0">My mistakes by topic</h2><span class="muted" style="font-size:14px">Get a word right in practice and it leaves this list.</span></div>
     ${info.filter(t => t.mk.length).map(({ g, i, mk }) => `<div class="mgrp"><div class="row" style="justify-content:space-between"><h3>${esc(g.name)} <span class="pill bad">${mk.length}</span></h3><div class="row"><button class="btn small primary" type="button" data-fix="${i}">Spell these</button><button class="btn small" type="button" data-fixd="${i}">${src === 'r' ? 'Paraphrase' : 'Dictation'}</button></div></div>
       <div class="mistakes">${mk.map(k => { const m = S.miss[k]; return `<div class="mk"><span><b style="font-family:var(--f-word);font-size:18px">${esc(W[k].w)}</b> ${speakBtn(W[k].w)}<br><span class="bn muted">${esc(W[k].bn)}</span></span><span>${m.given ? `You wrote: <s>${esc(m.given)}</s><br>` : ''}<span class="muted" style="font-size:13px">Wrong ${m.n} time${m.n > 1 ? 's' : ''} · last on ${dateStr(m.d)}</span></span></div>`; }).join('')}</div></div>`).join('')}
@@ -1192,6 +1192,7 @@ function groupView(src, title, intro, extraHead){
   $$('[data-di]').forEach(b => b.onclick = () => startPractice({ mode:'dict', keys: pickForDrill(gKeys(src, +b.dataset.di), 12), title: 'Dictation: ' + gs[+b.dataset.di].name, back }));
   $$('[data-fix]').forEach(b => b.onclick = () => fix(+b.dataset.fix, 'spell'));
   $$('[data-fixd]').forEach(b => b.onclick = () => fix(+b.dataset.fixd, src === 'r' ? 'para' : 'dict'));
+  $$('[data-lq]').forEach(b => b.onclick = () => learnTopic(src, +b.dataset.lq, back));
   $$('[data-pq]').forEach(b => b.onclick = () => startPractice({ mode:'para', keys: pickForDrill(gKeys(src, +b.dataset.pq), 15), title: 'Paraphrase: ' + gs[+b.dataset.pq].name, back }));
   if ($('#mAll')) $('#mAll').onclick = () => startPractice({ mode:'spell', keys: missAll.slice(0, 40), title: 'All mistakes, topic by topic', back });
   if ($('#mJump')) $('#mJump').onclick = () => $('#mistakes').scrollIntoView({ behavior:'smooth' });
@@ -1222,6 +1223,31 @@ function rvPassage(g, ks){
   return `<section class="panel rvp" style="margin-top:18px"><div class="label">Mini passage</div>${g.passage.map(p => `<p>${esc(p).replace(re, '<mark>$&</mark>')}</p>`).join('')}
     <h3 style="margin-top:14px">True, False or Not Given?</h3><p class="muted" style="font-size:13.5px;margin:0 0 6px">Do the statements agree with the passage?</p>
     ${g.tfng.map((q, i) => `<div class="tfq" data-a="${esc(g.ans[i])}"><p><b>${i + 1}.</b> ${esc(q)}</p><div class="row">${['TRUE','FALSE','NOT GIVEN'].map(o => `<button class="opt small" type="button" data-tf="${o}">${o}</button>`).join('')}<span class="tfr"></span></div></div>`).join('')}</section>`;
+}
+// one word per screen with its meaning, then a Bangla-meaning quiz on the whole topic
+function learnTopic(src, gi, back){
+  const g = DATA[SRC[src]][gi], ks = gKeys(src, gi); let i = 0;
+  const quiz = () => startPractice({ mode:'bn', keys: shuffle(ks), title: 'Quiz: ' + g.name, back });
+  const draw = () => {
+    const x = W[ks[i]], last = i === ks.length - 1;
+    main().innerHTML = `<div class="practice"><div class="row" style="justify-content:space-between;margin-bottom:8px"><h2 style="font-size:22px">${esc(g.name)}</h2><button class="btn small" type="button" id="lqSkip">Go to quiz</button></div>
+      <div class="p-top"><button class="btn small ghost" type="button" id="lqBack">Back</button><div class="p-bar"><i style="width:${(i + 1) / ks.length * 100}%"></i></div><span class="mono">${i + 1}/${ks.length}</span></div>
+      <div class="card"><div class="big">${esc(x.w)}</div>
+        <div class="center">${x.pos ? `<span class="pos">${esc(x.pos)}</span>` : ''}${speakBtn(x.w)}${starBtn(ks[i])}</div>
+        <div class="bnbig">${esc(x.bn)}</div>
+        ${x.syn ? `<p style="text-align:center;margin:0"><b>Paraphrase:</b> ${esc(x.syn)}</p>` : ''}
+        ${x.def ? `<p class="muted" style="text-align:center;margin:0">${esc(x.def)}</p>` : ''}
+        ${x.ex ? `<p class="muted" style="text-align:center;margin:0;font-style:italic">"${esc(x.ex)}"</p>` : ''}
+        <div class="center"><button class="btn" type="button" id="lqPrev" ${i ? '' : 'disabled'}>Previous</button><button class="btn primary" type="button" id="lqNext">${last ? 'Start the quiz' : 'Next word'}</button></div>
+        <p class="muted" style="text-align:center;font-size:13px;margin:0">${last ? `Quiz: ${ks.length} questions, choose the Bangla meaning of each word.` : 'Arrow keys also work.'}</p></div></div>`;
+    bindSpeak();
+    $('#lqPrev').onclick = () => { if (i){ i--; draw(); } };
+    $('#lqNext').onclick = () => { if (last) quiz(); else { i++; draw(); } };
+    $('#lqSkip').onclick = quiz;
+    $('#lqBack').onclick = () => { document.onkeydown = null; route(); };
+  };
+  document.onkeydown = e => { if (!$('#lqNext')) { document.onkeydown = null; return; } if (e.key === 'ArrowRight') $('#lqNext').click(); if (e.key === 'ArrowLeft') $('#lqPrev').click(); };
+  draw(); window.scrollTo(0, 0);
 }
 function viewListening(){ groupView('l', 'Listening words', 'High-frequency words that come up again and again as answers in IELTS Listening, especially Parts 1 and 2. In the test, a spelling mistake makes the answer wrong, so practise writing every one.'); }
 function viewL1200(){
@@ -1302,6 +1328,15 @@ function renderItem(){
       <div class="bnbig" style="font-family:var(--f-head);font-size:clamp(24px,4vw,32px)">${esc(ask === 'syn' ? x.syn : x.def)}</div>
       <div class="opts">${it.opts.map(k => `<button class="opt" type="button" data-o="${esc(k)}"><b style="font-family:var(--f-head);font-size:19px">${esc(W[k].w)}</b></button>`).join('')}</div><div id="fb"></div></div>`;
   }
+  else if (it.m === 'bn'){
+    // distractors from the same topic first, so the choices are close in meaning area
+    const same = shuffle(groupKeys(x.src, x.g).filter(k => k !== it.k && W[k].bn !== x.bn));
+    const pool = same.length >= 3 ? same.slice(0, 3) : same.concat(shuffle(srcKeys(x.src).filter(k => k !== it.k && !same.includes(k) && W[k].bn !== x.bn)).slice(0, 3 - same.length));
+    it.opts = shuffle([it.k, ...pool]);
+    body = `<div class="card"><div class="label" style="text-align:center">Choose the Bangla meaning</div><div class="big">${esc(x.w)}</div>
+      <div class="center">${x.pos ? `<span class="pos">${esc(x.pos)}</span>` : ''}${speakBtn(x.w)}</div>
+      <div class="opts">${it.opts.map(k => `<button class="opt bn" type="button" data-o="${esc(k)}" style="font-size:19px">${esc(W[k].bn)}</button>`).join('')}</div><div id="fb"></div></div>`;
+  }
   main().innerHTML = `<div class="practice"><div class="row" style="justify-content:space-between;margin-bottom:8px"><h2 style="font-size:22px">${esc(P.title)}</h2><span class="pill good">${P.right} correct</span></div>${top}${body}</div>`;
   $('#pQuit').onclick = () => { endPractice(); route(); };
   bindSpeak();
@@ -1315,7 +1350,7 @@ function renderItem(){
     else $('#hint').onclick = () => { say(x.w); it.hinted = true; inp.focus(); };
     const go = () => checkSpell(it);
     $('#chk').onclick = go; inp.onkeydown = e => { if (e.key === 'Enter'){ e.preventDefault(); it.done ? next() : go(); } };
-  } else if (it.m === 'para'){
+  } else if (it.m === 'para' || it.m === 'bn'){
     $$('[data-o]').forEach(b => b.onclick = () => { if (P.answered) return; P.answered = true;
       const ok = b.dataset.o === it.k; b.classList.add(ok ? 'ok' : 'no'); if (!ok) $(`[data-o="${CSS.escape(it.k)}"]`).classList.add('ok');
       record(it, ok, ok ? '' : W[b.dataset.o].w);
