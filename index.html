@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Daily IELTS vocabulary: reading words with Bangla meanings, high-frequency listening words, Part 4 topic lists, spelling, dictation and typing practice with progress tracking.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B3245A'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' fill='white' text-anchor='middle'%3EAa%3C/text%3E%3C/svg%3E">
-<title>IELTS Word Lab</title>
+<title>IELTS Lab: Academic preparation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
 <style>
@@ -937,13 +937,41 @@ body{background:#F5F6F8;background-image:none}
 .jd.today .dot,.mic.on,.lplayer.on .wave i{animation:none}
 .hero::before,.khero::before,.m1hero::before,.ghero::before,.ghero::after{display:none}
 
+.brand small{display:block;font:600 11px var(--f-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:1px}
+.nav .ng{color:var(--ink);opacity:.55}
+.dash{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;background:#16284F;color:#fff;border-radius:22px;padding:26px 28px}
+.dash h1{font-size:clamp(28px,4vw,40px);margin:4px 0 6px}.dash p{margin:0 0 14px;max-width:60ch;color:#D5DDEE}.dash .label{color:#AFC0E4}
+.dfield{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#AFC0E4}
+.dfield input,.dfield select{font:600 15px var(--f-ui);padding:8px 10px;border-radius:10px;border:1px solid rgb(255 255 255 / .25);background:rgb(255 255 255 / .1);color:#fff;color-scheme:dark}
+.dfield select option{color:#13203A}
+.dash-side{display:flex;gap:10px}.dnum{background:rgb(255 255 255 / .1);border-radius:14px;padding:12px 14px;text-align:center;min-width:96px}
+.dnum b{display:block;font:800 32px/1 var(--f-head)}.dnum b small{font-size:15px;opacity:.7}.dnum span{font-size:12.5px;color:#D5DDEE}
+.modh{font-size:20px;margin:24px 0 10px}
+.mods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.mod{background:var(--surface);border:1px solid #E4E7EC;border-top:4px solid var(--mc);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:2px}
+.modt{margin-bottom:8px}.modt h3{font-size:20px;color:var(--mc)}.modt span{font-size:12.5px;color:var(--muted)}
+.mod a{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600;font-size:14.5px}
+.mod a:hover{color:var(--mc)}.mod a span{color:var(--mc)}
+.bandrow{display:grid;grid-template-columns:minmax(0,1fr) 96px 48px;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.bandrow label{font-weight:700}.bandrow small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.bandrow input,.bandrow select{font:600 16px var(--f-ui);padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;width:100%;background:var(--surface);color:var(--ink)}
+.bandrow>b{font:800 20px var(--f-head);text-align:right}
+.bandout{text-align:center}.bandbig{display:block;font:800 84px/1 var(--f-head);color:var(--accent);margin:6px 0 10px}
+.bandbars{display:flex;flex-direction:column;gap:8px;margin-top:14px;text-align:left}
+.bandbars div{display:grid;grid-template-columns:84px minmax(0,1fr) 34px;gap:10px;align-items:center;font-size:14px}
+.bandbars i{height:10px;background:var(--sunk);border-radius:5px;overflow:hidden}.bandbars u{display:block;height:100%}.bandbars b{text-align:right}
+.khero,.ghero,.m1hero{background:var(--sec) !important}
+.kcard,.unit,.rptype{--tint:var(--sec) !important}
+@media (min-width:881px){.rail-card{overflow-y:auto;scrollbar-width:thin}}
+@media (max-width:900px){.mods{grid-template-columns:repeat(2,minmax(0,1fr))}.dash{grid-template-columns:1fr}.dash-side{flex-wrap:wrap}}
+@media (max-width:520px){.mods{grid-template-columns:1fr}.dnum{flex:1;min-width:0}}
 </style>
 </head>
 <body>
 
 <div class="shell">
   <aside class="rail" aria-label="Sections"><div class="rail-card">
-    <div class="brand"><span class="logo">Aa</span><span>IELTS Word Lab</span></div>
+    <div class="brand"><span class="logo">IE</span><span>IELTS Lab<small>Academic preparation</small></span></div>
     <nav class="nav" id="nav"></nav>
     <div class="spacer"></div>
     <div class="mini"><button class="btn small ghost" id="openSettings" type="button" style="padding-left:0">Settings</button></div>
@@ -1060,7 +1088,7 @@ function route(){
   if (typeof G !== 'undefined' && G) G.active = false;
   if (typeof stopK === 'function') { stopK(); K = null; }
   stopTyping();
-  ({ today:viewToday, reading:viewReading, listening:viewListening, l1200:viewL1200, part4:viewPart4, spell:viewSpell, typing:viewTyping, writing:viewWriting, progress:viewProgress, grammar:viewGrammar, skills:viewSkills, tests:viewTests, rtests:viewRTests, wbook:viewWBook, sbook:viewSBook, plan:viewPlan })[sec]();
+  ({ today:viewToday, reading:viewReading, listening:viewListening, l1200:viewL1200, part4:viewPart4, spell:viewSpell, typing:viewTyping, writing:viewWriting, progress:viewProgress, grammar:viewGrammar, skills:viewSkills, tests:viewTests, rtests:viewRTests, wbook:viewWBook, sbook:viewSBook, plan:viewPlan, band:viewBand })[sec]();
   window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
@@ -1103,12 +1131,14 @@ function viewToday(){
   const hr = new Date().getHours();
   const greet = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
   main().innerHTML = `
-  <section class="hero">
-    <div class="ring">${ringSVG(pct, true)}<div class="center"><b>${l.xp}</b><span>of ${g} points</span></div></div>
-    <div><div class="label">${new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' })}</div><h1>${greet}${S.settings.name ? ', ' + esc(S.settings.name) : ''}</h1>
-      <p>${pct >= 1 ? 'Daily goal reached. Anything more today is a bonus.' : `Learn your new words, clear your reviews, then spell, listen and type. ${remaining} reading words still to discover.`}</p></div>
-    <div class="flame"><b>${sk}</b><span>day streak</span></div>
+  <section class="dash">
+    <div class="dash-main"><div class="label">${new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' })}</div><h1>${greet}${S.settings.name ? ', ' + esc(S.settings.name) : ''}</h1>
+      <p>${dashLine()}</p>
+      <div class="row"><label class="dfield">Exam date<input type="date" id="dExam" value="${esc(S.g.exam || '')}"></label><label class="dfield">Target band<select id="dBand">${[5.5,6,6.5,7,7.5,8,8.5,9].map(b => `<option ${b === (S.settings.band || 7) ? 'selected' : ''}>${b}</option>`).join('')}</select></label></div></div>
+    <div class="dash-side"><div class="dnum"><b>${examDay() != null ? Math.max(0, examDay() - TODAY()) : '–'}</b><span>days to exam</span></div><div class="dnum"><b>${sk}</b><span>day streak</span></div><div class="dnum"><b>${l.xp}<small>/${g}</small></b><span>points today</span></div></div>
   </section>
+  <h2 class="modh">The four test modules</h2>
+  <div class="mods">${MODS.map(([name, col, fmt, links]) => `<div class="mod" style="--mc:${col}"><div class="modt"><h3>${name}</h3><span>${fmt}</span></div>${links.map(([h, t]) => `<a href="#${h}">${t}<span aria-hidden="true">→</span></a>`).join('')}</div>`).join('')}</div>
   <div class="grid2" style="margin-top:18px">
     <div class="panel"><h2>Today's plan</h2><div class="mission">${tasks.map(t => `
       <div class="task"><span class="check ${t.done ? 'on' : ''}">${t.done ? ICON.check : ''}</span><span><b>${t.title}</b><small>${t.sub}</small></span>${t.btn ? `<button class="btn small ${t.done ? '' : 'primary'}" type="button" data-act="${t.act}">${t.done && t.act !== 'review' ? 'Again' : t.btn}</button>` : ''}</div>`).join('')}</div></div>
@@ -1126,6 +1156,53 @@ function viewToday(){
   $$('[data-act]').forEach(b => b.onclick = () => todayAction(b.dataset.act));
   $$('[data-more]').forEach(b => b.onclick = () => learnMore(+b.dataset.more));
   $('#todaySettings').onclick = openSettings;
+  $('#dExam').onchange = e => { S.g.exam = e.target.value || null; save(); viewToday(); };
+  $('#dBand').onchange = e => { S.settings.band = +e.target.value; save(); viewToday(); };
+}
+const MODS = [
+  ['Listening', '#0E6FB8', '4 parts · 40 questions · 30 minutes', [['tests', 'Full practice tests'], ['skills', 'Question type courses'], ['l1200', 'Listening vocabulary'], ['spell', 'Spelling and dictation']]],
+  ['Reading', '#0F766E', '3 passages · 40 questions · 60 minutes', [['rtests', 'Practice passages'], ['skills', 'Question type courses'], ['reading', 'Reading vocabulary']]],
+  ['Writing', '#B45309', '2 tasks · 60 minutes', [['wbook', 'Writing book'], ['wbook-t2s', 'Essay structures'], ['writing', 'Writing check'], ['grammar', 'Grammar']]],
+  ['Speaking', '#6D3FD1', '3 parts · 11 to 14 minutes', [['sbook', 'Speaking book'], ['sbook-up-mix', 'Band 7 upgrade drills'], ['sbook-s13', 'Part 2 cue cards']]]];
+function dashLine(){
+  const ed = examDay(), t = S.settings.band || 7;
+  if (ed == null) return `Set your exam date to start the countdown. Your target is band ${t}.`;
+  const left = ed - TODAY();
+  return left > 0 ? `${left} day${left > 1 ? 's' : ''} until your exam. Your target is band ${t}. Do today's plan below to stay on track.` : left === 0 ? `Your exam is today. Good luck. Read your error log once and trust your preparation.` : `Your exam date has passed. Set a new date to restart the countdown.`;
+}
+/* ---------- band calculator (approximate public conversion tables, Academic) ---------- */
+const BANDL = [[39,9],[37,8.5],[35,8],[32,7.5],[30,7],[26,6.5],[23,6],[18,5.5],[16,5],[13,4.5],[11,4]];
+const BANDR = [[39,9],[37,8.5],[35,8],[33,7.5],[30,7],[27,6.5],[23,6],[19,5.5],[15,5],[13,4.5],[10,4]];
+const rawBand = (t, n) => (t.find(([min]) => n >= min) || [0, 3.5])[1];
+const overallBand = a => Math.floor(a.reduce((x, y) => x + y, 0) / a.length * 2 + .5) / 2;   // .25 and .75 round up, as IELTS does
+console.assert(overallBand([6.5, 6.5, 5, 7]) === 6.5 && overallBand([6.5, 6.5, 5.5, 6]) === 6 && rawBand(BANDL, 30) === 7 && rawBand(BANDR, 29) === 6.5, 'band maths');
+function viewBand(){
+  S.band = Object.assign({ l:30, r:30, w:6, s:6.5 }, S.band || {}); const b = S.band;
+  const halves = [4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9];
+  const lb = rawBand(BANDL, b.l), rb = rawBand(BANDR, b.r), ov = overallBand([lb, rb, b.w, b.s]), tg = S.settings.band || 7;
+  const num = (id, v) => `<input type="number" id="${id}" min="0" max="40" value="${v}" inputmode="numeric">`;
+  const sel = (id, v) => `<select id="${id}">${halves.map(h => `<option ${h === v ? 'selected' : ''}>${h}</option>`).join('')}</select>`;
+  main().innerHTML = `<div class="page-head"><div><h1>Band calculator</h1><p>Enter your correct answers for Listening and Reading and your estimated Writing and Speaking bands. The overall band is the average of the four, rounded to the nearest half band.</p></div></div>
+  <div class="grid2">
+    <div class="panel"><h2>Your scores</h2>
+      <div class="bandrow"><label for="bL">Listening <small>correct answers out of 40</small></label>${num('bL', b.l)}<b>${lb}</b></div>
+      <div class="bandrow"><label for="bR">Academic Reading <small>correct answers out of 40</small></label>${num('bR', b.r)}<b>${rb}</b></div>
+      <div class="bandrow"><label for="bW">Writing <small>estimated band</small></label>${sel('bW', b.w)}<b>${b.w}</b></div>
+      <div class="bandrow"><label for="bS">Speaking <small>estimated band</small></label>${sel('bS', b.s)}<b>${b.s}</b></div>
+      <p class="muted" style="font-size:13.5px;margin:10px 0 0">Raw-score conversions vary slightly between test versions, so treat the Listening and Reading bands as close estimates.</p></div>
+    <div class="panel bandout"><div class="label">Overall band</div><b class="bandbig">${ov.toFixed(1)}</b>
+      <p>${ov >= tg ? `You are at or above your target of band ${tg}.` : `Your target is band ${tg}. You need ${(tg - ov).toFixed(1)} more. The fastest gain is usually in your lowest module: ${[['Listening', lb], ['Reading', rb], ['Writing', b.w], ['Speaking', b.s]].sort((x, y) => x[1] - y[1])[0][0]}.`}</p>
+      <div class="bandbars">${[['Listening', lb, '#0E6FB8'], ['Reading', rb, '#0F766E'], ['Writing', b.w, '#B45309'], ['Speaking', b.s, '#6D3FD1']].map(([n, v, c]) => `<div><span>${n}</span><i><u style="width:${v / 9 * 100}%;background:${c}"></u></i><b>${v}</b></div>`).join('')}</div></div>
+  </div>
+  <div class="panel" style="margin-top:18px"><h2>Test format at a glance</h2>
+    <div class="wbtable"><table><thead><tr><th>Module</th><th>Time</th><th>What you do</th><th>How it is scored</th></tr></thead><tbody>
+      <tr><td>Listening</td><td>30 minutes</td><td>4 parts, 40 questions. The recording plays once.</td><td>1 mark per correct answer, converted to a band</td></tr>
+      <tr><td>Academic Reading</td><td>60 minutes</td><td>3 passages, 40 questions. No extra transfer time.</td><td>1 mark per correct answer, converted to a band</td></tr>
+      <tr><td>Academic Writing</td><td>60 minutes</td><td>Task 1: a report of 150+ words. Task 2: an essay of 250+ words.</td><td>Four criteria. Task 2 counts double.</td></tr>
+      <tr><td>Speaking</td><td>11 to 14 minutes</td><td>Part 1 interview, Part 2 long turn, Part 3 discussion</td><td>Four criteria, equally weighted</td></tr></tbody></table></div></div>`;
+  const set = (id, k, f) => $(id).onchange = e => { S.band[k] = f(e.target.value); save(); viewBand(); };
+  const clamp = v => Math.max(0, Math.min(40, Math.round(+v) || 0));
+  set('#bL', 'l', clamp); set('#bR', 'r', clamp); set('#bW', 'w', Number); set('#bS', 's', Number);
 }
 function ringSVG(p, light){ const r = 56, c = 2 * Math.PI * r;
   return `<svg viewBox="0 0 132 132" aria-hidden="true"><circle cx="66" cy="66" r="${r}" fill="none" stroke="${light ? 'rgb(255 255 255 / .25)' : 'var(--sunk)'}" stroke-width="12"/><circle cx="66" cy="66" r="${r}" fill="none" stroke="${light ? '#fff' : 'var(--accent)'}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - p)}"/></svg>`; }
@@ -2084,7 +2161,7 @@ const kpct = r => r ? r.best / r.total : 0;
 const kmd = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<mark>$1</mark>');
 let K = null; // current reader or test
 const cheatHTML = (d, open) => `<details class="cheat" ${open ? 'open' : ''}><summary>Trick card: aajker formula</summary><ol>${d.cheat.map(x => `<li>${kmd(x.replace(/^\d+\.\s*/, ''))}</li>`).join('')}</ol></details>`;
-const hintHTML = (q, i) => q.hint ? `<div class="khint"><button class="btn small ghost" type="button" data-hint="${i}">Hint dekho</button><div class="hx" hidden>${kmd(q.hint)}</div></div>` : '';
+const hintHTML = (q, i) => q.hint ? `<div class="khint"><button class="btn small ghost" type="button" data-hint="${i}">Show hint</button><div class="hx" hidden>${kmd(q.hint)}</div></div>` : '';
 function bindHints(){ $$('[data-hint]').forEach(b => b.onclick = () => { b.nextElementSibling.hidden = false; b.remove(); (K.hints = K.hints || new Set()).add(b.dataset.hint); }); }
 
 /* ---------- voices by gender ---------- */
@@ -2114,13 +2191,13 @@ function viewSkills(){
     const c = SC[nx[0]], d = c.days[nx[1] - 1], read = S.k.read[kday(c, nx[1])];
     return `<div class="task"><span class="check"></span><span><b>${label}: ${esc(c.title)}, day ${nx[1]}</b><small>${esc(d.title)}</small></span><div class="row"><button class="btn small ${read ? '' : 'primary'}" type="button" data-rd="${c.id}:${nx[1]}">${read ? 'Read again' : 'Read chapter'}</button><button class="btn small ${read ? 'primary' : ''}" type="button" data-ts="${c.id}:${nx[1]}">Take test</button></div></div>`; };
   main().innerHTML = `
-  <section class="khero"><div><div class="label">Question types</div><h1>Kothin question er bhoy dur koro</h1>
-    <p>Pach ta choto course, shob Banglish e. Protidin ekta chapter (tricks + example) ar ekta test. Test e atke gele Hint chap dao. Sesh e dekhbe answer ta passage er kothay lukano chilo.</p></div>
+  <section class="khero"><div><div class="label">Question types</div><h1>Master the hardest question types</h1>
+    <p>Five short courses. Each day has one chapter (tricks and examples) and one test. If you get stuck in a test, tap Hint. At the end you see exactly where the answer was in the passage.</p></div>
     <div class="gcount"><div><b>${rDone}</b><span>of 18 reading days</span></div><div><b>${lDone}</b><span>of 12 listening days</span></div></div></section>
-  <div class="panel gmission" style="margin-top:18px"><div class="row" style="justify-content:space-between"><h2 style="margin:0">Aaj: ekta reading day + ekta listening day</h2>${miss ? `<span class="pill bad">${miss} mistakes saved</span>` : ''}</div>
+  <div class="panel gmission" style="margin-top:18px"><div class="row" style="justify-content:space-between"><h2 style="margin:0">Today: one reading day and one listening day</h2>${miss ? `<span class="pill bad">${miss} mistakes saved</span>` : ''}</div>
     <div class="mission">${row(rn, 'Reading')}${row(ln, 'Listening')}</div>
-    <p class="muted" style="margin:10px 0 0;font-size:14px">Reading e headings, matching information ar MCQ ghure ghure ashe, tai tinta eksathe improve hoy. Listening e MCQ ar matching palabodol kore.</p></div>
-  ${typeof M1 !== 'undefined' && M1 ? `<a class="panel m1link" href="#skills-m100"><div><div class="label">New · Listening Part 2 ar 3</div><h2 style="margin:4px 0">MCQ 100: lomba option er kothin MCQ</h2><p class="muted" style="margin:0;font-size:14px">10 ta natural audio recording, 100 marks, heavy paraphrase ar C1 level word. Lomba option e jei problem, sheta ekhane fix hobe.</p></div><span class="btn primary small">${Object.keys(S.m1.res).length ? Object.keys(S.m1.res).length + '/10 done · continue' : 'Start'}</span></a>` : ''}
+    <p class="muted" style="margin:10px 0 0;font-size:14px">Reading rotates through headings, matching information and multiple choice, so all three improve together. Listening alternates between multiple choice and matching.</p></div>
+  ${typeof M1 !== 'undefined' && M1 ? `<a class="panel m1link" href="#skills-m100"><div><div class="label">Listening Parts 2 and 3</div><h2 style="margin:4px 0">MCQ 100: hard multiple choice with long options</h2><p class="muted" style="margin:0;font-size:14px">10 natural audio recordings, 100 marks, heavy paraphrase and C1-level vocabulary. Built to fix the problems that long options cause.</p></div><span class="btn primary small">${Object.keys(S.m1.res).length ? Object.keys(S.m1.res).length + '/10 done · continue' : 'Start'}</span></a>` : ''}
   <h2 style="font-size:24px;margin:26px 0 12px">Reading</h2><div class="kgroup">${['rhead','rinfo','rmcq'].map(courseCard).join('')}</div>
   <h2 style="font-size:24px;margin:26px 0 12px">Listening</h2><div class="kgroup">${['lmcq','lmatch'].map(courseCard).join('')}</div>`;
   bindK();
@@ -2161,7 +2238,7 @@ function viewCourse(c){
 function trickBank(c){
   const tr = []; c.days.forEach(d => d.pages.forEach(p => p.blocks.forEach(b => { if (b.t === 'trick') tr.push([d.n, b]); })));
   if (!tr.length) return '';
-  return `<div class="panel" style="margin-top:22px"><h2>Trick bank</h2><p class="muted" style="margin:-4px 0 12px;font-size:14px">Je day er chapter porecho, oi day er trick gula ekhane khule jay. Exam er age ek bar chokh bulao.</p>
+  return `<div class="panel" style="margin-top:22px"><h2>Trick bank</h2><p class="muted" style="margin:-4px 0 12px;font-size:14px">The tricks from every chapter you have read unlock here. Skim them once before the exam.</p>
     <div class="tbank">${tr.map(([n, b]) => S.k.read[kday(c, n)] ? `<div class="trick"><b class="k">${esc(b.h)} <span class="muted">· day ${n}</span></b>${kmd(b.x)}</div>` : `<div class="trick locked"><b class="k">${esc(b.h.split(':')[0])} · day ${n}</b>Day ${n} er chapter porle khulbe.</div>`).join('')}</div></div>`;
 }
 const qText = (dr, q) => dr.type === 'heading' ? 'Paragraph ' + q.p : dr.type === 'info' ? q.s : q.q;
@@ -2183,10 +2260,10 @@ function openChapter(c, n, page){
     if (b.t === 'steps') return `<ol class="steps">${b.x.map(s => `<li><span>${kmd(s)}</span></li>`).join('')}</ol>`;
     if (b.t === 'trick') return `<div class="trick"><b class="k">${esc(b.h)}</b>${kmd(b.x)}</div>`;
     if (b.t === 'tip') return `<div class="note tip"><b class="k">Tip</b>${kmd(b.x)}</div>`;
-    if (b.t === 'trap') return `<div class="note trap"><b class="k">Ekhane bhul hoy</b>${kmd(b.x)}</div>`;
+    if (b.t === 'trap') return `<div class="note trap"><b class="k">Common mistake</b>${kmd(b.x)}</div>`;
     if (b.t === 'bn') return `<div class="note bnn"><b class="k">বাংলায়</b>${esc(b.x)}</div>`;
     if (b.t === 'pairs') return `<table class="pairs"><tr><th>${c.skill === 'R' ? 'In the passage' : 'In the recording'}</th><th></th><th>In the question</th></tr>${b.x.map(([a, q]) => `<tr><td>${esc(a)}</td><td class="ar">↔</td><td>${esc(q)}</td></tr>`).join('')}</table>`;
-    if (b.t === 'example') return `<div class="ex"><div class="label" style="color:#9A7B55;margin-bottom:4px">Example: age nije try koro</div><div class="q">${kmd(b.q)}</div><div class="ans"><button class="btn small" type="button" data-show>Answer dekho</button><div hidden><p style="margin:8px 0 4px"><b>Answer: ${esc(b.a)}</b></p><p style="margin:0">${kmd(b.x)}</p></div></div></div>`;
+    if (b.t === 'example') return `<div class="ex"><div class="label" style="color:#9A7B55;margin-bottom:4px">Example: try it yourself first</div><div class="q">${kmd(b.q)}</div><div class="ans"><button class="btn small" type="button" data-show>Show answer</button><div hidden><p style="margin:8px 0 4px"><b>Answer: ${esc(b.a)}</b></p><p style="margin:0">${kmd(b.x)}</p></div></div></div>`;
     return '';
   }).join('');
   main().innerHTML = `<div class="book"><div class="ktop"><a class="btn small ghost" href="#skills-${c.id}">← ${esc(c.title)}</a><span class="muted" style="font-size:14px">Page ${page + 1} of ${P}</span></div>
@@ -2230,7 +2307,7 @@ function readingTest(){
   main().innerHTML = `<div class="ktop"><div class="row"><a class="btn small ghost" href="#skills-${c.id}">← ${esc(c.title)}</a><span class="pill">Day ${n} test · ${KTYPE[dr.type]}</span></div>
     <div class="row"><span class="ktimer" id="ktm"></span><button class="btn primary" type="button" id="kSub">Check answers</button></div></div>
     <div class="ktest"><article class="kpass" id="kpass">${passageHTML(dr)}</article>
-    <div class="kq" id="kq">${cheatHTML(c.days[n - 1])}<div class="ins">${esc(dr.instr)}<br><span style="font-size:13px">Passage er word select korle highlight hobe. Atke gele "Hint dekho" chap dao.</span></div>
+    <div class="kq" id="kq">${cheatHTML(c.days[n - 1])}<div class="ins">${esc(dr.instr)}<br><span style="font-size:13px">Select any words in the passage to highlight them. If you get stuck, tap "Show hint".</span></div>
       ${dr.type === 'heading' ? `<div><div class="label" style="margin-bottom:6px">List of headings (tap one to cross it out)</div><div class="hlist">${dr.headings.map((h, j) => `<button type="button" data-h="${j}"><b>${ROMAN[j]}</b><span>${esc(h)}</span></button>`).join('')}</div></div>` : ''}
       ${items}<button class="btn primary" type="button" id="kSub2">Check answers</button></div></div>`;
   K.timer = setInterval(timerTick, 1000); timerTick(); bindHints();
@@ -2255,12 +2332,12 @@ function finishTest(){
   const pct = right / tot;
   if (pct >= .8){ sndWin(); confetti(); } else if (pct >= .5) sndOK(); else sndNo();
   const nh = K.hints ? K.hints.size : 0;
-  const msg = (pct === 1 ? 'Full marks! Ei question type ekhon tomar.' : pct >= .8 ? 'Darun, band 8 level. Je gula bhul hoise tar explanation ta poro.' : pct >= .5 ? 'Bhalo shuru. Highlight kora line gula dekho, answer oikhanei lukano chilo.' : 'Kono problem nai, eivabei shikha hoy. Niche prottek ta explanation poro, kal abar test dao.') + (nh ? ` (${nh} ta hint use korecho. Porer bar kom hint e try koro.)` : '');
+  const msg = (pct === 1 ? 'Full marks! You have mastered this question type.' : pct >= .8 ? 'Excellent, band 8 level. Read the explanations for the ones you missed.' : pct >= .5 ? 'A good start. Look at the highlighted lines: the answers were there.' : 'No problem, this is how you learn. Read each explanation below and take the test again tomorrow.') + (nh ? ` (You used ${nh} hint${nh > 1 ? 's' : ''}. Try with fewer next time.)` : '');
   const resHTML = res.map(r => `<div class="kres ${r.ok ? 'ok' : 'no'}"><div><span class="qn" style="background:${r.ok ? 'var(--good)' : 'var(--bad)'}">${r.i + 1}</span><b>${esc(qText(dr, r.q))}</b></div>
-    <div>${r.ok ? 'Thik' : `Tumi: <s>${esc(r.g == null || r.g === '' ? 'no answer' : giveText(dr, r.g, r.q))}</s>`} · Answer: <b>${esc(ansText(dr, r.q))}</b></div>
+    <div>${r.ok ? 'Correct' : `You: <s>${esc(r.g == null || r.g === '' ? 'no answer' : giveText(dr, r.g, r.q))}</s>`} · Answer: <b>${esc(ansText(dr, r.q))}</b></div>
     <div class="ev">“${esc(r.q.ev)}”</div><div>${esc(r.q.why)}</div></div>`).join('');
   const head = `<div class="kres ${pct >= .5 ? 'ok' : 'no'}" style="text-align:center;padding:16px"><div style="font-family:var(--f-head);font-size:48px;font-weight:800;line-height:1">${right}<span class="muted" style="font-size:24px">/${tot}</span></div><div>${msg}</div>
-    <div class="row" style="justify-content:center;margin-top:6px"><button class="btn small" type="button" id="kAgain">Abar dao</button>${n < 6 ? `<button class="btn small primary" type="button" id="kNext">Day ${n + 1} poro</button>` : ''}<a class="btn small" href="#skills">All courses</a></div></div>`;
+    <div class="row" style="justify-content:center;margin-top:6px"><button class="btn small" type="button" id="kAgain">Try again</button>${n < 6 ? `<button class="btn small primary" type="button" id="kNext">Read day ${n + 1}</button>` : ''}<a class="btn small" href="#skills">All courses</a></div></div>`;
   if (dr.kind === 'R'){
     $('#kpass').innerHTML = passageHTML(dr, res.map(r => ({ ev: r.q.ev, n: r.i + 1, l: dr.type === 'heading' ? r.q.p : dr.type === 'info' ? r.q.a : null })));
     $('#kq').innerHTML = head + resHTML;
@@ -2348,12 +2425,12 @@ const M1S = {}; (M1 || []).forEach(s => M1S[s.id] = s);
 S.m1 = Object.assign({ res:{}, miss:{}, mode:'exam' }, S.m1 || {});
 const M1BASE = 'audio/';
 const M1TRICKS = [
-  ['Core idea age dhoro', 'Long option mane beshi word, beshi idea na. Preview er somoy proti option e 2-3 ta key word tap koro, baki ta bad. Shunar somoy shudhu oi core idea gula match korba.'],
-  ['Ekta bhul detail = puro option bhul', 'Long option er beshir bhag thik thake, kintu ekta choto jinish bhul: only, all, always, recently, ba onno kono manush. Ekta word o na mille option ta kete dao.'],
-  ['Hubohu word = shondeho', 'Tinta option er kotha i recording e ashbe. Je option er word hubohu shunla, oita prai trap. Thik answer ta onno word e, paraphrase kore bola hoy.'],
-  ['Final decision ta nao', "'but', 'actually', 'in the end', 'having said that', 'so we went with' er porer kotha final. Prothome ja bole pore bodlay, oita trap."],
+  ['Find the core idea first', 'A long option has more words, not more ideas. During the preview, tap 2 or 3 key words in each option and ignore the rest. While you listen, match only those core ideas.'],
+  ['One wrong detail makes the whole option wrong', 'Most of a long option is usually right, but one small thing is wrong: only, all, always, recently, or a different person. If a single word does not match, cross the option out.'],
+  ['Same words are suspicious', 'All three options are mentioned in the recording. An option whose exact words you hear is usually a trap. The correct answer is said in different words, as a paraphrase.'],
+  ['Take the final decision', "What comes after 'but', 'actually', 'in the end', 'having said that' or 'so we went with' is final. What speakers say first and then change is a trap."],
   ['Kar mot, kokhon er kotha', "Stem e 'Owen thinks' thakle onner mot dhorbe na. 'used to', 'originally', 'at first' shunle bujhba oita ager kotha, ekhon er na."],
-  ['Choose TWO: tick, cross, question', 'Shunte shunte 5 ta option er pashe mone mone tick, cross ba ? dao. Sesh e 2 ta tick rakho. Duita answer alada alada jaygay ashe, tai prothom ta peye theme jeyo na.']
+  ['Choose TWO: tick, cross, question', 'As you listen, mentally mark each of the 5 options with a tick, a cross or a question mark. Keep 2 ticks at the end. The two answers come at different points, so do not stop after the first.']
 ];
 const m1Marks = s => s.qs.reduce((a, q) => a + (q.type === 'two' ? 2 : 1), 0);
 const m1Total = () => (M1 || []).reduce((a, s) => a + m1Marks(s), 0);
@@ -2366,15 +2443,15 @@ function viewM100(){
   const best = done.reduce((a, s) => a + S.m1.res[s.id].best, 0);
   const miss = Object.keys(S.m1.miss);
   main().innerHTML = `<div class="row" style="margin-bottom:12px"><a class="btn small ghost" href="#skills">← All question types</a></div>
-  <section class="khero m1hero"><div><div class="label">Listening Part 2 ar 3</div><h1>MCQ 100: lomba option er kothin MCQ</h1>
-    <p>10 ta recording, 100 marks. Option gula lomba, word gula kothin, ar thik answer ta shob shomoy paraphrase kora. Exam mode e audio ekbar i baje. Practice mode e thamano, pichone jaoa, abar shona jay.</p></div>
+  <section class="khero m1hero"><div><div class="label">Listening Part 2 ar 3</div><h1>MCQ 100: hard multiple choice with long options</h1>
+    <p>10 recordings, 100 marks. The options are long, the vocabulary is hard, and the correct answer is always paraphrased. In exam mode the audio plays once. In practice mode you can pause, go back and listen again.</p></div>
     <div class="gcount"><div><b>${done.length}</b><span>of 10 sets done</span></div><div><b>${best}</b><span>of ${m1Total()} best marks</span></div></div></section>
   <div class="panel" style="margin-top:18px"><h2>Lomba option e jitar 6 trick</h2><div class="tbank">${M1TRICKS.map(([h, x], i) => `<div class="trick"><b class="k">Trick ${i + 1}: ${esc(h)}</b>${esc(x)}</div>`).join('')}</div></div>
   ${[2, 3].map(p => `<h2 style="font-size:24px;margin:26px 0 12px">Part ${p} ${p === 2 ? '<span class="muted" style="font-size:16px">ekjon speaker, daily life</span>' : '<span class="muted" style="font-size:16px">2-3 jon, academic discussion</span>'}</h2>
     <div class="kgroup">${M1.filter(s => s.part === p).map(m1Card).join('')}</div>`).join('')}
-  ${miss.length ? `<div class="panel" style="margin-top:22px"><h2>Tomar bhul gula (${miss.length})</h2><div class="mistakes">${miss.map(k => { const [id, qi] = k.split(':'); const s = M1S[id]; if (!s) return ''; const q = s.qs[qi];
-      return `<div class="mk"><span><span class="pill" style="margin-bottom:4px">${esc(s.title)}, Q${+qi + 1}</span><br><b>${esc(q.q)}</b></span><span>Answer: <b>${esc(m1AnsText(q))}</b><br><a class="btn small" href="#skills-m100-${id}">Abar dao</a></span></div>`; }).join('')}</div>
-      <p class="muted" style="font-size:14px;margin:10px 0 0">Set ta abar dile, thik korle bhul ta list theke chole jabe.</p></div>` : ''}`;
+  ${miss.length ? `<div class="panel" style="margin-top:22px"><h2>Your mistakes (${miss.length})</h2><div class="mistakes">${miss.map(k => { const [id, qi] = k.split(':'); const s = M1S[id]; if (!s) return ''; const q = s.qs[qi];
+      return `<div class="mk"><span><span class="pill" style="margin-bottom:4px">${esc(s.title)}, Q${+qi + 1}</span><br><b>${esc(q.q)}</b></span><span>Answer: <b>${esc(m1AnsText(q))}</b><br><a class="btn small" href="#skills-m100-${id}">Try again</a></span></div>`; }).join('')}</div>
+      <p class="muted" style="font-size:14px;margin:10px 0 0">Take the set again: a question leaves this list when you get it right.</p></div>` : ''}`;
 }
 function m1Card(s){
   const r = S.m1.res[s.id]; const tot = m1Marks(s);
@@ -2382,7 +2459,7 @@ function m1Card(s){
   return `<div class="kcard" style="--tint:${s.part === 2 ? '#0B8F74' : '#5B5BD6'};--tint-soft:${s.part === 2 ? '#E3F5EF' : '#ECECFC'}">
     <div class="row" style="justify-content:space-between"><span class="label">Part ${s.part} · ${tot} marks · about ${Math.round(words / 150)} min</span>${r ? `<span class="pill ${r.best / tot >= .7 ? '' : 'bad'}">best ${r.best}/${tot}</span>` : ''}</div>
     <h3>${esc(s.title)}</h3><p class="muted" style="margin:0;font-size:14px">${esc(s.context)}</p>
-    <div class="row"><a class="btn small primary" href="#skills-m100-${s.id}">${r ? 'Abar dao' : 'Test dao'}</a>${r ? `<span class="muted" style="font-size:13px">${r.tries} ${r.tries > 1 ? 'tries' : 'try'}</span>` : ''}</div></div>`;
+    <div class="row"><a class="btn small primary" href="#skills-m100-${s.id}">${r ? 'Try again' : 'Start test'}</a>${r ? `<span class="muted" style="font-size:13px">${r.tries} ${r.tries > 1 ? 'tries' : 'try'}</span>` : ''}</div></div>`;
 }
 const m1AnsText = q => q.type === 'two' ? q.a.map(i => LET[i] + ' ' + q.o[i]).join(' + ') : LET[q.a] + ' ' + q.o[q.a];
 
@@ -2446,7 +2523,7 @@ function m1Open(s){
     <div class="lphase" id="lph"><span class="on">1 Preview</span><span>2 Listen</span><span>3 Check</span></div></div>
     <div class="ktest"><div class="stack">
       <div class="kq"><h2 style="margin:0;font-size:21px">${esc(s.title)}</h2><p style="margin:0"><b>${esc(s.context)}</b></p>
-        <div class="ins" id="lins">Preview: proti option e 2-3 ta key word tap koro (Trick 1). Je option bhul mone hoy, ✕ diye kete dao. Recording e tinta option er kotha i ashbe, tai final decision ta shuno.</div>
+        <div class="ins" id="lins">Preview: tap 2 or 3 key words in each option (Trick 1). Cross out any option you think is wrong. All three options are mentioned in the recording, so listen for the final decision.</div>
         <div class="row"><span class="ktimer" id="lprev">1:00</span><label class="chip" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="lmode" ${exam ? '' : 'checked'}> Practice mode (pause, seek, replay)</label></div>
       </div>
       <div class="lplayer" id="lplay"><div class="row" style="justify-content:space-between"><b>Recording</b><span class="mono" id="lpos">loading…</span></div><div class="wave">${'<i></i>'.repeat(18)}</div>
@@ -2460,7 +2537,7 @@ function m1Open(s){
   $$('.kopt').forEach(o => o.onclick = e => { if (K.done || e.target.closest('.cross') || e.target.closest('.kw') && K.phase === 'preview') return; m1Pick(+o.dataset.q, +o.dataset.o); });
   $('#lmode').onchange = e => { S.m1.mode = e.target.checked ? 'practice' : 'exam'; save(); if (K.phase === 'preview') m1Controls(); };
   let pv = 60; K.timer = setInterval(() => { pv--; const el = $('#lprev'); if (!el) return stopK(); el.textContent = pv >= 0 ? Math.floor(pv / 60) + ':' + String(pv % 60).padStart(2, '0') : 'time to listen'; if (pv < 0) { el.classList.add('over'); clearInterval(K.timer); } }, 1000);
-  $('#kSub2').onclick = () => { if (K.phase === 'preview' && !K.warnedP){ K.warnedP = true; toast('Age recording ta shuno. Tao check korte chaile abar chap dao.'); return; } m1Finish(); };
+  $('#kSub2').onclick = () => { if (K.phase === 'preview' && !K.warnedP){ K.warnedP = true; toast('Listen to the recording first. Tap again if you still want to check.'); return; } m1Finish(); };
   m1Source(s).then(src => { if (!K || K.s !== s) return; K.src = src; m1Controls(); });
   window.scrollTo(0, 0);
 }
@@ -2473,16 +2550,16 @@ function m1Pick(i, j){
 function m1Controls(){
   const s = K.s, src = K.src, exam = S.m1.mode !== 'practice';
   const go = $('#lgo'); if (!go) return; go.disabled = false;
-  if (src) { $('#lpos').textContent = 'ready'; $('#lnote').textContent = exam ? 'Exam mode: audio ekbar i bajbe, thamano jabe na. Shunte shunte answer dao.' : 'Practice mode: thamao, 5 second pichone jao, ba bar e chap diye jekono jaygay jao.'; go.onclick = () => m1Play(); return; }
+  if (src) { $('#lpos').textContent = 'ready'; $('#lnote').textContent = exam ? 'Exam mode: the audio plays once and cannot be paused. Answer as you listen.' : 'Practice mode: pause, go back 5 seconds, or tap the bar to jump anywhere.'; go.onclick = () => m1Play(); return; }
   $('#lpos').textContent = 'no audio file';
-  $('#lnote').innerHTML = 'Ei set er natural audio ekhono load hoyni. <b>Natural voice banao</b> chaple tomar browser e AI voice toiri hobe (computer e 3-6 min, ekbar banale save thake). Na hole phone/computer er nijer voice e shunte paro.';
-  $('#lctl').innerHTML = `<button class="btn primary" type="button" id="lgen">Natural voice banao</button><button class="btn" type="button" id="ltts">Device voice e shuno</button>`;
+  $('#lnote').innerHTML = 'The natural audio for this set has not loaded yet. Tap <b>Generate natural voice</b> to create an AI voice in your browser (3 to 6 minutes on a computer, saved after the first time). Or listen with the built-in voice of your phone or computer.';
+  $('#lctl').innerHTML = `<button class="btn primary" type="button" id="lgen">Generate natural voice</button><button class="btn" type="button" id="ltts">Use device voice</button>`;
   $('#lgen').onclick = async () => {
     $('#lctl').innerHTML = '<span id="lgp">Model load hocche…</span>';
     try { const r = await m1Generate(s, (p, sec) => { const el = $('#lgp'); if (el) el.textContent = `Voice toiri hocche: ${Math.round(p * 100)}% (${Math.round(sec)} s)`; $('#lbar').style.width = p * 100 + '%'; });
       await m1Put(s.id, r); if (!K || K.s !== s) return; K.src = { url: URL.createObjectURL(r.blob), t: r.t, kind:'local' };
       $('#lctl').innerHTML = '<button class="btn primary" type="button" id="lgo">Start listening</button>'; $('#lbar').style.width = 0; m1Controls(); toast('Audio ready. Ekhon Start chapo.');
-    } catch (e) { $('#lctl').innerHTML = `<span>Hoy nai (${esc(e.message)}). Device voice use koro.</span> <button class="btn" type="button" id="ltts">Device voice e shuno</button>`; $('#ltts').onclick = () => m1Speak(); }
+    } catch (e) { $('#lctl').innerHTML = `<span>That did not work (${esc(e.message)}). Use the device voice instead.</span> <button class="btn" type="button" id="ltts">Use device voice</button>`; $('#ltts').onclick = () => m1Speak(); }
   };
   $('#ltts').onclick = () => m1Speak();
 }
@@ -2491,16 +2568,16 @@ const m1Fmt = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStar
 function m1Play(){
   const exam = S.m1.mode !== 'practice' && !K.done;
   const a = new Audio(K.src.url); a.preload = 'auto'; K.audio = a;
-  if (!K.done) { clearInterval(K.timer); m1Phase(1); $('#lins').textContent = 'Shuno ar answer dao. Speaker porer point e chole gele ager question er answer lock kore dao.'; }
+  if (!K.done) { clearInterval(K.timer); m1Phase(1); $('#lins').textContent = 'Listen and answer. When the speaker moves on to the next point, lock in your answer to the previous question.'; }
   $('#lctl').innerHTML = exam ? '' : `<button class="btn" type="button" id="lpp">Pause</button><button class="btn" type="button" id="lb5">← 5 s</button><button class="btn" type="button" id="lf5">5 s →</button><select id="lrate" title="Speed"><option value="0.85">0.85x</option><option value="1" selected>1x</option><option value="1.1">1.1x</option></select>`;
   $('#lplay').classList.add('on');
   a.ontimeupdate = () => { if (!a.duration) return; $('#lbar').style.width = (a.currentTime / a.duration * 100) + '%'; $('#lpos').textContent = m1Fmt(a.currentTime) + ' / ' + m1Fmt(a.duration); m1Follow(a.currentTime); };
-  a.onended = () => { $('#lplay').classList.remove('on'); if (K.done) return; m1Phase(2); $('#lpos').textContent = 'finished'; toast('Recording sesh. Answer gula dekhe Check answers chapo.'); if (!exam) $('#lpp').textContent = 'Play'; };
+  a.onended = () => { $('#lplay').classList.remove('on'); if (K.done) return; m1Phase(2); $('#lpos').textContent = 'finished'; toast('The recording has ended. Review your answers, then tap Check answers.'); if (!exam) $('#lpp').textContent = 'Play'; };
   a.onplay = () => { $('#lplay').classList.add('on'); if ($('#lpp')) $('#lpp').textContent = 'Pause'; };
   a.onpause = () => { $('#lplay').classList.remove('on'); if ($('#lpp')) $('#lpp').textContent = 'Play'; };
   if (!exam || K.done) m1Seekable(a);
   if (!exam) { $('#lpp').onclick = () => a.paused ? a.play() : a.pause(); $('#lb5').onclick = () => a.currentTime = Math.max(0, a.currentTime - 5); $('#lf5').onclick = () => a.currentTime = Math.min(a.duration || 0, a.currentTime + 5); $('#lrate').onchange = e => a.playbackRate = +e.target.value; }
-  a.play().catch(() => toast('Audio chalu hoyni. Abar chap dao.'));
+  a.play().catch(() => toast('The audio did not start. Tap again.'));
 }
 function m1Seekable(a){ const w = $('#lbarw'); if (!w) return; w.style.cursor = 'pointer'; w.onclick = e => { if (!a.duration) return; const r = w.getBoundingClientRect(); a.currentTime = (e.clientX - r.left) / r.width * a.duration; }; }
 function m1Follow(ct){
@@ -2521,7 +2598,7 @@ function m1Speak(){
 function m1Finish(){
   const s = K.s; if (K.done) return;
   const blank = s.qs.filter((q, i) => q.type === 'two' ? (K.ans[i] || []).length < 2 : K.ans[i] == null).length;
-  if (blank && !K.warned) { K.warned = true; toast(`${blank} ta question baki. Asol exam e guess koro. Sesh korte abar chap dao.`); return; }
+  if (blank && !K.warned) { K.warned = true; toast(`${blank} unanswered. In the real exam, always guess. Tap again to finish.`); return; }
   K.done = true; clearInterval(K.timer); if (K.play) { K.play.stop = true; speechSynthesis.cancel(); }
   m1Phase(2); let score = 0; const tot = m1Marks(s);
   const res = s.qs.map((q, i) => { const g = K.ans[i]; let m;
@@ -2535,20 +2612,20 @@ function m1Finish(){
     $$(`.kopt[data-q="${i}"]`).forEach(x => { const o = +x.dataset.o; const right = q.type === 'two' ? q.a.includes(o) : q.a === o; const picked = q.type === 'two' ? (g || []).includes(o) : g === o;
       x.classList.toggle('ok', right); x.classList.toggle('no', picked && !right); });
     const ev = Array.isArray(q.ev) ? q.ev : [q.ev];
-    item.insertAdjacentHTML('beforeend', `<div class="kres ${full ? 'ok' : 'no'}"><b>${full ? 'Thik' : 'Bhul'}${q.type === 'two' ? ` · ${res[i].m}/2` : ''}</b>
+    item.insertAdjacentHTML('beforeend', `<div class="kres ${full ? 'ok' : 'no'}"><b>${full ? 'Correct' : 'Wrong'}${q.type === 'two' ? ` · ${res[i].m}/2` : ''}</b>
       <span>Answer: <b>${esc(q.type === 'two' ? q.a.map(x => LET[x]).join(' + ') : LET[q.a])}</b>${q.type === 'two' ? '' : ''}</span>
       ${ev.map(e => `<span class="ev">"${esc(e)}"</span>`).join('')}<span>${kmd(q.why)}</span>
-      <button class="btn small ghost" type="button" data-hear="${i}">Ei jayga ta abar shuno</button></div>`);
+      <button class="btn small ghost" type="button" data-hear="${i}">Hear this part again</button></div>`);
   });
   const pct = score / tot;
-  const msg = pct >= .8 ? 'Darun! Ei level e asol exam er Part 2-3 easily cover hobe.' : pct >= .6 ? 'Bhalo. Bhul gulor why pore dekho, kon trap e porecho.' : 'Kothin set, tai chinta koro na. Transcript e highlight kora line gula pore abar dao.';
+  const msg = pct >= .8 ? 'Excellent! At this level you will handle Parts 2 and 3 of the real exam comfortably.' : pct >= .6 ? 'Good. Read the explanations for your mistakes to see which trap caught you.' : 'This is a hard set, so do not worry. Read the highlighted lines in the transcript and try again.';
   $('#kSub2').outerHTML = `<div class="kres ${pct >= .6 ? 'ok' : 'no'}" style="font-size:16px"><b style="font-size:20px">${score} / ${tot}</b><span>${msg}</span>${K.hints.size ? `<span class="muted">${K.hints.size} ta hint use korecho.</span>` : ''}
-    <div class="row"><button class="btn small primary" type="button" id="m1Again">Abar dao</button><a class="btn small" href="#skills-m100">Shob set</a></div></div>`;
+    <div class="row"><button class="btn small primary" type="button" id="m1Again">Try again</button><a class="btn small" href="#skills-m100">All sets</a></div></div>`;
   $('#m1Again').onclick = () => m1Open(s);
   const tr = $('#ltrans'); tr.hidden = false; tr.innerHTML = m1Trans(s, res) + m1Words(s);
   $$('[data-hear]').forEach(b => b.onclick = () => m1Hear(+b.dataset.hear));
   $$('#ltrans p[data-li]').forEach(p => p.onclick = () => m1Jump(+p.dataset.li));
-  $('#lins').textContent = 'Check kora sesh. Transcript e sobuj line e answer lukano chilo. Kono line e chap dile oi jayga theke baje.';
+  $('#lins').textContent = 'Checked. The answers were in the green lines of the transcript. Tap any line to play from that point.';
   if (K.audio) { K.audio.pause(); m1Seekable(K.audio); }
   window.scrollTo({ top:0, behavior:'smooth' });
 }
@@ -2575,22 +2652,25 @@ function m1Hear(i){
 /* ---------- Theme v2: grouped colour nav, section icons, full tests ---------- */
 ICON.tests = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><circle cx="17.5" cy="17.5" r="3.5" fill="#fff"/><path d="m16 17.5 1 1 2-2"/></svg>';
 SECTIONS.splice(SECTIONS.findIndex(s => s[0] === 'progress'), 0, ['tests', 'Listening tests']);
-const SECCOL = { today:'#0B8F74', plan:'#D9502F', reading:'#4F46E5', listening:'#0E7CC4', l1200:'#0F8BA0', part4:'#7C3AED', spell:'#D9502F', typing:'#B86E06', grammar:'#C9356F', skills:'#5B4FD6', tests:'#1D5FD1', rtests:'#0F766E', wbook:'#B45309', sbook:'#7C3AED', writing:'#12855F', progress:'#3F5BA9' };
-const NAVGROUPS = [['Learn', ['today', 'plan', 'reading', 'l1200', 'part4', 'wbook', 'sbook']], ['Practice', ['spell', 'typing', 'grammar', 'skills', 'writing']], ['Exam', ['tests', 'rtests', 'progress']]];
+const SECCOL = { today:'#1E3A6E', plan:'#1E3A6E', progress:'#1E3A6E', band:'#1E3A6E', tests:'#0E6FB8', l1200:'#0E6FB8', part4:'#0E6FB8', spell:'#0E6FB8', listening:'#0E6FB8', rtests:'#0F766E', reading:'#0F766E', skills:'#0F766E', wbook:'#B45309', writing:'#B45309', grammar:'#B45309', typing:'#B45309', sbook:'#6D3FD1' };
+const NAVGROUPS = [['Overview', ['today', 'plan', 'progress', 'band']], ['Listening', ['tests', 'l1200', 'part4', 'spell']], ['Reading', ['rtests', 'skills', 'reading']], ['Writing', ['wbook', 'writing', 'grammar', 'typing']], ['Speaking', ['sbook']]];
+const NAVLABEL = { today:'Dashboard', plan:'Study plan', progress:'Progress', band:'Band calculator', tests:'Practice tests', l1200:'Vocabulary', part4:'Part 4 topics', spell:'Spelling and dictation', rtests:'Practice tests', skills:'Question types', reading:'Vocabulary', wbook:'Writing book', writing:'Writing check', grammar:'Grammar', typing:'Typing', sbook:'Speaking book' };
+SECTIONS.push(['band', 'Band calculator']);
 function renderNav(sec){
   const have = new Map(SECTIONS); const used = new Set();
-  const link = id => { used.add(id); return `<a href="#${id}" style="--c:${SECCOL[id] || '#0B8F74'}" ${id === sec ? 'aria-current="page"' : ''}><span class="ic">${ICON[id] || ''}</span><span>${esc(have.get(id))}</span></a>`; };
+  const link = id => { used.add(id); return `<a href="#${id}" style="--c:${SECCOL[id] || '#0B8F74'}" ${id === sec ? 'aria-current="page"' : ''}><span class="ic">${ICON[id] || ''}</span><span>${esc(NAVLABEL[id] || have.get(id))}</span></a>`; };
   let h = NAVGROUPS.map(([g, ids]) => { const l = ids.filter(id => have.has(id)); return l.length ? `<div class="ng">${g}</div>` + l.map(link).join('') : ''; }).join('');
   h += SECTIONS.filter(([id]) => !used.has(id)).map(([id]) => link(id)).join('');
   $('#nav').innerHTML = h;
   document.body.dataset.sec = sec;
+  const c = SECCOL[sec] || '#1E3A6E', st = document.body.style; st.setProperty('--sec', c); st.setProperty('--sec2', c); st.setProperty('--sec-soft', `color-mix(in srgb, ${c} 10%, #fff)`);
 }
 
 /* ---------- full listening tests (Listening Lab, same site) ---------- */
 const LAB_URL = '../ielts-listening-lab/?embed=1';
 function viewTests(){
-  main().innerHTML = `<div class="page-head"><div><h1>Full listening tests</h1><p>20 ta full test, 40 question kore, asol computer-delivered IELTS er moto layout. Audio ekbar baje, sesh e 2 minute check korar somoy, tarpor band score.</p></div></div>
-    <div class="tfacts"><div><b>20</b><span>full tests</span></div><div><b>800</b><span>questions</span></div><div><b>4</b><span>levels, easy theke expert</span></div><div><b>~28 min</b><span>per test</span></div></div>
+  main().innerHTML = `<div class="page-head"><div><h1>Full listening tests</h1><p>20 full tests of 40 questions each, laid out like the computer-delivered IELTS. The audio plays once, you get 2 minutes to check at the end, and then your band score.</p></div></div>
+    <div class="tfacts"><div><b>20</b><span>full tests</span></div><div><b>800</b><span>questions</span></div><div><b>4</b><span>levels, easy to expert</span></div><div><b>~28 min</b><span>per test</span></div></div>
     <iframe class="labframe" id="labf" src="${LAB_URL}" title="Full IELTS listening tests" allow="autoplay"></iframe>`;
 }
 let LABVIEW = 'home';
@@ -2767,35 +2847,35 @@ S.rp = Object.assign({ res:{} }, S.rp || {});
 let RP = null, RPP = null, RT = null;
 async function rpLoad(){ if (RP) return RP; if (!RPP) RPP = fetch('reading.json', { cache:'no-cache' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(j => (RP = j)); return RPP; }
 const RPTYPES = [
-  ['heading', 'Matching headings', 'Paragraph er main idea dhoro', 7, '#4F46E5'],
-  ['info', 'Matching information', 'Kon paragraph e detail ta lukano', 6, '#0E7CC4'],
-  ['mcq', 'Multiple choice', '4 option, 3 ta trap', 4, '#B45309'],
-  ['summary', 'Summary with word box', 'Box theke thik word', 6, '#0F766E'],
-  ['full', 'Full passage', 'Shob question eksathe, 30 min', 23, '#C9356F']];
+  ['heading', 'Matching headings', 'Find the main idea of each paragraph', 7, '#4F46E5'],
+  ['info', 'Matching information', 'Find which paragraph holds a detail', 6, '#0E7CC4'],
+  ['mcq', 'Multiple choice', 'Four options, three of them traps', 4, '#B45309'],
+  ['summary', 'Summary with word box', 'Choose the right word from the box', 6, '#0F766E'],
+  ['full', 'Full passage', 'All questions together, 30 minutes', 23, '#C9356F']];
 const RPTIME = { heading:9, info:9, mcq:7, summary:8, full:30 };
 const RPTIPS = {
-  heading:['Heading list age porbe na. Age paragraph er prothom 2 line ar sesh line poro, nijer mone 4-5 word e main idea bolo, tarpor list dekho.', 'Je heading er word paragraph e hubohu ache, oita prai trap. Thik heading synonym diye lekha thake.', 'Ekta heading jodi shudhu ekta example ba number er kotha bole, oita detail, main idea na.', 'Sure na hole pencil e 2 ta option rakho, baki paragraph sesh kore elimination koro.'],
-  info:['Statement er type dekho: "an example of", "a reference to", "a comparison". Eta bole dey ki dhoroner sentence khujbe.', 'Order maintain kore na. Tai age shob statement er key idea mark koro, tarpor passage ekbar porte porte miliyo.', 'Answer prai paragraph er majhkhane lukano thake, prothom line e na.', 'Ekta paragraph duibar answer hote pare. Ekta letter use hoye geche bole bad dio na.'],
-  mcq:['Question gula passage er order e ashe. Stem er unique word (nam, saal, number) diye jayga ta khujo.', 'Shob option passage e kono na kono vabe ache. Je option ta stem er proshner uttor dey, shudhu sheta thik.', 'Extreme word (always, only, entirely, never) thakle sabdhan.', 'Kar mot, kokhon er kotha, sheta milao: researcher A er mot B er nam e dile bhul.'],
-  summary:['Age summary ta puro poro, gap er age-pore ki grammar lagbe (noun, adjective, verb) likhe rakho.', 'Box er word passage er hubohu word hoy na prai. Synonym khujo.', 'Grammar fit kore emon 2-3 option thakbe. Meaning diye final koro.', 'Summary ta passage er kon paragraph cover kore, sheta age dhoro: first gap er answer theke shuru koro.'],
-  full:['Prothome questions dekho, tarpor passage. Headings shob sesh e korle shohoj hoy, karon tokhon passage ta chena.', 'Ek question e 90 second er beshi atke thakle guess kore samne jao.', 'Matching information er key word age underline koro, passage porar somoy dhore felo.', 'Sesh 3 minute rakho blank answer fill korar jonno. Blank mane shunno number.']};
+  heading:['Do not read the list of headings first. Read the first 2 lines and the last line of the paragraph, say the main idea to yourself in 4 or 5 words, then look at the list.', 'A heading that repeats exact words from the paragraph is usually a trap. The correct heading is written with synonyms.', 'If a heading only mentions one example or one number, it is a detail, not the main idea.', 'If you are not sure, keep 2 options in pencil, finish the other paragraphs, then eliminate.'],
+  info:['Look at the type of statement: "an example of", "a reference to", "a comparison". It tells you what kind of sentence to look for.', 'The statements do not follow the order of the passage. Mark the key idea of every statement first, then match them as you read the passage once.', 'The answer is often hidden in the middle of a paragraph, not in the first line.', 'A paragraph can be the answer twice. Do not rule a letter out just because you have used it.'],
+  mcq:['The questions follow the order of the passage. Use a unique word in the stem (a name, a year, a number) to find the place.', 'Every option appears in the passage in some form. Only the option that answers the question in the stem is correct.', 'Be careful with extreme words (always, only, entirely, never).', 'Check whose opinion it is and when: giving researcher A\'s view under B\'s name is wrong.'],
+  summary:['Read the whole summary first and note what grammar each gap needs (noun, adjective, verb).', 'The words in the box are rarely the exact words of the passage. Look for synonyms.', 'Two or three options will fit the grammar. Decide by meaning.', 'Work out which paragraphs the summary covers: start from the answer to the first gap.'],
+  full:['Look at the questions first, then the passage. Headings are easier last, because by then you know the passage.', 'If you are stuck on one question for more than 90 seconds, guess and move on.', 'Underline the key words for matching information first, and catch them as you read.', 'Keep the last 3 minutes to fill in blank answers. A blank scores nothing.']};
 const rpKey = (id, t) => id + ':' + t;
 async function viewRTests(){
   main().innerHTML = '<div class="page-head"><div><h1>Reading tests</h1><p>Loading…</p></div></div>';
-  let d; try { d = await rpLoad(); } catch (e) { main().innerHTML = `<div class="page-head"><div><h1>Reading tests</h1><p>Passage load hoyni (${esc(e.message)}). Internet check kore abar try koro.</p></div></div>`; return; }
+  let d; try { d = await rpLoad(); } catch (e) { main().innerHTML = `<div class="page-head"><div><h1>Reading tests</h1><p>The passages did not load (${esc(e.message)}). Check your connection and try again.</p></div></div>`; return; }
   if (location.hash.split('-')[0] !== '#rtests' && location.hash !== '#rtests') return;
   const parts = location.hash.split('-').slice(1);
   if (parts.length === 2 && d.find(p => p.id === parts[0])) return rpTest(d.find(p => p.id === parts[0]), parts[1]);
   if (parts.length === 1 && RPTYPES.find(t => t[0] === parts[0])) return rpTypeList(d, parts[0]);
   const done = Object.keys(S.rp.res).length;
   const topics = [...new Set(d.map(p => p.topic))];
-  main().innerHTML = `<div class="page-head"><div><h1>Reading tests</h1><p>${d.length} ta kothin Cambridge-style passage (${d.reduce((a, p) => a + p.paras.reduce((b, x) => b + x.x.split(/\s+/).length, 0), 0).toLocaleString()} words). Question type dhore practice koro, ba puro passage er full test dao. Protita answer er sathe Banglish e keno thik, ar passage e kothay lekha.</p></div></div>
+  main().innerHTML = `<div class="page-head"><div><h1>Reading tests</h1><p>${d.length} demanding Cambridge-style passages (${d.reduce((a, p) => a + p.paras.reduce((b, x) => b + x.x.split(/\s+/).length, 0), 0).toLocaleString()} words). Practise by question type, or take a full test on a whole passage. Every answer comes with an explanation and the line in the passage that proves it.</p></div></div>
     <h2 class="rph">Question type dhore practice</h2>
     <div class="rptypes">${RPTYPES.map(([k, name, bn, n, col]) => { const best = d.filter(p => S.rp.res[rpKey(p.id, k)]).length;
       return `<a class="rptype" href="#rtests-${k}" style="--pc:${col}"><b>${name}</b><small>${bn}</small><span class="meta">${d.length} passages · ${n} question protita</span><span class="bar"><i style="width:${Math.round(best / d.length * 100)}%"></i></span><span class="meta">${best} of ${d.length} done</span></a>`; }).join('')}</div>
     <h2 class="rph">Topic dhore passage</h2>
     ${topics.map(t => `<div class="rptopic"><h3>${esc(t)}</h3><div class="rplist">${d.filter(p => p.topic === t).map(p => rpCard(p, 'full')).join('')}</div></div>`).join('')}
-    ${done ? '' : '<p class="muted" style="font-size:14px">Tip: prothome ekta question type er 2-3 ta passage koro, tarpor full passage dao.</p>'}`;
+    ${done ? '' : '<p class="muted" style="font-size:14px">Tip: do 2 or 3 passages of one question type first, then take a full passage.</p>'}`;
 }
 function rpCard(p, t){
   const r = S.rp.res[rpKey(p.id, t)];
@@ -2807,7 +2887,7 @@ function rpCard(p, t){
 function rpTypeList(d, t){
   const [, name, bn, n, col] = RPTYPES.find(x => x[0] === t);
   main().innerHTML = `<div class="row" style="margin-bottom:12px"><a class="btn small ghost" href="#rtests">← Reading tests</a></div>
-    <div class="page-head"><div><h1>${name}</h1><p>${bn}. ${d.length} ta passage, protitay ${n} ta question. Shuru korar age niche er tricks ekbar dekho.</p></div></div>
+    <div class="page-head"><div><h1>${name}</h1><p>${bn}. ${d.length} passages with ${n} questions each. Read the tricks below once before you start.</p></div></div>
     <div class="panel"><h2>Ei type e jitar tricks</h2><ol class="rptips">${RPTIPS[t].map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>
     <div class="rplist" style="margin-top:18px">${d.map(p => rpCard(p, t)).join('')}</div>`;
 }
@@ -2833,7 +2913,7 @@ function rpTest(p, t){
   RT.total = qn;
   main().innerHTML = `<div class="ktop"><div class="row"><a class="btn small ghost" href="#rtests${t === 'full' ? '' : '-' + t}">← Back</a><span class="pill">${esc((RPTYPES.find(x => x[0] === t) || [])[1] || '')} · ${qn} questions</span></div><span class="ktimer" id="rpclock">${RPTIME[t]}:00</span></div>
     <div class="rpsplit"><article class="rppass" id="rppass"><div class="label">${esc(p.topic)}</div><h2>${esc(p.title)}</h2><p class="sub">${esc(p.sub)}</p>
-      ${p.paras.map(x => `<p class="rpp" data-l="${x.l}"><b class="pl">${x.l}</b>${esc(x.x)}</p>`).join('')}<p class="muted" style="font-size:13px">Passage er text select korle highlight hoy. Highlight e click korle muche jay.</p></article>
+      ${p.paras.map(x => `<p class="rpp" data-l="${x.l}"><b class="pl">${x.l}</b>${esc(x.x)}</p>`).join('')}<p class="muted" style="font-size:13px">Select text in the passage to highlight it. Click a highlight to remove it.</p></article>
     <div class="rpq kq" id="rpq">${blocks.join('')}<button class="btn primary" type="button" id="rpCheck">Check answers</button></div></div>
     <button class="rpjump" type="button" id="rpJump">Questions ↓</button>`;
   $('#rpJump').onclick = () => { const q = $('#rpq'), toQ = q.getBoundingClientRect().top > 80; (toQ ? q : $('#rppass')).scrollIntoView({ behavior:'smooth' }); };
@@ -2852,7 +2932,7 @@ function rpHint(q, k, n){ return q.hint ? `<span class="rphint"><button class="b
 function rpCheck(){
   if (!RT || RT.done) return; const { p, t, sets } = RT;
   const blank = $$('#rpq [data-k]').filter(el => el.type !== 'radio').filter(el => !el.value).length + sets.filter(k => k === 'mcq').reduce((a) => a + p.mcq.qs.filter((q, i) => RT.ans['mcq:' + i] == null).length, 0);
-  if (blank && !RT.warned){ RT.warned = true; toast(`${blank} ta blank. Asol exam e guess koro. Check korte abar chap dao.`); return; }
+  if (blank && !RT.warned){ RT.warned = true; toast(`${blank} blank. In the real exam, always guess. Tap again to check.`); return; }
   RT.done = true; clearInterval(RT.timer); let score = 0; const evs = [];
   sets.forEach(k => p[k].qs.forEach((q, i) => {
     const key = k + ':' + i, g = RT.ans[key]; let ok = false, right = '';
@@ -2864,7 +2944,7 @@ function rpCheck(){
     const host = k === 'mcq' ? $(`#rpq input[data-k="${key}"]`).closest('.rq') : k === 'summary' ? $(`#rpq select[data-k="${key}"]`).closest('.gapw') : $(`#rpq [data-k="${key}"]`).closest('.rq');
     const n = +host.dataset.n; host.classList.add(ok ? 'ok' : 'no');
     if (k === 'mcq') $$(`#rpq input[data-k="${key}"]`).forEach(r => { const o = r.closest('.ropt'); if (+r.value === q.a) o.classList.add('ok'); else if (r.checked) o.classList.add('no'); });
-    const fb = `<div class="kres ${ok ? 'ok' : 'no'}"><b>${n}. ${ok ? 'Thik' : 'Bhul'}</b><span>Answer: <b>${esc(right)}</b></span>${q.ev ? `<span class="ev">"${esc(q.ev)}"</span>` : ''}<span>${kmd(q.why || '')}</span></div>`;
+    const fb = `<div class="kres ${ok ? 'ok' : 'no'}"><b>${n}. ${ok ? 'Correct' : 'Wrong'}</b><span>Answer: <b>${esc(right)}</b></span>${q.ev ? `<span class="ev">"${esc(q.ev)}"</span>` : ''}<span>${kmd(q.why || '')}</span></div>`;
     if (k === 'summary') host.closest('.rqset').insertAdjacentHTML('beforeend', fb); else host.insertAdjacentHTML('beforeend', fb);
     if (q.ev) evs.push([q.ev, n]); if (k === 'heading') { const para = $(`#rppass .rpp[data-l="${q.p}"]`); para && para.insertAdjacentHTML('afterbegin', `<span class="phead ${ok ? 'ok' : 'no'}">${n}. ${esc(ROMAN[q.a])} ${esc(p.heading.list[q.a])}</span>`); }
   }));
@@ -2872,8 +2952,8 @@ function rpCheck(){
   const key = rpKey(p.id, t); const r = S.rp.res[key] || { best:0, tries:0 }; r.best = Math.max(r.best, score); r.total = RT.total; r.tries++; r.last = score; r.date = TODAY(); S.rp.res[key] = r; save();
   const band = rpBand(score, RT.total);
   $('#rpCheck').outerHTML = `<div class="kres ${score / RT.total >= .7 ? 'ok' : 'no'}" style="font-size:16px"><b style="font-size:22px">${score} / ${RT.total}${band ? ` · band ${band} level` : ''}</b>
-    <span>${score / RT.total >= .8 ? 'Darun! Ei level er passage e eta band 7.5+ er performance.' : score / RT.total >= .6 ? 'Bhalo. Bhul gulor "why" pore dekho kon trap e porecho.' : 'Kothin passage, tai chinta koro na. Sobuj highlight kora line gula pore abar dao.'}</span>${RT.hints.size ? `<span class="muted">${RT.hints.size} ta hint use korecho.</span>` : ''}
-    <div class="row"><button class="btn small primary" type="button" id="rpAgain">Abar dao</button><a class="btn small" href="#rtests">Shob passage</a></div></div>
+    <span>${score / RT.total >= .8 ? 'Excellent! On a passage this hard, that is a band 7.5+ performance.' : score / RT.total >= .6 ? 'Good. Read the explanations for your mistakes to see which trap caught you.' : 'This is a hard passage, so do not worry. Read the green highlighted lines and try again.'}</span>${RT.hints.size ? `<span class="muted">Hints used: ${RT.hints.size}.</span>` : ''}
+    <div class="row"><button class="btn small primary" type="button" id="rpAgain">Try again</button><a class="btn small" href="#rtests">All passages</a></div></div>
     <div class="panel"><h2>Power words</h2><div class="m1words">${p.words.map(w => `<div><b>${esc(w.w)}</b> ${speakBtn(w.w)}<span class="bn">${esc(w.bn)}</span><small>${esc(w.m)}</small></div>`).join('')}</div></div>`;
   $('#rpAgain').onclick = () => rpTest(p, t);
   $$('#rpq select, #rpq input').forEach(x => x.disabled = true);
